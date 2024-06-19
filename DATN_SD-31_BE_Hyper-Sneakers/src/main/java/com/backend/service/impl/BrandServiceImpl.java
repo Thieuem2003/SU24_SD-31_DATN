@@ -1,14 +1,16 @@
 package com.backend.service.impl;
 
-import com.backend.ServiceResult;
-import com.backend.config.AppConstant;
 import com.backend.dto.request.brand.BrandRequest;
 import com.backend.dto.request.brand.BrandRequestUpdate;
 import com.backend.dto.response.BrandResponse;
 import com.backend.entity.Brand;
 import com.backend.repository.BrandRepository;
 import com.backend.service.IBrandService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Calendar;
@@ -22,29 +24,43 @@ public class BrandServiceImpl implements IBrandService {
 
     @Autowired
     private BrandRepository brandRepository;
+    @Autowired
+    private ModelMapper modelMapper;
 
     @Override
-    public ServiceResult<List<BrandResponse>> getAll() {
+    public List<BrandResponse> getAll() {
         List<Brand> brandList = brandRepository.findAll();
-        List<BrandResponse> brandResponses = convertToRes(brandList);
-        return new ServiceResult<>(AppConstant.SUCCESS, "brandList", brandResponses);
+        return convertToRes(brandList);
     }
 
     @Override
-    public ServiceResult<Brand> addNewBrand(BrandRequest brandRequest) {
+    public Page<BrandResponse> pageBrand(Integer pageNo, Integer size) {
+        Pageable pageable = PageRequest.of(pageNo, size);
+        Page<Brand> brandPage = brandRepository.findAll(pageable);
+        return brandPage.map(brand -> modelMapper.map(brand, BrandResponse.class));
+    }
+
+    @Override
+    public BrandResponse getOne(Long id) {
+        Brand brand = brandRepository.findById(id).orElse(null);
+        return modelMapper.map(brand, BrandResponse.class);
+    }
+
+    @Override
+    public String addNewBrand(BrandRequest brandRequest) {
         Optional<Brand> brandOptional = brandRepository.findByNameBrand(brandRequest.getName());
         if (brandOptional.isPresent()) {
             if (brandOptional.get().getStatus() == 0) {
                 Brand brand = brandOptional.get();
                 brand.setStatus(1);
-                Brand brandUpdate = brandRepository.save(brand);
-                return new ServiceResult<>(AppConstant.SUCCESS, "Brand created succesfully!", brandUpdate);
+                brandRepository.save(brand);
+                return "Brand created succesfully!";
             } else {
-                return new ServiceResult<>(AppConstant.FAIL, "Category already exits!", null);
+                return "Category already exits!";
             }
         } else {
             if (brandRequest.getName() == null || brandRequest.getName().trim().isEmpty()) {
-                return new ServiceResult<>(AppConstant.BAD_REQUEST, "The name of brand not valid!", null);
+                return "The name of brand not valid!";
             } else {
                 Brand brand = new Brand();
                 Calendar calendar = Calendar.getInstance();
@@ -53,18 +69,19 @@ public class BrandServiceImpl implements IBrandService {
                 brand.setStatus(1);
                 brand.setCreatedAt(date);
                 brand.setUpdatedAt(date);
-                return new ServiceResult<>(AppConstant.SUCCESS, "Brand created succesfully!", brandRepository.save(brand));
+                brandRepository.save(brand);
+                return "Brand created succesfully!";
             }
 
         }
     }
 
     @Override
-    public ServiceResult<Brand> updateBrand(BrandRequestUpdate brandRequestUpdate) {
+    public String updateBrand(BrandRequestUpdate brandRequestUpdate) {
         Optional<Brand> brandOptional = brandRepository.findById(brandRequestUpdate.getId());
         if (brandOptional.isPresent()) {
-            if (brandRequestUpdate.getName() == null || (brandRequestUpdate.getName() != null && brandRequestUpdate.getName().trim().isEmpty())) {
-                return new ServiceResult<>(AppConstant.BAD_REQUEST, "The name of brand not valid!", null);
+            if (brandRequestUpdate.getName() == null || brandRequestUpdate.getName().trim().isEmpty()) {
+                return "The name of brand not valid!";
             } else {
                 Brand brandExits = brandOptional.get();
                 brandExits.setId(brandExits.getId());
@@ -75,39 +92,41 @@ public class BrandServiceImpl implements IBrandService {
                 brandExits.setUpdatedAt(calendar.getTime());
 
                 brandExits.setStatus(brandRequestUpdate.getStatus());
-                Brand brandUpdate = brandRepository.save(brandExits);
-                return new ServiceResult<>(AppConstant.SUCCESS, "The brand update succesfully!", brandUpdate);
+                brandRepository.save(brandExits);
+                return "The brand update successfully!";
             }
 
         } else {
-            return new ServiceResult<>(AppConstant.BAD_REQUEST, "The brand not found!", null);
+            return "The brand not found!";
         }
 
     }
 
     @Override
-    public ServiceResult<Brand> deleteBrand(BrandRequestUpdate brandRequestUpdate) {
-        Optional<Brand> brandOptional = brandRepository.findById(brandRequestUpdate.getId());
+    public String deleteBrand(Long id) {
+        Optional<Brand> brandOptional = brandRepository.findById(id);
         if (brandOptional.isPresent()) {
             Brand brandExits = brandOptional.get();
             brandExits.setStatus(0);
+            Calendar calendar = Calendar.getInstance();
+            brandExits.setUpdatedAt(calendar.getTime());
             brandRepository.save(brandExits);
-            return new ServiceResult<>(AppConstant.SUCCESS, "The brand delete succesfully!", null);
-        }else {
-            return new ServiceResult<>(AppConstant.BAD_REQUEST, "The brand not found!", null);
+            return "The brand delete succesfully!";
+        } else {
+            return "The brand not found!";
         }
     }
 
     @Override
-    public ServiceResult<Brand> activeBrand(BrandRequestUpdate brandRequestUpdate) {
+    public String activeBrand(BrandRequestUpdate brandRequestUpdate) {
         Optional<Brand> brandOptional = brandRepository.findById(brandRequestUpdate.getId());
         if (brandOptional.isPresent()) {
             Brand brandExits = brandOptional.get();
             brandExits.setStatus(1);
             brandRepository.save(brandExits);
-            return new ServiceResult<>(AppConstant.SUCCESS, "The brand active succesfully!", null);
-        }else {
-            return new ServiceResult<>(AppConstant.BAD_REQUEST, "The brand not found!", null);
+            return "The brand active succesfully!";
+        } else {
+            return "The brand not found!";
         }
     }
 

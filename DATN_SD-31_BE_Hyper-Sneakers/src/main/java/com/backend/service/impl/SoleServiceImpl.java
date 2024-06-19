@@ -1,14 +1,16 @@
 package com.backend.service.impl;
 
-import com.backend.ServiceResult;
-import com.backend.config.AppConstant;
 import com.backend.dto.request.sole.SoleRequest;
 import com.backend.dto.request.sole.SoleRequestUpdate;
 import com.backend.dto.response.SoleResponse;
 import com.backend.entity.Sole;
 import com.backend.repository.SoleRepository;
 import com.backend.service.ISoleService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Calendar;
@@ -22,30 +24,44 @@ public class SoleServiceImpl implements ISoleService {
 
     @Autowired
     private SoleRepository soleRepository;
+    @Autowired
+    private ModelMapper modelMapper;
 
     @Override
-    public ServiceResult<List<SoleResponse>> getAll() {
+    public List<SoleResponse> getAll() {
         List<Sole> soleList = soleRepository.findAll();
-        List<SoleResponse> soleResponses = convertToRes(soleList);
-        return new ServiceResult<>(AppConstant.SUCCESS, "Get list Sole",soleResponses);
+        return convertToRes(soleList);
     }
 
     @Override
-    public ServiceResult<Sole> addNewSole(SoleRequest soleRequest) {
+    public Page<SoleResponse> pageSole(Integer pageNo, Integer size) {
+        Pageable pageable = PageRequest.of(pageNo, size);
+        Page<Sole> solePage = soleRepository.findAll(pageable);
+        return solePage.map(sole -> modelMapper.map(sole, SoleResponse.class));
+    }
+
+    @Override
+    public SoleResponse getOne(Long id) {
+        Sole sole = soleRepository.findById(id).orElse(null);
+        return modelMapper.map(sole, SoleResponse.class);
+    }
+
+    @Override
+    public String addNewSole(SoleRequest soleRequest) {
         Optional<Sole> soleOptional = soleRepository.findByNameSole(soleRequest.getName());
-        if (soleOptional.isPresent()){
+        if (soleOptional.isPresent()) {
             if (soleOptional.get().getStatus() == 0) {
                 Sole sole = soleOptional.get();
                 sole.setStatus(1);
-                Sole soleUpdate = soleRepository.save(sole);
-                return new ServiceResult<>(AppConstant.SUCCESS, "Sole updated succesfully!", soleUpdate);
+                soleRepository.save(sole);
+                return "Sole updated successfully!";
             } else {
-                return new ServiceResult<>(AppConstant.FAIL,"Sole already exits!",null);
+                return "Sole already exits!";
             }
-        }else {
-            if(soleRequest.getName() == null || soleRequest.getName().trim().isEmpty()){
-                return new ServiceResult<>(AppConstant.BAD_REQUEST,"The name of sole not valid!", null);
-            }else {
+        } else {
+            if (soleRequest.getName() == null || soleRequest.getName().trim().isEmpty()) {
+                return "The name of sole not valid!";
+            } else {
                 Sole sole = new Sole();
                 Calendar calendar = Calendar.getInstance();
                 Date date = calendar.getTime();
@@ -53,18 +69,19 @@ public class SoleServiceImpl implements ISoleService {
                 sole.setStatus(1);
                 sole.setCreatedAt(date);
                 sole.setUpdatedAt(date);
-                return new ServiceResult<>(AppConstant.SUCCESS,"Category",soleRepository.save(sole));
+                soleRepository.save(sole);
+                return "Category";
             }
         }
     }
 
     @Override
-    public ServiceResult<Sole> updateSole(SoleRequestUpdate soleRequestUpdate) {
+    public String updateSole(SoleRequestUpdate soleRequestUpdate) {
         Optional<Sole> soleOptional = soleRepository.findById(soleRequestUpdate.getId());
-        if (soleOptional.isPresent()){
-            if(soleRequestUpdate.getName() == null || soleRequestUpdate.getName().trim().isEmpty()){
-                return new ServiceResult<>(AppConstant.BAD_REQUEST,"The name of sole not valid!", null);
-            }else {
+        if (soleOptional.isPresent()) {
+            if (soleRequestUpdate.getName() == null || soleRequestUpdate.getName().trim().isEmpty()) {
+                return "The name of sole not valid!";
+            } else {
                 Sole soleExits = soleOptional.get();
                 soleExits.setId(soleExits.getId());
                 soleExits.setName(soleRequestUpdate.getName());
@@ -74,37 +91,37 @@ public class SoleServiceImpl implements ISoleService {
                 soleExits.setUpdatedAt(calendar.getTime());
 
                 soleExits.setStatus(soleRequestUpdate.getStatus());
-                Sole soleUpdate = soleRepository.save(soleExits);
-                return new ServiceResult<>(AppConstant.SUCCESS,"The sole update succesfully!", soleUpdate);
+                soleRepository.save(soleExits);
+                return "The sole update succesfully!";
             }
-        }else {
-            return new ServiceResult<>(AppConstant.BAD_REQUEST,"The sole not found!", null);
+        } else {
+            return "The sole not found!";
         }
     }
 
     @Override
-    public ServiceResult<Sole> deleteSole(SoleRequestUpdate soleRequestUpdate) {
-        Optional<Sole> soleOptional = soleRepository.findById(soleRequestUpdate.getId());
-        if (soleOptional.isPresent()){
+    public String deleteSole(Long id) {
+        Optional<Sole> soleOptional = soleRepository.findById(id);
+        if (soleOptional.isPresent()) {
             Sole soleExits = soleOptional.get();
             soleExits.setStatus(0);
             soleRepository.save(soleExits);
-            return new ServiceResult<>(AppConstant.SUCCESS,"The sole delete succesfully!", null);
-        }else {
-            return new ServiceResult<>(AppConstant.BAD_REQUEST,"The sole not found!", null);
+            return "The sole delete succesfully!";
+        } else {
+            return "The sole not found!";
         }
     }
 
     @Override
-    public ServiceResult<Sole> activeSole(SoleRequestUpdate soleRequestUpdate) {
+    public String activeSole(SoleRequestUpdate soleRequestUpdate) {
         Optional<Sole> soleOptional = soleRepository.findById(soleRequestUpdate.getId());
-        if (soleOptional.isPresent()){
+        if (soleOptional.isPresent()) {
             Sole soleExits = soleOptional.get();
             soleExits.setStatus(1);
             soleRepository.save(soleExits);
-            return new ServiceResult<>(AppConstant.SUCCESS,"The sole active succesfully!", null);
-        }else {
-            return new ServiceResult<>(AppConstant.BAD_REQUEST,"The sole not found!", null);
+            return "The sole active successfully!";
+        } else {
+            return "The sole not found!";
         }
     }
 

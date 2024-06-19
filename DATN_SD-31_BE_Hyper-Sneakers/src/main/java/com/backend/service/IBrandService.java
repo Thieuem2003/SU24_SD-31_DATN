@@ -1,23 +1,26 @@
 package com.backend.service;
 
-import com.backend.ServiceResult;
 import com.backend.dto.request.brand.BrandRequest;
 import com.backend.dto.request.brand.BrandRequestUpdate;
 import com.backend.dto.response.BrandResponse;
-import com.backend.entity.Brand;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
 public interface IBrandService {
 
-    ServiceResult<List<BrandResponse>> getAll();
+    List<BrandResponse> getAll();
 
-    ServiceResult<Brand> addNewBrand(BrandRequest brandRequest);
+    Page<BrandResponse> pageBrand(Integer pageNo, Integer size);
 
-    ServiceResult<Brand> updateBrand(BrandRequestUpdate brandRequestUpdate);
+    BrandResponse getOne(Long id);
 
-    ServiceResult<Brand> deleteBrand(BrandRequestUpdate brandRequestUpdate);
+    String addNewBrand(BrandRequest brandRequest);
 
-    ServiceResult<Brand> activeBrand(BrandRequestUpdate brandRequestUpdate);
+    String updateBrand(BrandRequestUpdate brandRequestUpdate);
+
+    String deleteBrand(Long id);
+
+    String activeBrand(BrandRequestUpdate brandRequestUpdate);
 
 }

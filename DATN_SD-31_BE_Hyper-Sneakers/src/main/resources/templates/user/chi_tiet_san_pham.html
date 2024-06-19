@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/fragments_layout_user}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .size-selector-button:active .size-text {
+            color: black; /* Đổi màu văn bản thành đen khi được nhấn */
+        }
+
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.size-selector-button').on('click', function() {
+                // Xóa lớp 'selected' khỏi tất cả các nút
+                $('.size-selector-button').removeClass('selected');
+
+                // Thêm lớp 'selected' vào nút được nhấn
+                $(this).addClass('selected');
+
+                // Cập nhật thuộc tính aria-checked để phù hợp với trạng thái nút đã chọn
+                $('.size-selector-button').attr('aria-checked', 'false');
+                $(this).attr('aria-checked', 'true');
+
+                // Cập nhật nội dung của legend với kích thước được chọn
+                var selectedSize = $(this).find('.size-text').text();
+                $('#selectedSizeLabel').text('Size :' + selectedSize);
+            });
+        });
+
+    </script>
+</head>
+<body>
+
+<div class="layout-column" data-trk-id="c1" layout:fragment="content_user">
+    <div class="layout-row pdp-style-breadcrumbs pdp-breadcrumbs" data-trk-id="pdp-breadcrumbs">
+        <div class="breadcrumb-promo-container">
+            <ul class="breadcrumbs-container show-mobile-breadcrumb" vocab="http://schema.org/" typeof="BreadcrumbList">
+                <li property="itemListElement" typeof="ListItem"><span
+                        class="breadcrumb-text">Product ID: 13398295</span>
+                    <meta property="position" content="3"/>
+                    <meta property="name" content="Product ID: 13398295"/>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="layout-row pdp-style-overwrapper" data-trk-id="r7">
+        <div class="layout-column large-8 medium-6 small-12" data-trk-id="c1">
+            <div
+                    class="layout-row image-viewer-light"
+                    data-trk-id="image-viewer-light"
+            >
+                <div class="image-container">
+                    <div class="product-images flex-column">
+                        <div class="main-image large-12">
+                            <div class="carousel-container large-pdp-image">
+                                <div
+                                        class="carousel large-pdp-image transition"
+                                        style="transform: translateX(0%)"
+                                >
+                                    <img
+                                            src="//images.footballfanatics.com/paris-saint-germain/paris-saint-germain-nike-home-stadium-shirt-2023-24-womens-with-neymar-jr-10-printing_ss4_p-13398295+u-95g0hnlzer4haqfekdex+v-c0deec91f4154c8381d2da136c83dad7.jpg?_hv=2&amp;w=900"
+                                            alt="Paris Saint-Germain Nike Home Stadium Shirt 2023-24 - Womens with Neymar Jr 10 printing"
+                                            class="carousel-image current-image"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="thumbnails-wrapper small-12">
+                            <div class="thumbnails text-center">
+                                <button
+                                        class="thumbnail-link m-a-sm active thumbnail-images"
+                                        data-trk-id="update-thumbnail"
+                                >
+                                    <img
+                                            src="//images.footballfanatics.com/paris-saint-germain/paris-saint-germain-nike-home-stadium-shirt-2023-24-womens-with-neymar-jr-10-printing_ss4_p-13398295+u-95g0hnlzer4haqfekdex+v-c0deec91f4154c8381d2da136c83dad7.jpg?_hv=2&amp;w=120"
+                                            alt="Selected slide 1 of 3"
+                                            class="thumbnail-image"
+                                    />
+                                </button>
+                                <button
+                                        class="thumbnail-link m-a-sm thumbnail-images"
+                                        data-trk-id="update-thumbnail"
+                                >
+                                    <img
+                                            src="//images.footballfanatics.com/paris-saint-germain/paris-saint-germain-nike-home-stadium-shirt-2023-24-womens-with-neymar-jr-10-printing_ss4_p-13398295+pv-1+u-95g0hnlzer4haqfekdex+v-ed9ba2b0bf8d4ab3b233f20589d0b316.jpg?_hv=2&amp;w=120"
+                                            alt="Display slide 2 of 3"
+                                            class="thumbnail-image"
+                                    /></button
+                                >
+                                <button
+                                        class="thumbnail-link m-a-sm thumbnail-images"
+                                        data-trk-id="update-thumbnail"
+                                >
+                                    <img
+                                            src="//images.footballfanatics.com/paris-saint-germain/paris-saint-germain-nike-home-stadium-shirt-2023-24-womens-with-neymar-jr-10-printing_ss4_p-13398295+pv-2+u-95g0hnlzer4haqfekdex+v-3ed5d938d9364f9dbd60eef0956d5cf1.jpg?_hv=2&amp;w=120"
+                                            alt="Display slide 3 of 3"
+                                            class="thumbnail-image"
+                                    />
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div  class="layout-column large-4 medium-6 small-12" data-trk-id="c2">
+            <div class="layout-row">
+                <div class="product-title-container">
+                    <h1 style="color: black">
+                        <span ></span>
+                        <!--                        Paris Saint-Germain Nike Home Stadium Shirt 2023-24 - Womens-->
+                        <!--                        with Neymar Jr 10 printing-->
+                    </h1>
+                </div>
+            </div>
+            <div class="layout-row pdp-price" data-trk-id="pdp-price">
+                <div class="price-card" tabindex="0" data-talos="pdpProductPrice">
+                    <div class="superscript">
+                        <div class="price-row">
+                    <span class="lowest"
+                    ><span class="price"
+                    >Giá:
+                        <span class="money-value"
+                        ><span class="sr-only"></span
+                        >
+                            <span></span>
+                         </span
+                         ><span class="suffix nodiscountpricetext"></span
+                        ></span>
+                    </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div  class="layout-row pdp-buy-box" data-trk-id="pdp-buy-box">
+                <div>
+                    <div class="pdp-buy-box-container" >
+                        <div class="buy-box-size-selector">
+                            <div class="size-selector-container" role="radiogroup">
+                                <div class="size-selector-header">
+                                    <legend class="size-selector-label" id="selectedSizeLabel">Size:</legend>
+
+                                </div>
+<!--                                <div th:each="ctsp:${listChiTietSanPham}">-->
+                                    <div class="size-selector-list" id="size-selector-list">
+                                        <div th:each="kt:${listChiTietSanPham}"  class="size-selector-button available" data-trk-id="size-m" data-talos="buttonSize" role="radio" aria-checked="false">
+                                            <div class="size-text" th:text="${kt.kichThuoc.ten}"></div>
+                                        </div>
+                                    </div>
+<!--                                </div>-->
+
+
+
+                            </div>
+                        </div>
+                        <div class="buy-box-add-to-cart-container">
+                            <div class="buy-box-quantity-buttons-container">
+                                <div class="buy-box-quantity">
+                                    <div class="product-quantity-container">
+                                        <label for="quantityInput" class="quantity-title">Quantity</label>
+                                        <div class="field-wrapper drop-down qty-dropdown more-item-separator">
+                                            <div tabindex="0" aria-label="Quantity" role="button" aria-haspopup="listbox" aria-expanded="false" data-talos="ddItemQty" class="field-wrapper-item label-up">
+                                                <div class="field-wrapper-children">
+                                                    <input type="number" id="quantityInput" name="Quantity" value="1" style="height: 40px;" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="buy-box-actions" style="display: none;">
+                                    <div class="buy-box-add-to-cart">
+                                        <div class="add-to-cart-container">
+                                            <button class="button large primary false" data-talos="buttonAddToCart" data-trk-id="add-to-cart">
+                                                <span class="balance l"></span>
+                                                <span>Add to Cart</span>
+                                                <span class="balance r"></span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+            <div
+                    class="layout-row product-shipping-details"
+                    data-trk-id="product-shipping-details"
+            >
+                <div
+                        class="description-box product-shipping-details-container collapsible"
+                        role="region"
+                >
+                    <div
+                            class="description-box-title"
+                            aria-expanded="true"
+                            tabindex="0"
+                            role="button"
+                    >
+                        <div class="description-box-title-content undefined">
+                            Shipping
+                        </div>
+                        <i class="icon icon-minus" role="presentation"></i>
+                    </div>
+                    <div class="description-box-content">
+                        <div class="shipping-message-container">
+                            <ul class="padding">
+                                <li>This item ships within 3 business days.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div
+                    class="layout-row product-details"
+                    data-trk-id="product-details"
+            >
+                <div
+                        class="description-box product-details-container collapsible collapsed"
+                        role="region"
+                >
+                    <div
+                            class="description-box-title"
+                            aria-expanded="false"
+                            tabindex="0"
+                            role="button"
+                    >
+                        <div class="description-box-title-content undefined">
+                            Details
+                        </div>
+                        <i class="icon icon-plus" role="presentation"></i>
+                    </div>
+                    <div class="description-box-content">
+                        <ul class="">
+                            <li>Product ID: 13398295</li>
+                            <li>
+                                Inspired by the jersey worn by Paris Saint-Germain players
+                                during matches
+                            </li>
+                            <li>
+                                The GOAT badge on the sleeve is included with the Players
+                                or Custom flocking option
+                            </li>
+                            <li>Nike Dri-FIT technology wicks away sweat faster</li>
+                            <li>Standard fit for a relaxed fit</li>
+                            <li>100% polyester</li>
+                            <li>Machine washable</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div
+                    class="layout-row product-details"
+                    data-trk-id="product-details"
+            >
+                <div
+                        class="description-box product-details-container collapsible collapsed"
+                        role="region"
+                >
+                    <div
+                            class="description-box-title"
+                            aria-expanded="false"
+                            tabindex="0"
+                            role="button"
+                    >
+                        <div class="description-box-title-content undefined">
+                            Description
+                        </div>
+                        <i class="icon icon-plus" role="presentation"></i>
+                    </div>
+                    <div class="description-box-content">
+                        <p>
+                            Le maillot PSG Stadium Fourth est inspiré de la tenue que porte les joueurs du Paris
+                            Saint-Germain lors des matchs. Il est conçu dans un tissu anti-transpiration et est
+                            entièrement fabriqué à partir de fibres de polyester recyclé. Le badge GOAT sur la manche
+                            est inclus avec l'option flocage Joueurs ou Personnalisé.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div
+            class="layout-row pdp-style-overwrapper"
+            data-trk-id="PDP_RECOMMENDATIONS_1"
+    >
+        <div class="pl-dynamic-carousel">
+            <div class="carousel">
+                <div class="carousel-header-black-strip">
+                    <h4 class="carousel-title">Recently Viewed</h4>
+                </div>
+                <div class="carousel-list-container">
+                    <div class="base-carousel-container show-arrows-desktop">
+                        <div class="base-carousel">
+                            <div class="carousel-list">
+                                <div class="carousel-item">
+                                    <div class="product-card row carousel-product-card">
+                                        <div class="carousel-product-image">
+                                            <div class="card-image-container">
+                                                <div class="product-image-container">
+                                                    <a
+                                                            href="/en/maillot-psg-domicile-match-dri-fit-adv-23/24/p-5681927308344407+z-84-3923741552?_ref=p-PDP:m-RV:pi-PDP_RECOMMENDATIONS_1:i-r0c0:po-0"
+                                                            data-trk-id="p-13368107"
+                                                            class="color-black"
+                                                            tabindex="-1"
+                                                            aria-hidden="true"
+                                                    ><img
+                                                            src="//images.footballfanatics.com/paris-saint-germain/paris-saint-germain-nike-home-dri-fit-adv-match-shirt-2023-24_ss4_p-13368107+u-6swpap3ahgp3lvfzx2td+v-aa114dc0c5444902b7cb9f90ff7c24dd.jpg?_hv=2&amp;w=340"
+                                                            alt="Paris Saint-Germain Nike Home Dri Fit Adv Match Shirt 2023-24"
+                                                            class="product-image stateful-image"
+                                                            height="340"
+                                                            width="340"
+                                                            data-talos="imageSearchResult"
+                                                            loading="auto"
+                                                    /></a>
+                                                </div>
+                                            </div>
+                                            <div
+                                                    class="product-card-colors hide-for-small-only"
+                                            ></div>
+                                        </div>
+                                        <div class="carousel-product-info">
+                                            <div class="">
+                                                <div
+                                                        class="price-card"
+                                                        tabindex="0"
+                                                        data-talos="srpProductPrice"
+                                                >
+                                                    <div class="superscript">
+                                                        <div class="price-row">
+                                    <span class="lowest"
+                                    ><span class="price"
+                                    ><span class="money-value"
+                                    ><span class="sr-only">€149.99</span
+                                    ><span aria-hidden="true"
+                                    ><sup>€</sup><span>149</span
+                                    ><sup>99</sup></span
+                                    > </span
+                                    ><span
+                                            class="suffix nodiscountpricetext"
+                                    ></span
+                                    ></span>
+                                    </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="product-card-title">
+                                                <a
+                                                        href="/en/maillot-psg-domicile-match-dri-fit-adv-23/24/p-5681927308344407+z-84-3923741552?_ref=p-PDP:m-RV:pi-PDP_RECOMMENDATIONS_1:i-r0c0:po-0"
+                                                        data-trk-id="p-13368107"
+                                                        data-talos="linkSearchResult"
+                                                        class="color-black"
+                                                        title="Paris Saint-Germain Nike Home Dri Fit Adv Match Shirt 2023-24"
+                                                >Paris Saint-Germain Nike Home Dri Fit Adv Match
+                                                    Shirt 2023-24</a
+                                                >
+                                            </div>
+                                            <div
+                                                    class="product-card-colors show-for-small-only"
+                                            ></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div
+            class="layout-row pdp-style-overwrapper"
+            data-trk-id="PDP_RECOMMENDATIONS_2"
+    >
+        <div class="pl-dynamic-carousel">
+            <div class="carousel">
+                <div class="carousel-header-black-strip">
+                    <h4 class="carousel-title">You May Also Like</h4>
+                </div>
+                <div class="carousel-list-container">
+                    <div class="base-carousel-container show-arrows-desktop">
+                        <div class="base-carousel">
+                            <div class="carousel-list">
+                                <div class="carousel-item">
+                                    <div class="product-card row carousel-product-card">
+                                        <div class="carousel-product-image">
+                                            <div class="card-image-container">
+                                                <div class="product-image-container">
+                                                    <a
+                                                            href="/en/maillot-psg-jordan-extérieur-stadium-22/23-femme-avec-flocage-neymar-jr-10/p-2347471359764830+z-913-1957330907?_ref=p-PDP:m-YMAL:pi-PDP_RECOMMENDATIONS_2:i-r0c0:po-0"
+                                                            data-trk-id="p-13324947"
+                                                            class="color-black"
+                                                            tabindex="-1"
+                                                            aria-hidden="true"
+                                                    ><img
+                                                            src="//images.footballfanatics.com/paris-saint-germain/paris-saint-germain-away-stadium-shirt-2022-23-womens-with-neymar-jr-10-printing_ss4_p-13324947+u-185lcfopxn54w36ypwau+v-29f41cc3d53c4b688c4ee3b53fd9f44d.jpg?_hv=2&amp;w=340"
+                                                            alt="Paris Saint-Germain Away Stadium Shirt 2022-23 - Womens with Neymar Jr 10 printing"
+                                                            class="product-image stateful-image"
+                                                            height="340"
+                                                            width="340"
+                                                            data-talos="imageSearchResult"
+                                                            loading="auto"
+                                                    /></a>
+                                                </div>
+                                            </div>
+                                            <div
+                                                    class="product-card-colors hide-for-small-only"
+                                            ></div>
+                                        </div>
+                                        <div class="carousel-product-info">
+                                            <div class="">
+                                                <div
+                                                        class="price-card"
+                                                        tabindex="0"
+                                                        data-talos="srpProductPrice"
+                                                >
+                                                    <div class="superscript">
+                                                        <div class="price-row">
+                                    <span class="lowest"
+                                    ><span class="price primary"
+                                    >Reduced:
+                                        <span class="money-value"
+                                        ><span class="sr-only">€85.49</span
+                                        ><span aria-hidden="true"
+                                        ><sup>€</sup><span>85</span
+                                        ><sup>49</sup></span
+                                        > </span
+                                        ><span class="suffix saleprice"></span
+                                        ></span>
+                                    </span>
+                                                        </div>
+                                                        <div class="price-row">
+                                    <span class="strike-through"
+                                    ><span class="price"
+                                    >Regular:
+                                        <span class="money-value"
+                                        ><span class="sr-only">€107.99</span
+                                        ><span aria-hidden="true"
+                                        ><sup>€</sup><span>107</span
+                                        ><sup>99</sup></span
+                                        > </span
+                                        ><span
+                                                class="suffix prediscountprice"
+                                        ></span
+                                        ></span>
+                                    </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="product-card-title">
+                                                <a
+                                                        href="/en/maillot-psg-jordan-extérieur-stadium-22/23-femme-avec-flocage-neymar-jr-10/p-2347471359764830+z-913-1957330907?_ref=p-PDP:m-YMAL:pi-PDP_RECOMMENDATIONS_2:i-r0c0:po-0"
+                                                        data-trk-id="p-13324947"
+                                                        data-talos="linkSearchResult"
+                                                        class="color-black"
+                                                        title="Paris Saint-Germain Away Stadium Shirt 2022-23 - Womens with Neymar Jr 10 printing"
+                                                >Paris Saint-Germain Away Stadium Shirt 2022-23
+                                                    - Womens with Neymar Jr 10 printing</a
+                                                >
+                                            </div>
+                                            <div
+                                                    class="product-card-colors show-for-small-only"
+                                            ></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

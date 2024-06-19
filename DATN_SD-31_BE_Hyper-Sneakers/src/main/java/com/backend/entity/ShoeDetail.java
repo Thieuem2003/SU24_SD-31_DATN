@@ -9,6 +9,12 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PastOrPresent;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -43,17 +49,14 @@ public class ShoeDetail {
 
     @ManyToOne
     @JoinColumn(name = "color_id")
-    private Color color;//
-
+    private Color color;
 
     @Column(name = "price")
     private BigDecimal priceInput;
 
-//    @Column(name = "priceoutput")
-//    private BigDecimal priceOutput;
-
     @Column(name = "quantity")
     private Integer quantity;
+
 
     @Column(name = "created_by")
     private String createdBy;

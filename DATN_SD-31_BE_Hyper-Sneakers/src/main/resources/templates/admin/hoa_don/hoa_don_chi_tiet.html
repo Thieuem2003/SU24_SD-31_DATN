@@ -1,0 +1,324 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en"-->
+<!--      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"-->
+<!--      layout:decorate="~{admin/hoa_don/hoa_don_cho}"-->
+<!--&gt;-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Title</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<div class="" layout:fragment="gioHang">-->
+<!--    <div class="flex-row-fluid ml-lg-8">-->
+<!--        <div class="card card-custom gutter-b">-->
+<!--            <div class="row">-->
+<!--                <div class="col-7">-->
+<!--                    <div class="card-header flex-wrap border-0 pt-6 pb-0">-->
+<!--                        <h3 class="card-title align-items-start flex-column">-->
+<!--            <span class="card-label font-weight-bolder font-size-h3 text-dark"-->
+<!--            >Giỏ hàng</span-->
+<!--            >-->
+<!--                        </h3>-->
+<!--                    </div>-->
+<!--                    <div class="card-body">-->
+<!--                        <div class="table-responsive">-->
+<!--                            <table class="table">-->
+<!--                                <thead>-->
+<!--                                <tr>-->
+<!--                                    <th>Sản Phẩm</th>-->
+<!--                                    <th class="text-center">Kích Cỡ</th>-->
+<!--                                    <th class="text-center">Số Lượng</th>-->
+<!--                                    <th class="text-right">Giá</th>-->
+<!--                                    <th class="text-right">Đơn Giá</th>-->
+<!--                                    <th class="text-right">Hành Động</th>-->
+<!--                                </tr>-->
+<!--                                </thead>-->
+<!--                                <tbody>-->
+<!--                                <tr th:each="hdct:${listGioHang}">-->
+<!--                                    <td class="d-flex align-items-center font-weight-bolder">-->
+<!--                                        <div class="symbol symbol-60 flex-shrink-0 mr-4 bg-light">-->
+<!--                                            <a href="#" class="symbol symbol-50px">-->
+<!--                                                <img th:src="@{'/admin/psg/chi-tiet-san-pham/display?id=' + ${hdct.chiTietSanPham.sanPham.id}}"-->
+<!--                                                     alt="Image">-->
+<!--                                            </a>-->
+<!--                                        </div>-->
+<!--                                        <a href="#" class="text-dark text-hover-primary"-->
+<!--                                           th:text="${hdct.chiTietSanPham.sanPham.ten}"></a-->
+<!--                                        >-->
+<!--                                    </td>-->
+<!--                                    <td-->
+<!--                                            class="text-center align-middle font-weight-bolder font-size-h5"-->
+<!--                                            th:text="${hdct.chiTietSanPham.kichThuoc.ten}">-->
+<!--                                    </td>-->
+<!--                                    <td class="text-center">-->
+<!--                                        <a th:href="@{/admin/psg/hoa-don/update-quantity/{idHdct}/{newQuantity}(idHdct=${hdct.id},newQuantity=${hdct.soLuong - 1})}"-->
+<!--                                           class="btn btn-xs btn-light-success btn-icon mr-2"-->
+<!--                                           th:if="${hdct.soLuong > 1}">-</a>-->
+<!--                                        <span class="mr-2 font-weight-bolder" th:text="${hdct.soLuong}"></span>-->
+<!--                                        <a th:href="@{/admin/psg/hoa-don/update-quantity/{idHdct}/{newQuantity}(idHdct=${hdct.id},newQuantity=${hdct.soLuong + 1})}"-->
+<!--                                           class="btn btn-xs btn-light-success btn-icon"-->
+<!--                                           th:if="${hdct.soLuong > 0}">+</a>-->
+<!--                                    </td>-->
+
+<!--                                    <td-->
+<!--                                            class="text-right align-middle font-weight-bolder font-size-h5"-->
+<!--                                            th:text="${hdct.giaBan}">-->
+<!--                                    </td>-->
+<!--                                    <td-->
+<!--                                            class="text-right align-middle font-weight-bolder font-size-h5"-->
+<!--                                            th:text="${hdct.donGia}">-->
+<!--                                    </td>-->
+<!--                                    <td class="text-right align-middle">-->
+<!--                                        <a-->
+<!--                                                th:href="@{/admin/psg/hoa-don/delete-san-pham/{id}(id=${hdct.id})}"-->
+<!--                                                class="btn btn-danger font-weight-bolder font-size-sm"-->
+<!--                                        >-->
+<!--                                            Remove-->
+<!--                                        </a>-->
+<!--                                    </td>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <td colspan="2"></td>-->
+<!--                                    <td colspan="1"></td>-->
+<!--                                    <td class="font-weight-bolder font-size-h4 text-right">-->
+<!--                                        Tổng Tiền-->
+<!--                                    </td>-->
+<!--                                    <td class="font-weight-bolder font-size-h4 text-right" th:text="${totalAmount}">-->
+
+<!--                                    </td>-->
+<!--                                </tr>-->
+<!--                                </tbody>-->
+<!--                            </table>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="col-5">-->
+
+<!--                    <div class="card-header flex-wrap border-0 pt-6 pb-0">-->
+<!--                        <h3 class="card-title align-items-start flex-column">-->
+<!--            <span class="card-label font-weight-bolder font-size-h3 text-dark"-->
+<!--            >Thanh Toán</span-->
+<!--            >-->
+<!--                        </h3>-->
+<!--                    </div>-->
+<!--                    <div class="card-body">-->
+<!--                        <div class="table-responsive">-->
+<!--                            <form action="/admin/psg/hoa-don/thanh-toan-hoa-don-tai-quay" method="post"-->
+<!--                                  th:object="${hoaDon}">-->
+<!--                                <input type="hidden" th:field="*{id}">-->
+<!--                                <input type="hidden" th:field="*{ma}">-->
+<!--                                <input type="hidden" th:field="*{ngayTao}">-->
+<!--                                <table class="table">-->
+<!--                                    <tbody>-->
+<!--                                    <tr>-->
+<!--                                        <td class="d-flex align-items-center font-weight-bolder">-->
+<!--                                            Khách hàng-->
+<!--                                        </td>-->
+<!--                                        <td class="text-right align-middle font-weight-bolder font-size-h5">-->
+<!--                                            <form th:action="@{/admin/psg/hoa-don/update-hoa-don/khach-hang/{hoaDonId}(hoaDonId=${hoaDon.id})}"-->
+<!--                                                  method="post">-->
+<!--                                                <select class="form-control" id="kt_select2_1" name="customerId"-->
+<!--                                                        th:field="*{khachHang}" onchange="updateHoaDonKhachHang()">-->
+<!--                                                    <option value="">Chọn khách hàng</option>-->
+<!--                                                    <option th:each="kh : ${listKhachHang}" th:value="${kh.id}"-->
+<!--                                                            th:text="${kh.sdt}+' '+${kh.ten} "></option>-->
+<!--                                                </select>-->
+<!--                                            </form>-->
+<!--                                        </td>-->
+<!--                                    </tr>-->
+<!--                                    <tr>-->
+<!--                                        <td class="d-flex align-items-center font-weight-bolder">-->
+<!--                                            Tổng tiền hàng-->
+<!--                                        </td>-->
+<!--                                        <td class="text-right align-middle font-weight-bolder font-size-h5">-->
+<!--                                            <input type="number" name="" class="form-control mb-2"-->
+<!--                                                   disabled th:value="${totalAmount}"-->
+<!--                                                   id="totalAmount"/>-->
+<!--                                        </td>-->
+<!--                                    </tr>-->
+<!--                                    <tr>-->
+<!--                                        <td class="d-flex align-items-center font-weight-bolder">-->
+<!--                                            Giảm giá (%)-->
+<!--                                        </td>-->
+<!--                                        <td class="text-right align-middle font-weight-bolder font-size-h5">-->
+<!--                                            <input type="number" name="" class="form-control mb-2"-->
+<!--                                                   th:field="*{phanTramGiamGia}" placeholder="%" id="discountInput"-->
+<!--                                                   value="0"/>-->
+<!--                                        </td>-->
+<!--                                    </tr>-->
+<!--                                    <tr>-->
+<!--                                        <td class="d-flex align-items-center font-weight-bolder">-->
+<!--                                            Voucher-->
+<!--                                        </td>-->
+<!--                                        <td class="text-right align-middle font-weight-bolder font-size-h5">-->
+<!--                                            <select class="form-control" name="param" id="kt_select2_7"-->
+<!--                                                    th:field="*{phieu_giam_gia}">-->
+<!--                                                <option value="0" selected>Chọn voucher</option>-->
+<!--                                                <option th:each="vc : ${listVoucher}" th:value="${vc.soTienGiam}">-->
+<!--                                                    <span th:text="${vc.ma}"></span>-->
+<!--                                                    - -->
+<!--                                                    <span th:text="${vc.soTienGiam}"></span>-->
+<!--                                                    - -->
+<!--                                                    <span th:text="${vc.giaTriDonHangToiThieu}"></span>-->
+<!--                                                </option>-->
+<!--                                            </select>-->
+<!--                                        </td>-->
+<!--                                    </tr>-->
+
+<!--                                    <tr>-->
+<!--                                        <td class="d-flex align-items-center font-weight-bolder">-->
+<!--                                            Phương thức thanh toán-->
+<!--                                        </td>-->
+<!--                                        <td class="text-right align-middle font-weight-bolder font-size-h5">-->
+<!--                                            <select class="form-control" name="hinhThucThanhToan" id="phuongThucThanhToan">-->
+<!--                                                <option value="">Chọn hình thức thanh toán</option>-->
+<!--                                                <option th:each="pttt : ${phuongThucThanhToan}"-->
+<!--                                                        th:value="${pttt.ten}" th:text="${pttt.moTa} "></option>-->
+<!--                                            </select>-->
+<!--                                        </td>-->
+<!--                                    </tr>-->
+<!--                                    <tr id="tienChuyenKhoanSection">-->
+<!--                                        <td class="d-flex align-items-center font-weight-bolder">-->
+<!--                                            Tiền chuyển khoản:-->
+<!--                                        </td>-->
+<!--                                        <td class="text-right align-middle font-weight-bolder font-size-h5">-->
+<!--                                            <input type="number" name="" class="form-control"-->
+<!--                                                   th:field="*{tienKhachChuyenKhoan}" placeholder="Tiền chuyển khoản"-->
+<!--                                                   value=""/>-->
+<!--                                        </td>-->
+<!--                                    </tr>-->
+<!--                                    <tr id="maGiaDichSection">-->
+<!--                                        <td class="d-flex align-items-center font-weight-bolder">-->
+<!--                                            Mã giao dịch:-->
+<!--                                        </td>-->
+<!--                                        <td class="text-right align-middle font-weight-bolder font-size-h5">-->
+<!--                                            <input type="text" name="" class="form-control"-->
+<!--                                                   th:field="*{maGiaoDich}" placeholder="Mã giao dịch" value=""/>-->
+<!--                                        </td>-->
+<!--                                    </tr>-->
+<!--                                    <tr>-->
+<!--                                        <td class="d-flex align-items-center font-weight-bolder">-->
+<!--                                            Hình Thúc Bán Hàng-->
+<!--                                        </td>-->
+<!--                                        <td class="text-right align-middle font-weight-bolder font-size-h5">-->
+<!--                                            <div class="radio-inline">-->
+<!--                                                <label class="radio radio-primary">-->
+<!--                                                    <input type="radio" name="radios11" checked="checked" value="ACTIVE"-->
+<!--                                                           th:field="*{hinhThucBanHang}" id="taiQuayRadio"/>-->
+<!--                                                    <span></span>-->
+<!--                                                    Tại quầy-->
+<!--                                                </label>-->
+<!--                                                <label class="radio radio-primary">-->
+<!--                                                    <input type="radio" name="radios11" value="INACTIVE"-->
+<!--                                                           th:field="*{hinhThucBanHang}" id="giaoHangRadio"/>-->
+<!--                                                    <span></span>-->
+<!--                                                    Giao hàng-->
+<!--                                                </label>-->
+<!--                                            </div>-->
+<!--                                        </td>-->
+<!--                                    </tr>-->
+<!--                                    <tr id="diaChiSection">-->
+<!--                                        <td class="d-flex align-items-center font-weight-bolder">-->
+<!--                                            Địa chỉ:-->
+<!--                                        </td>-->
+<!--                                        <td class="text-right align-middle font-weight-bolder font-size-h5">-->
+<!--                                            <select class="form-control mt-2"-->
+<!--                                                    style="height: 45px"-->
+<!--                                                    name="province" id="province">-->
+<!--                                                <option value="">Chọn tỉnh</option>-->
+<!--                                            </select>-->
+<!--                                            <select class="form-control mt-2"-->
+<!--                                                    style="height: 45px"-->
+<!--                                                    name="district" id="district">-->
+<!--                                                <option value="">Chọn quận</option>-->
+<!--                                            </select>-->
+<!--                                            <select class="form-control mt-2"-->
+<!--                                                    style="height: 45px"-->
+<!--                                                    name="ward" id="ward">-->
+<!--                                                <option value="">Chọn phường</option>-->
+<!--                                            </select>-->
+
+<!--                                            <input type="hidden" class="form-control" th:field="*{diaChi}"-->
+<!--                                                   id="diaChiInput">-->
+<!--                                        </td>-->
+<!--                                    </tr>-->
+<!--                                    <tr id="tienShipSection">-->
+<!--                                        <td class="d-flex align-items-center font-weight-bolder">-->
+<!--                                            Tiền ship:-->
+<!--                                        </td>-->
+<!--                                        <td class="text-right align-middle font-weight-bolder font-size-h5">-->
+<!--                                            <input type="number" name="" id="tienShip" class="form-control"-->
+<!--                                                   th:field="*{tienShip}" placeholder="Tiền ship" value="0"/>-->
+<!--                                        </td>-->
+<!--                                    </tr>-->
+<!--                                    <tr id="tenNguoiNhanSection">-->
+<!--                                        <td class="d-flex align-items-center font-weight-bolder">-->
+<!--                                            Tên người nhận:-->
+<!--                                        </td>-->
+<!--                                        <td class="text-right align-middle font-weight-bolder font-size-h5">-->
+<!--                                            <input type="text" name="" class="form-control"-->
+<!--                                                   th:field="*{tenNguoiNhan}" placeholder="Tên người nhận" value=""/>-->
+<!--                                        </td>-->
+<!--                                    </tr>-->
+<!--                                    <tr id="sdtNguoiNhanSection">-->
+<!--                                        <td class="d-flex align-items-center font-weight-bolder">-->
+<!--                                            Số điện thoại người nhận:-->
+<!--                                        </td>-->
+<!--                                        <td class="text-right align-middle font-weight-bolder font-size-h5">-->
+<!--                                            <input type="text" name="" class="form-control"-->
+<!--                                                   th:field="*{sdtNguoiNhan}" placeholder="Số điện thoại người nhận"-->
+<!--                                                   value=""/>-->
+<!--                                        </td>-->
+<!--                                    </tr>-->
+<!--                                    <tr id="ngayMuonNhanSection">-->
+<!--                                        <td class="d-flex align-items-center font-weight-bolder">-->
+<!--                                            Ngày muốn nhận hàng:-->
+<!--                                        </td>-->
+<!--                                        <td class="text-right align-middle font-weight-bolder font-size-h5">-->
+<!--                                            <input type="date" name="" class="form-control"-->
+<!--                                                   th:field="*{ngayMuonNhan}" placeholder="Ngày muốn nhận hàng"-->
+<!--                                                   value=""/>-->
+<!--                                        </td>-->
+<!--                                    </tr>-->
+<!--                                    <tr>-->
+<!--                                        <td class="d-flex align-items-center font-weight-bolder">-->
+<!--                                            Khách cần trả-->
+<!--                                        </td>-->
+<!--                                        <td class="text-right align-middle font-weight-bolder font-size-h5">-->
+<!--                                            <input type="number" name="" class="form-control mb-2"-->
+<!--                                                   th:field="*{thanhTien}" disabled placeholder="Thành tiền"-->
+<!--                                                   id="customerPayment"/>-->
+<!--                                        </td>-->
+<!--                                    </tr>-->
+<!--                                    <tr>-->
+<!--                                        <td class="d-flex align-items-center font-weight-bolder">-->
+<!--                                            Tiền mặt khách trả-->
+<!--                                        </td>-->
+<!--                                        <td class="text-right align-middle font-weight-bolder font-size-h5">-->
+<!--                                            <input type="number" name="" id="tienMatKhachTra" class="form-control mb-2"-->
+<!--                                                   th:field="*{tienMatKhachTra}" placeholder="Tiền mặt khách trả"-->
+<!--                                                   value="0"/>-->
+<!--                                        </td>-->
+<!--                                    </tr>-->
+<!--                                    <tr>-->
+<!--                                        <td class="d-flex align-items-center font-weight-bolder">-->
+<!--                                            Tiền thừa-->
+<!--                                        </td>-->
+<!--                                        <td class="text-right align-middle font-weight-bolder font-size-h5">-->
+<!--                                            <input type="number" name="" id="tienThua" class="form-control mb-2"-->
+<!--                                                   placeholder="Tiền thừa" value="0"/>-->
+<!--                                        </td>-->
+<!--                                    </tr>-->
+<!--                                    </tbody>-->
+<!--                                </table>-->
+<!--                                <button class="btn btn-primary mb-5" type="submit">Thanh Toán</button>-->
+<!--                            </form>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->

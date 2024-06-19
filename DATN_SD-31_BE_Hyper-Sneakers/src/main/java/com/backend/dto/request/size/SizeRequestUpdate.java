@@ -17,7 +17,7 @@ public class SizeRequestUpdate {
 
     private Long id;
 
-    private Float name;
+    private Integer name;
 
     private Date createdAt;
 

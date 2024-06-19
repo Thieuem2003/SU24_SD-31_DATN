@@ -1,34 +1,14 @@
 package com.backend.controller;
 
-import com.backend.dto.request.LoginRequest;
-import com.backend.dto.request.SignupRequest;
-import com.backend.dto.response.JwtResponse;
-import com.backend.dto.response.MessageResponse;
-import com.backend.entity.Account;
-import com.backend.entity.Role;
-import com.backend.entity.login.ERole;
-import com.backend.filter.JwtTokenProvider;
-import com.backend.repository.AccountRepository;
-import com.backend.repository.QuyenHanRepository;
-import com.backend.security.CustomUserDetails;
 //import javax.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 //import org.springframework.security.authentication.AuthenticationManager;
 //import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 //import org.springframework.security.core.Authentication;
 //import org.springframework.security.core.GrantedAuthority;
 //import org.springframework.security.core.context.SecurityContextHolder;
 //import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 //import org.springframework.web.bind.annotation.RestController;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 //@RestController
 public class LoginController {

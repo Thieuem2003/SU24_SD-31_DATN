@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/fragments_layout_admin}"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+<div class="container" layout:fragment="content">
+    <div class="row">
+        <div class="col-8">
+            <li class="nav-item d-none d-md-block">
+        <a class="nav-link" href="javascript:void(0)">
+            <nav class="navbar bg-body">
+                <div class="container-fluid">
+                    <form class="d-flex" role="search" action="/admin/psg/nha-san-xuat/searchActive/0" method="get">
+                        <input name="searchNameOrMa" class="form-control custom-shadow custom-radius border-0 bg-white"
+                               type="search" placeholder="Search Tên Or Mã" aria-label="Search">
+                        <button class="btn btn-rounded btn-primary" type="submit">Search</button>
+                    </form>
+                </div>
+            </nav>
+        </a>
+    </li>
+        </div>
+        <div class="col-2">
+            <a href="/admin/psg/nha-san-xuat/view-add" class="btn waves-effect waves-light btn-rounded btn-primary">View Add</a>
+        </div>
+        <div class="col-2">
+            <a href="/admin/psg/nha-san-xuat/pageInActive/0" class="btn waves-effect waves-light btn-rounded btn-primary">View Revert</a>
+        </div>
+
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title mb-3">Danh Sách</h4>
+            <div class="tab-content">
+                <div class="tab-pane show active" id="home">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">STT</th>
+                            <th scope="col">Mã</th>
+                            <th scope="col">Tên</th>
+                            <th scope="col">Trạng Thái</th>
+                            <th scope="col">Hành Động</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="nsx,index:${listNhaSanXuatActive}">
+                            <td th:text="${index.count}"></td>
+                            <td th:text="${nsx.ma}"></td>
+                            <td th:text="${nsx.ten}"></td>
+                            <td th:text="${nsx.trangThai.moTa}"></td>
+                            <td>
+                      <span>
+                                      <a th:href="@{/admin/psg/nha-san-xuat/view-update/{id}(id=${nsx.id})}"
+                                         class="btn waves-effect waves-light btn-rounded btn-warning"
+                                        >Update</a>
+                                    <form th:action="@{/admin/psg/nha-san-xuat/delete/{id}(id=${nsx.id})}" method="post"  style="display: inline;">
+                                    <a th:href="@{/admin/psg/nha-san-xuat/delete/{id}(id=${nsx.id})}">
+                                        <button type="submit"
+                                                class="btn waves-effect waves-light btn-rounded btn-danger" onclick="return confirm('Bạn có muốn xóa không')">Delete
+                                        </button>
+                                    </a>
+                                </form>
+                      </span>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                            <li class="page-item" th:if="${currentPage !=0}">
+                                <a class="page-link" th:href="@{'/admin/psg/nha-san-xuat/pageActive/'+${ currentPage - 1}}">Previous</a>
+                            </li>
+                            <li class="page-item" th:each="i: ${#numbers.sequence(1,totalPages)}"
+                                th:classappend="${currentPage == i - 1 ? 'active' : ''}">
+                                <a class="page-link" th:href="@{'/admin/psg/nha-san-xuat/pageActive/'+${i - 1}}">
+                                    <span th:text="${i}"></span>
+                                </a>
+                            </li>
+                            <li class="page-item" th:if="${currentPage + 1 != totalPages}">
+                                <a class="page-link" th:href="@{'/admin/psg/nha-san-xuat/pageActive/'+${currentPage + 1}}">Next</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div> <!-- end card-body-->
+    </div>
+</div>
+</body>
+</html>

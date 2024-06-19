@@ -1,21 +1,24 @@
 package com.backend.service;
 
-import com.backend.ServiceResult;
 import com.backend.dto.request.material.MaterialRequest;
 import com.backend.dto.request.material.MaterialRequestUpdate;
 import com.backend.dto.response.MaterialResponse;
-import com.backend.entity.Material;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
 public interface IMaterialService {
-    ServiceResult<List<MaterialResponse>> getAll();
+    List<MaterialResponse> getAll();
 
-    ServiceResult<Material> addNewMaterial(MaterialRequest materialRequest);
+    MaterialResponse getOne(Long id);
 
-    ServiceResult<Material> updateMaterial(MaterialRequestUpdate materialRequestUpdate);
+    Page<MaterialResponse> pageMaterial(Integer page, Integer size);
 
-    ServiceResult<Material> deleteMaterial(MaterialRequestUpdate materialRequestUpdate);
+    String addNewMaterial(MaterialRequest materialRequest);
 
-    ServiceResult<Material> activeMaterial(MaterialRequestUpdate materialRequestUpdate);
+    String updateMaterial(MaterialRequestUpdate materialRequestUpdate);
+
+    String deleteMaterial(Long id);
+
+    String activeMaterial(MaterialRequestUpdate materialRequestUpdate);
 }

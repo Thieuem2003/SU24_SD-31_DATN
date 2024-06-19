@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/fragments_layout_user}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div layout:fragment="content_user">
+
+<div class="layout-row" data-trk-id="PSG_HM_SPOT">
+  <div class="pl-clickable-image">
+    <a href="#" data-trk-id="">
+      <div class="responsive-image"><img loading="lazy" th:src="@{/assets/img/banner_psg.avif}"
+                                         alt="NEW 23/24 DEMBÉLÉ KIT - SHOP NOW"/></div>
+    </a>
+  </div>
+</div>
+<div class="layout-row" data-trk-id="PSG_SBP_HEADER">
+  <div class="pl-clickable-image">
+    <div class="responsive-image"><img loading="lazy"
+                                       th:src="@{/assets/img/banner_psg_2.avif}"
+                                       alt="SHOP BY PLAYER" width="1600" height="70"/></div>
+  </div>
+</div>
+<div class="row" data-trk-id="r7">
+  <div class="col-2" data-trk-id="PSG_SBP_1">
+    <div class="pl-clickable-image">
+      <a href="/user/psg/trang-chu/cau-thu/1" data-trk-id="">
+        <div class="responsive-image"><img loading="lazy"
+                                           th:src="@{/assets/img/ramos_away.avif}"
+                                           alt="Shop Ramos Merchandise"/></div>
+      </a>
+    </div>
+  </div>
+  <div class="col-2" data-trk-id="PSG_SBP_2">
+    <div class="pl-clickable-image">
+      <a href="/user/psg/trang-chu/cau-thu/2" data-trk-id="">
+        <div class="responsive-image"><img loading="lazy"
+                                           th:src="@{/assets/img/neymar_away.avif}"
+                                           alt="Shop Neymar Jr. Merchandise"/></div>
+      </a>
+    </div>
+  </div>
+  <div class="col-2" data-trk-id="PSG_SBP_3">
+    <div class="pl-clickable-image">
+      <a th:href="@{/user/psg/trang-chu/cau-thu/{id}(id=${2})}"
+         data-trk-id="">
+        <div class="responsive-image"><img loading="lazy"
+                                           th:src="@{/assets/img/mbappe_away.avif}"
+                                           alt="Shop Mbappe Merchandise"/></div>
+      </a>
+    </div>
+  </div>
+  <div class="col-2" data-trk-id="PSG_SBP_4">
+    <div class="pl-clickable-image">
+      <a href="#" data-trk-id="">
+        <div class="responsive-image"><img loading="lazy" th:src="@{/assets/img/kang_away.avif}"
+                                           alt="Shop Lee Kang In Merchandise"/></div>
+      </a>
+    </div>
+  </div>
+  <div class="col-2" data-trk-id="PSG_SBP_5">
+    <div class="pl-clickable-image">
+      <a href="#"
+         data-trk-id="">
+        <div class="responsive-image"><img loading="lazy"
+                                           th:src="@{/assets/img/verratti_away.avif}"
+                                           alt="Shop Verratti Merchandise"/></div>
+      </a>
+    </div>
+  </div>
+  <div class="col-2" data-trk-id="PSG_SBP_6">
+    <div class="pl-clickable-image">
+      <a href="#" data-trk-id="">
+        <div class="responsive-image"><img loading="lazy"
+                                           th:src="@{/assets/img/dembele_away.avif}"
+                                           alt="Shop Dembele Merchandise"/></div>
+      </a>
+    </div>
+  </div>
+</div>
+<div class="layout-row" data-trk-id="PSG_HP_DSPOT">
+  <div class="pl-clickable-image">
+    <a href="#"
+       data-trk-id="">
+      <div class="responsive-image"><img loading="lazy" th:src="@{/assets/img/banner_psg_3.avif}"
+                                         alt="NEW PSG X Rebond by Docteur Paper LIMITED EDITION"/></div>
+    </a>
+  </div>
+</div>
+<div class="row" data-trk-id="r9">
+  <div class="col-6" data-trk-id="PSG_BSPOT_2">
+    <div class="pl-clickable-image"><a
+            href="#"
+            data-trk-id=""><img loading="lazy" th:src="@{/assets/img/banner_psg_4.avif}"
+                                alt="23/24 Home Training kits - Shop now"/></a></div>
+  </div>
+  <div class="col-6"  data-trk-id="PSG_BSPOT_1">
+    <div class="pl-clickable-image"><a
+
+            href="#"
+            data-trk-id=""><img loading="lazy" th:src="@{/assets/img/banner_psg_5.avif}"
+                                alt="23/24 Away Training kits - Shop now"/></a></div>
+  </div>
+</div>
+<div class="layout-row" data-trk-id="AB_Carousel_1">
+  <div class="pl-dynamic-carousel">
+    <div class="carousel">
+      <div class="carousel-header-black-strip">
+        <h4 class="carousel-title">Men&#x27;s Best Sellers</h4><a
+              href="#" data-trk-id="MBS-view-all" class="carousel-view-all-button default">View All</a>
+      </div>
+      <div class="carousel-list-container">
+        <div class="base-carousel-container show-arrows-desktop">
+          <div class="base-carousel">
+            <div class="carousel-list">
+              <div class="carousel-item">
+                <div class="product-card row carousel-product-card">
+                  <div class="carousel-product-image">
+                    <div class="card-image-container">
+                      <div class="product-image-container"><a
+                              href="#"
+                              data-trk-id="p-200387338" class="color-black"
+                              tabindex="-1" aria-hidden="true"><img loading="lazy"
+                                                                    th:src="@{/assets/img/banner_psg_8.avif}"
+                                                                    alt="Paris Saint-Germain Nike Home Stadium Shirt 2023-24 with Lee Kang In 19 printing"
+                                                                    class="product-image"
+                                                                    width="340"
+                                                                    height="340"/></a>
+                      </div>
+                    </div>
+                    <div class="product-card-colors hide-for-small-only"></div>
+                  </div>
+                  <div class="carousel-product-info">
+                    <div class="">
+                      <div class="price-card" tabindex="0" data-talos="srpProductPrice">
+                        <div class="superscript">
+                          <div class="price-row"><span class="lowest"><span
+                                  class="price"><span class="money-value"><span
+                                  class="sr-only">US$124.00</span><span
+                                  aria-hidden="true"><sup>US$</sup><span>124</span><sup>00</sup></span>
+                                                            </span><span
+                                  class="suffix nodiscountpricetext"></span></span>
+                                                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="product-card-title"><a
+
+                            href="#" data-trk-id="p-200387338" data-talos="linkSearchResult"
+                            class="color-black"
+                            title="Paris Saint-Germain Nike Home Stadium Shirt 2023-24 with Lee Kang In 19 printing">Paris
+                      Saint-Germain Nike Home Stadium Shirt 2023-24 with Lee Kang In 19
+                      printing</a></div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="layout-row" data-trk-id="PSG_HMSPOT_A">
+  <div class="pl-clickable-image">
+    <a href="#" data-trk-id="">
+      <div class="responsive-image"><img loading="lazy" th:src="@{/assets/img/banner_psg_6.avif}"
+                                         alt="CHAMPIONS RANGE! SHOP NOW"/></div>
+    </a>
+  </div>
+</div>
+<div class="layout-row" data-trk-id="PSG_ASPOT">
+  <div class="pl-clickable-image">
+    <a href="#"
+       data-trk-id="">
+      <div class="responsive-image"><img loading="lazy" th:src="@{/assets/img/banner_psg_7.avif}"
+                                         alt="NEW RETRO - SHOP NOW"/></div>
+    </a>
+  </div>
+</div>
+<div class="layout-row" data-trk-id="AB_CAROUSEL_3">
+  <div class="pl-dynamic-carousel">
+    <div class="carousel">
+      <div class="carousel-header-black-strip">
+        <h4 class="carousel-title">Kids&#x27; Best Sellers</h4><a
+              href="#"
+              data-trk-id="KBS-view-all" class="carousel-view-all-button default">View All</a></div>
+      <div class="carousel-list-container">
+        <div class="base-carousel-container show-arrows-desktop">
+          <div class="base-carousel">
+            <div class="carousel-list">
+              <div class="carousel-item">
+                <div class="product-card row carousel-product-card">
+                  <div class="carousel-product-image">
+                    <div class="card-image-container">
+                      <div class="product-image-container"><a
+                              href="#"
+                              data-trk-id="p-14400943" class="color-black"
+                              tabindex="-1" aria-hidden="true"><img loading="lazy"
+                                                                    th:src="@{/assets/img/banner_psg_8.avif}"
+                                                                    alt="Paris Saint-Germain Nike Home Stadium Shirt 2023-24 - Kids with Mbappé 7 printing"
+                                                                    class="product-image"
+                                                                    width="340"
+                                                                    height="340"/></a>
+                      </div>
+                    </div>
+                    <div class="product-card-colors hide-for-small-only"></div>
+                  </div>
+                  <div class="carousel-product-info">
+                    <div class="">
+                      <div class="price-card" tabindex="0" data-talos="srpProductPrice">
+                        <div class="superscript">
+                          <div class="price-row"><span class="lowest"><span
+                                  class="price"><span class="money-value"><span
+                                  class="sr-only">US$102.00</span><span
+                                  aria-hidden="true"><sup>US$</sup><span>102</span><sup>00</sup></span>
+                                                            </span><span
+                                  class="suffix nodiscountpricetext"></span></span>
+                                                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="product-card-title"><a
+                            href="#"
+                            data-trk-id="p-14400943" data-talos="linkSearchResult"
+                            class="color-black"
+                            title="Paris Saint-Germain Nike Home Stadium Shirt 2023-24 - Kids with Mbappé 7 printing">Paris
+                      Saint-Germain Nike Home Stadium Shirt 2023-24 - Kids with Mbappé 7
+                      printing</a></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row" data-trk-id="r15">
+  <div class="col-6" data-trk-id="PSG_BSPOT_3">
+    <div class="pl-clickable-image"><a
+            href="#"
+            data-trk-id=""><img loading="lazy" th:src="@{/assets/img/banner_psg_8.avif}"
+                                alt="PSG NIKE PEGASUS 40 - Shop now"/></a></div>
+  </div>
+  <div  class="col-6" data-trk-id="PSG_BSPOT_4">
+    <div class="pl-clickable-image"><a
+            href="#"
+            data-trk-id=""><img loading="lazy" th:src="@{/assets/img/banner_psg_9.avif}"
+                                alt="Personalise your jersey! "/></a></div>
+  </div>
+</div>
+<div class="layout-row" data-trk-id="AB_CAROUSEL_2">
+  <div class="pl-dynamic-carousel">
+    <div class="carousel">
+      <div class="carousel-header-black-strip">
+        <h4 class="carousel-title">Women&#x27;s Best Sellers</h4><a
+              href="#"
+              data-trk-id="WBS-view-all" class="carousel-view-all-button default">View All</a></div>
+      <div
+              class="carousel-list-container">
+        <div class="base-carousel-container show-arrows-desktop">
+          <div class="base-carousel">
+            <div class="carousel-list">
+              <div class="carousel-item">
+                <div class="product-card row carousel-product-card">
+                  <div class="carousel-product-image">
+                    <div class="card-image-container">
+                      <div class="product-image-container"><a
+                              href="#"
+                              data-trk-id="p-200387349" class="color-black"
+                              tabindex="-1" aria-hidden="true"><img loading="lazy"
+                                                                    th:src="@{/assets/img/banner_psg_8.avif}"
+                                                                    alt="Paris Saint-Germain Nike Home Stadium Shirt 2023-24 - Womens with Lee Kang In 19 printing"
+                                                                    class="product-image"
+                                                                    width="340"
+                                                                    height="340"/></a>
+                      </div>
+                    </div>
+                    <div class="product-card-colors hide-for-small-only"></div>
+                  </div>
+                  <div class="carousel-product-info">
+                    <div class="">
+                      <div class="price-card" tabindex="0" data-talos="srpProductPrice">
+                        <div class="superscript">
+                          <div class="price-row"><span class="lowest"><span
+                                  class="price"><span class="money-value"><span
+                                  class="sr-only">US$124.00</span><span
+                                  aria-hidden="true"><sup>US$</sup><span>124</span><sup>00</sup></span>
+                                                            </span><span
+                                  class="suffix nodiscountpricetext"></span></span>
+                                                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="product-card-title"><a
+                            href="#"
+                            data-trk-id="p-200387349" data-talos="linkSearchResult"
+                            class="color-black"
+                            title="Paris Saint-Germain Nike Home Stadium Shirt 2023-24 - Womens with Lee Kang In 19 printing">Paris
+                      Saint-Germain Nike Home Stadium Shirt 2023-24 - Womens with Lee Kang
+                      In 19 printing</a></div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="layout-row" data-trk-id="PSG_PARTNERS">
+  <div class="pl-clickable-image">
+    <div class="responsive-image"><img loading="lazy" th:src="@{/assets/img/banner_psg_10.avif}"
+                                       alt="Sponsors PSG"/></div>
+  </div>
+</div>
+
+</div>
+</body>
+</html>
