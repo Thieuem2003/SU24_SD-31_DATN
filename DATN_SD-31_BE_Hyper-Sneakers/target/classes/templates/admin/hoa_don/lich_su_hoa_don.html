@@ -1,0 +1,221 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en"-->
+<!--      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"-->
+<!--      layout:decorate="~{fragments/fragments_layout_admin}"-->
+<!--&gt;-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Title</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<div class="container" layout:fragment="content">-->
+
+<!--    <div class="card card-custom">-->
+<!--        <div class="card-header flex-wrap border-0 pt-6 pb-0">-->
+<!--            <div class="card-body">-->
+<!--                <h4 class="card-title mb-3">Lịch Sử Hóa Đơn</h4>-->
+<!--                <div class="tab-content">-->
+<!--                    <div class="tab-pane show active" id="home">-->
+<!--                        <table class="table">-->
+<!--                            <thead>-->
+<!--                            <tr>-->
+<!--                                <th scope="col">STT</th>-->
+<!--                                <th scope="col"></th>-->
+<!--                                <th scope="col">Ngày Tạo</th>-->
+<!--                                <th scope="col">Ghi Chú</th>-->
+<!--                                <th scope="col">Người Xác Nhận</th>-->
+
+<!--                            </tr>-->
+<!--                            </thead>-->
+<!--                            <tbody>-->
+<!--                            <tr th:each="ls,index:${listLichSuHoaDon}">-->
+<!--                                <td th:text="${index.count}"></td>-->
+<!--                                <td th:text="${ls.loaiLichSuHoaDon.moTa}"></td>-->
+<!--                                <td th:text="${#temporals.format(ls.ngayTao, 'dd-MM-yyyy HH:mm')}"></td>-->
+
+<!--                                <td th:text="${ls.moTa}"></td>-->
+<!--                                &lt;!&ndash;                                <td th:text="${ls.nhanVien.ten}"></td>&ndash;&gt;-->
+<!--                            </tr>-->
+<!--                            </tbody>-->
+<!--                        </table>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <a th:href="@{/admin/psg/hoa-don/update-trang-thai-hoa-don/{id}/{trangThaiHoaDon}(id=${hoaDon.id},trangThaiHoaDon='CONFIRMED')}"-->
+<!--                   th:if="${showConfirmButton}" class="btn btn-success">Xác nhận</a>-->
+
+<!--                &lt;!&ndash; Giao hàng button &ndash;&gt;-->
+<!--                <a th:href="@{/admin/psg/hoa-don/update-trang-thai-hoa-don/{id}/{trangThaiHoaDon}(id=${hoaDon.id},trangThaiHoaDon='SHIPPING')}"-->
+<!--                   th:if="${showShippingButton}" class="btn btn-success">Giao hàng</a>-->
+
+<!--                &lt;!&ndash; Hoàn thành đơn button &ndash;&gt;-->
+<!--                <a th:href="@{/admin/psg/hoa-don/update-trang-thai-hoa-don/{id}/{trangThaiHoaDon}(id=${hoaDon.id},trangThaiHoaDon='APPROVED')}"-->
+<!--                   th:if="${showCompleteButton}" class="btn btn-success">Hoàn Thành Đơn</a>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="card card-custom">-->
+<!--        <div class="card-header flex-wrap border-0 pt-6 pb-0">-->
+<!--            <div class="card-body">-->
+<!--                <h4 class="card-title mb-3">Thông Tin Đơn Hàng</h4>-->
+<!--                <hr>-->
+<!--                <div class="tab-pane show active">-->
+<!--                    <table class="table">-->
+
+<!--                        <thead>-->
+<!--                        <tr>-->
+<!--                        </tr>-->
+<!--                        </thead>-->
+<!--                        <tbody>-->
+<!--                        <tr>-->
+<!--                            <td class="d-flex align-items-center font-weight-bolder">-->
+<!--                                Trạng Thái</td>-->
+<!--                            <td   th:text="${hoaDon.trangThai.moTa}" class="text-right align-middle font-weight-bolder font-size-h5">-->
+
+<!--                            </td>-->
+<!--                            <td class="d-flex align-items-center font-weight-bolder">-->
+<!--                                Người Đặt Hàng</td>-->
+<!--                            <td th:text="${hoaDon.khachHang.ten}" class="text-right align-middle font-weight-bolder font-size-h5">-->
+
+<!--                            </td>-->
+<!--                        </tr>-->
+<!--                        <tr>-->
+<!--                            <td class="d-flex align-items-center font-weight-bolder">-->
+<!--                                Loại</td>-->
+<!--                            <td th:text="${hoaDon.hinhThucBanHang.moTa}" class="text-right align-middle font-weight-bolder font-size-h5">-->
+
+<!--                            </td>-->
+<!--                            <td class="d-flex align-items-center font-weight-bolder">-->
+<!--                                Người Nhận Hàng</td>-->
+<!--                            <td th:text="${hoaDon.tenNguoiNhan}" class="text-right align-middle font-weight-bolder font-size-h5">-->
+
+<!--                            </td>-->
+<!--                        </tr>-->
+<!--                        <tr>-->
+<!--                            <td class="d-flex align-items-center font-weight-bolder">-->
+<!--                                Mã Đơn Hàng</td>-->
+<!--                            <td th:text="${hoaDon.ma}" class="text-right align-middle font-weight-bolder font-size-h5">-->
+
+<!--                            </td>-->
+<!--                            <td class="d-flex align-items-center font-weight-bolder">-->
+<!--                                Số điện thoại người nhận</td>-->
+<!--                            <td th:text="${hoaDon.sdtNguoiNhan}" class="text-right align-middle font-weight-bolder font-size-h5">-->
+
+<!--                            </td>-->
+<!--                        </tr>-->
+<!--                        <tr>-->
+<!--                            <td class="d-flex align-items-center font-weight-bolder"></td>-->
+<!--                            <td class="text-right align-middle font-weight-bolder font-size-h5"></td>-->
+<!--                            <td class="d-flex align-items-center font-weight-bolder">Địa Chỉ Nhận Hàng</td>-->
+<!--                            <td th:text="${hoaDon.diaChi}" class="text-right align-middle font-weight-bolder font-size-h5"></td>-->
+<!--                        </tr>-->
+<!--                        </tbody>-->
+<!--                    </table>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="card card-custom">-->
+<!--        <div class="card-header flex-wrap border-0 pt-6 pb-0">-->
+<!--            <h4 class="card-title mb-3">Lịch Sử Thanh Toán</h4>-->
+<!--            <hr>-->
+<!--            <div class="tab-content">-->
+<!--                <div class="tab-pane show active">-->
+<!--                    <table class="table">-->
+<!--                        <thead>-->
+<!--                        <tr>-->
+<!--                            <th scope="col">Số Tiền Mặt</th>-->
+<!--                            <th scope="col">Số Chuyển Khoản</th>-->
+<!--                            <th scope="col">Thời Gian</th>-->
+<!--                            <th scope="col">Loại Giao Dịch</th>-->
+<!--                            <th scope="col">Phương Thức Thanh Toán</th>-->
+<!--                            <th scope="col">Trạng Thái</th>-->
+<!--                            <th scope="col">Nhân Viên Xác Nhận</th>-->
+<!--                        </tr>-->
+<!--                        </thead>-->
+<!--                        <tbody>-->
+<!--                        <tr th:each="lsgd,index:${listGiaoDich}">-->
+<!--                            <td th:text="${lsgd.soTienMat}"></td>-->
+<!--                            <td th:text="${lsgd.soTienChuyenKhoan}"></td>-->
+<!--                            <td th:text="${lsgd.ngayTao}"></td>-->
+<!--                            <td th:text="${lsgd.loaiGiaoDich.moTa}"></td>-->
+<!--                            <td th:text="${lsgd.phuongThucThanhToan.moTa}"></td>-->
+<!--                            <td th:text="${lsgd.trangThaiGiaoDich.moTa}"></td>-->
+<!--                            &lt;!&ndash;                            <td th:text="${lsgd.nhanVien.ten}"></td>&ndash;&gt;-->
+<!--                        </tr>-->
+<!--                        </tbody>-->
+<!--                    </table>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="card card-custom">-->
+<!--        <div class="card-header flex-wrap border-0 pt-6 pb-0">-->
+<!--            <div class="tab-content">-->
+<!--                <div class="tab-pane show active">-->
+<!--                    <table class="table">-->
+<!--                        <thead>-->
+<!--                        <tr>-->
+<!--                            <th scope="col"></th>-->
+<!--                            <th scope="col"></th>-->
+<!--                            <th scope="col"></th>-->
+<!--                        </tr>-->
+<!--                        </thead>-->
+<!--                        <tbody>-->
+<!--                        <tr th:each="hdct,index:${listHoaDonChiTiet}">-->
+<!--                            <td class="d-flex align-items-center">-->
+<!--                                <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">-->
+
+<!--                                    <div class="symbol-label">-->
+<!--                                        <img th:src="@{${'/admin/psg/chi-tiet-san-pham/display?id=' + hdct.chiTietSanPham.sanPham.id}}"-->
+<!--                                             alt="Emma Smith"-->
+<!--                                             style="width: 150px; height: 120px;border-radius: 10%;object-fit: cover"-->
+<!--                                        />-->
+<!--                                    </div>-->
+
+<!--                                </div>-->
+<!--                                <div class="d-flex flex-column">-->
+<!--                                    <span th:text="${hdct.chiTietSanPham.sanPham.ten}"></span>-->
+<!--                                    <span th:text="${hdct.giaBan}"></span>-->
+<!--                                    <span th:text="${hdct.soLuong}"></span>-->
+<!--                                </div>-->
+<!--                            </td>-->
+<!--                            <td th:text="${hdct.donGia}"></td>-->
+<!--                            <td>Trả Hàng</td>-->
+<!--                        </tr>-->
+<!--                        </tbody>-->
+<!--                    </table>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+<!--<div id="mo-ta" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">-->
+<!--    <div class="modal-dialog">-->
+<!--        <div class="modal-content">-->
+<!--            <div class="modal-body">-->
+<!--                <div class="text-center mt-2 mb-4">-->
+<!--                    <a href="#" class="text-success">-->
+<!--                                                        <span><img class="me-2" th:src="@{/assets/images/image1.png}"-->
+<!--                                                                   alt="" height="80"></span>-->
+<!--                    </a>-->
+<!--                </div>-->
+
+<!--                <form th:action="@{/admin/psg/hoa-don/update-trang-thai-hoa-don/{id}(id=${hoaDon.id})}" method="post"-->
+<!--                >-->
+<!--                    <div class="form-group mb-3">-->
+<!--                        <input class="form-control custom-shadow custom-radius border-0 bg-white"-->
+<!--                               type="text" placeholder="Ghi chú" value="moTa"-->
+<!--                               style="height: 50px">-->
+<!--                    </div>-->
+<!--                    <div class="form-group mb-3 text-center">-->
+<!--                        <button class="btn btn-rounded btn-primary" type="submit">Xác Nhân</button>-->
+<!--                    </div>-->
+<!--                </form>-->
+
+<!--            </div>-->
+<!--        </div>&lt;!&ndash; /.modal-content &ndash;&gt;-->
+<!--    </div>&lt;!&ndash; /.modal-dialog &ndash;&gt;-->
+<!--</div>-->
+
+<!--</body>-->
+<!--</html>-->

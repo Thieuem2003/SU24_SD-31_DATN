@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/fragments_layout_admin}"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="container" layout:fragment="content">
+
+
+    <h2 class="text-center mb-4">Thêm Sản Phẩm</h2>
+    <form action="/admin/dashboard/san-pham/add" method="post" th:object="${sanPham}"
+          onsubmit="return validateBeforeSubmit()" enctype="multipart/form-data">
+        <div class="card card-custom">
+            <div class="card-header flex-wrap border-0 pt-6 pb-0">
+                <div class="row">
+                    <div class="col-9">
+                        <div class="form-group mb-3">
+                            <label class="form-label" style="margin-left: 10px;font-size: 14px">Tên Sản Phẩm</label>
+                            <input class="form-control custom-shadow custom-radius border-1 bg-white"
+                                   type="text" placeholder="Nhập tên sản phẩm" th:field="*{name}"
+                                   style="height: 50px">
+                            <span th:if="${#fields.hasErrors('name')}" style="color: red; font-size: 15px"
+                                  th:errors="*{name}"></span>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group mb-3">
+                            <label class="form-label" style="margin-left: 10px;font-size: 14px">Mã</label>
+                            <input class="form-control custom-shadow custom-radius border-1 bg-white"
+                                   type="text" placeholder="Nhập mã sản phẩm" th:field="*{code}"
+                                   style="height: 50px">
+                            <span th:if="${#fields.hasErrors('code')}" style="color: red; font-size: 15px"
+                                  th:errors="*{code}"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group mb-3">
+                    <label class="form-label" style="margin-left: 10px;font-size: 14px">Mô Tả Sản Phẩm</label>
+                    <input class="form-control custom-shadow custom-radius border-1 bg-white"
+                           type="text" placeholder="Nhập mô tả sản phẩm" th:field="*{description}"
+                           style="height: 80px">
+                    <span th:if="${#fields.hasErrors('description')}" style="color: red; font-size: 15px"
+                          th:errors="*{description}"></span>
+                </div>
+                <div class="row">
+                    <div class="col-3">
+                        <div class="form-group mb-4">
+                            <label class="form-label" style="margin-left: 10px;font-size: 14px">Chieu cao</label>
+                            <input class="form-control custom-shadow custom-radius border-1 bg-white"
+                                   type="number" placeholder="Nhập chieu cao" th:field="*{shoeHeight}"
+                                   style="height: 40px">
+                            <span th:if="${#fields.hasErrors('shoeHeight')}" style="color: red; font-size: 15px"
+                                  th:errors="*{shoeHeight}"></span>
+                        </div>
+                        <div class="form-group mb-4">
+                            <label class="form-label" style="margin-left: 10px;font-size: 14px">De Giay <a href="#"
+                                                                                                           data-bs-toggle="modal"
+                                                                                                           data-bs-target="#de-giay"
+                                                                                                           style="font-size: 12px;margin-left: 5px">Thêm
+                                De</a></label>
+                            <div class="customize-input d-flex">
+                                <select
+                                        class="custom-select form-control bg-white custom-radius custom-shadow border-1"
+                                        style="height: 40px;width: 300px; font-size: 13px"
+                                        th:field="*{sole}">
+                                    <option th:each="sl:${listSole}" th:value="${sl.id}" th:text="${sl.name}"
+                                    ></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group mb-4">
+                            <label class="form-label" style="margin-left: 10px; font-size: 14px">Status</label>
+                            <div>
+                                <input type="radio" th:field="*{status}" th:value="1" id="active" class="form-check-input">
+                                <label for="active" class="form-check-label">Active</label>
+                            </div>
+                            <div>
+                                <input type="radio" th:field="*{status}" th:value="0" id="disable" class="form-check-input">
+                                <label for="disable" class="form-check-label">Disable</label>
+                            </div>
+                            <span th:if="${#fields.hasErrors('status')}" style="color: red; font-size: 15px" th:errors="*{status}"></span>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group mb-4">
+                            <label class="form-label" style="margin-left: 10px;font-size: 14px">Giá</label>
+                            <div class="form-group mb-3">
+                                <input class="form-control custom-shadow custom-radius border-1 bg-white"
+                                       type="number" placeholder="Nhập giá sản phẩm" th:name="prices"
+                                       style="height: 40px">
+                                <!--                                <span th:if="${#fields.hasErrors('gia')}" style="color: red; font-size: 15px"-->
+                                <!--                                      th:errors="*{gia}"></span>-->
+                            </div>
+                        </div>
+                        <div class="form-group mb-4">
+                            <label class="form-label" style="margin-left: 10px;font-size: 14px">Chat Lieu <a href="#"
+                                                                                                             data-bs-toggle="modal"
+                                                                                                             data-bs-target="#chat-lieu"
+                                                                                                             style="font-size: 12px;margin-left: 5px">Thêm
+                                Chat Lieu</a></label>
+                            <div class="customize-input d-flex">
+                                <select class="custom-select form-control bg-white custom-radius custom-shadow border-1"
+                                        style="height: 40px;width: 300px; font-size: 13px"
+                                        th:field="*{material}"
+                                >
+                                    <option th:each="cl:${listMaterial}" th:value="${cl.id}"
+                                            th:text="${cl.name}"></option>
+
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group mb-4">
+                            <label class="form-label" style="margin-left: 10px;font-size: 14px">Category <a
+                                    href="#" data-bs-toggle="modal"
+                                    data-bs-target="#loai-san-pham"
+                                    style="font-size: 12px;margin-left: 5px">Thêm
+                                Category</a></label>
+                            <div class="customize-input d-flex">
+                                <select
+                                        class="custom-select form-control bg-white custom-radius custom-shadow border-1"
+                                        style="height: 40px;width: 300px; font-size: 13px"
+                                        th:field="*{category}"
+                                >
+                                    <option th:each="lsp:${listCategory}" th:value="${lsp.id}" th:text="${lsp.name}"
+                                    ></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group mb-4">
+                            <label class="form-label" style="margin-left: 10px;font-size: 14px">Thương Hiệu <a href="#"
+                                                                                                               data-bs-toggle="modal"
+                                                                                                               data-bs-target="#thuong-hieu"
+                                                                                                               style="font-size: 12px;margin-left: 5px">Thêm
+                                Brand</a></label>
+                            <div class="customize-input d-flex">
+                                <select
+                                        class="custom-select form-control bg-white custom-radius custom-shadow border-1"
+                                        style="height: 40px;width: 300px; font-size: 13px"
+                                        th:field="*{brand}"
+                                >
+                                    <option th:each="th:${listBrand}" th:value="${th.id}"
+                                            th:text="${th.name}"></option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group mb-4">
+                            <label class="form-label" style="margin-left: 10px;font-size: 14px">Chieu dai</label>
+                            <input class="form-control custom-shadow custom-radius border-1 bg-white"
+                                   type="number" placeholder="Nhập chieu dai" th:field="*{shoeLength}"
+                                   style="height: 40px">
+                            <span th:if="${#fields.hasErrors('shoeLength')}" style="color: red; font-size: 15px"
+                                  th:errors="*{shoeLength}"></span>
+                        </div>
+                        <div class="form-group mb-4">
+                            <label class="form-label" style="margin-left: 10px;font-size: 14px">Chieu rong</label>
+                            <input class="form-control custom-shadow custom-radius border-1 bg-white"
+                                   type="number" placeholder="Nhập chieu rong" th:field="*{shoeWidth}"
+                                   style="height: 40px">
+                            <span th:if="${#fields.hasErrors('shoeWidth')}" style="color: red; font-size: 15px"
+                                  th:errors="*{shoeWidth}"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card card-custom">
+            <div class="card-header flex-wrap border-0 pt-6 pb-0">
+                <div class="row">
+                    <div class="col-3">
+                        <div class="card-title">
+                            <h4 class="card-label">
+                                Kích Thước
+                                <span class="d-block text-muted pt-2 font-size-sm"><a href="#"
+                                                                                      data-bs-toggle="modal"
+                                                                                      data-bs-target="#kich-thuoc"
+                                                                                      style="font-size: 12px;margin-left: 5px">Thêm
+                        Kích Thước</a></span>
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="col-9">
+                        <div id="kichThuocContainer" class="form-group mb-3">
+                            <label class="check" th:each="kt:${listSize}"
+                                   style="margin-right: 15px;margin-top: 15px">
+                                <input type="checkbox" th:name="sizes" th:value="${kt.id}"/>
+                                <span th:text="${kt.name}"></span>
+                            </label>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-3">
+                        <div class="card-title">
+                            <h4 class="card-label">
+                                Mau Sac
+                                <span class="d-block text-muted pt-2 font-size-sm"><a href="#"
+                                                                                      data-bs-toggle="modal"
+                                                                                      data-bs-target="#mau-sac"
+                                                                                      style="font-size: 12px;margin-left: 5px">Thêm
+                        Mau Sac</a></span>
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="col-9">
+                        <div id="mauSacContainer" class="form-group mb-3">
+                            <label class="check" th:each="ms:${listColor}"
+                                   style="margin-right: 15px;margin-top: 15px">
+                                <input type="checkbox" th:name="colors" th:value="${ms.id}"/>
+                                <span th:text="${ms.name}"></span>
+                            </label>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card card-custom">
+            <div class="card-header flex-wrap border-0 pt-6 pb-0">
+                <div class="form-group mb-3">
+                    <label class="form-label" style="margin-left: 10px;font-size: 14px">Images loader</label>
+                    <div class="input-group">
+                        <input type="file" class="form-control" id="filesAnhSanPham" name="image"
+                               aria-describedby="inputGroupFileAddon04"
+                               aria-label="Upload" required="required" multiple>
+                    </div>
+
+
+                    <div id="previewImages" class="d-flex w-150px h-150px">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group mb-3 text-center">
+            <button class="btn waves-effect waves-light btn-rounded btn-outline-info" type="submit">Save</button>
+        </div>
+    </form>
+    <h2 class="text-center mb-4">Chi tiet san pham</h2>
+    <div class="card card-custom">
+        <div class="card-header flex-wrap border-0 pt-6 pb-0">
+            <div class="form-group mb-3">
+                <form action="/admin/dashboard/chi-tiet-san-pham/update-pending" method="post" id="updateForm"
+                      onsubmit="return confirm('Bạn có thêm không?')">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">STT</th>
+                            <th scope="col">Tên</th>
+                            <th scope="col">Size</th>
+                            <th scope="col">Màu</th>
+                            <th scope="col">Số Lượng</th>
+                            <th scope="col">Giá</th>
+                            <th scope="col">Hành Động</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="ctsp, index : ${listPending}">
+                            <td th:text="${index.count}"></td>
+                            <td th:text="${ctsp.shoeName}"></td>
+                            <td th:text="${ctsp.size}"></td>
+                            <td th:text="${ctsp.color}"></td>
+                            <td>
+                                <input type="hidden" name="ids" th:value="${ctsp.id}"/>
+                                <input type="number" min="0" class="form-control border-1 bg-white" name="soLuongs[]"
+                                       th:value="${ctsp.quantity}" style="height: 35px"/>
+
+                            </td>
+                            <td>
+                                <input type="number" min="0" class="form-control border-1 bg-white" name="priceInput[]"
+                                       th:value="${ctsp.priceInput}" style="height: 35px"/>
+                            </td>
+                            <td>
+                                <a th:href="@{/admin/dashboard/chi-tiet-san-pham/delete/{id}(id=${ctsp.id})}"
+                                   class="btn waves-effect waves-light btn-rounded btn-danger">Xóa</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div class="form-group mb-3 text-center">
+                        <button class="btn waves-effect waves-light btn-rounded btn-outline-info" type="submit">Save
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="mau-sac" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="text-center mt-2 mb-4">
+                        <a href="#" class="text-success">
+                                                        <span><img class="me-2" th:src="@{/assets/images/image1.png}"
+                                                                   alt="" height="80"></span>
+                        </a>
+                    </div>
+
+                    <form action="/admin/dashboard/san-pham/add-mau-sac" th:object="${color}" method="post"
+                          onsubmit="return  confirm('Bạn có thêm không?')">
+                        <div class="form-group mb-3">
+                            <label class="form-label">Mã Màu</label>
+                            <input class="form-control custom-shadow custom-radius border-0 bg-white" type="color"
+                                   style="height: 50px" th:field="*{name}">
+                        </div>
+                        <div class="form-group mb-3 text-center">
+                            <button class="btn btn-rounded btn-primary" type="submit">Add</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+    <div id="de-giay" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="text-center mt-2 mb-4">
+                        <a href="#" class="text-success">
+                                                        <span><img class="me-2" th:src="@{/assets/images/image1.png}"
+                                                                   alt="" height="80"></span>
+                        </a>
+                    </div>
+
+                    <form action="/admin/dashboard/san-pham/add-de-giay" th:object="${sole}" method="post"
+                          onsubmit="return  confirm('Bạn có thêm không?')">
+                        <div class="form-group mb-3">
+                            <label class="form-label">Ten De</label>
+                            <input class="form-control custom-shadow custom-radius border-0 bg-white" type="text"
+                                   style="height: 50px" th:field="*{name}">
+                        </div>
+                        <div class="form-group mb-3 text-center">
+                            <button class="btn btn-rounded btn-primary" type="submit">Add</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+    <div id="chat-lieu" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="text-center mt-2 mb-4">
+                        <a href="#" class="text-success">
+                                                        <span><img class="me-2" th:src="@{/assets/images/image1.png}"
+                                                                   alt="" height="80"></span>
+                        </a>
+                    </div>
+
+                    <form action="/admin/dashboard/san-pham/add-chat-lieu" th:object="${material}" method="post"
+                          onsubmit="return  confirm('Bạn có thêm không?')">
+                        <div class="form-group mb-3">
+                            <input class="form-control custom-shadow custom-radius border-0 bg-white"
+                                   type="text" placeholder="Nhập tên chất liệu" th:field="*{name}" style="height: 50px">
+                            <span th:if="${#fields.hasErrors('name')}" style="color: red; font-size: 13px"
+                                  th:errors="*{name}"></span>
+                        </div>
+                        <div class="form-group mb-3 text-center">
+                            <button class="btn btn-rounded btn-primary" type="submit">Add</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+    <div id="thuong-hieu" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="text-center mt-2 mb-4">
+                        <a href="#" class="text-success">
+                                                        <span><img class="me-2" th:src="@{/assets/images/image1.png}"
+                                                                   alt="" height="80"></span>
+                        </a>
+                    </div>
+
+                    <form action="/admin/dashboard/san-pham/add-thuong-hieu" th:object="${brand}" method="post"
+                          onsubmit="return  confirm('Bạn có thêm không?')">
+                        <div class="form-group mb-3">
+                            <input class="form-control custom-shadow custom-radius border-0 bg-white"
+                                   type="text" placeholder="Nhập tên thương hiệu" th:field="*{name}"
+                                   style="height: 50px">
+                            <span th:if="${#fields.hasErrors('name')}" style="color: red; font-size: 13px"
+                                  th:errors="*{name}"></span>
+                        </div>
+                        <div class="form-group mb-3 text-center">
+                            <button class="btn btn-rounded btn-primary" type="submit">Add</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+    <div id="loai-san-pham" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="text-center mt-2 mb-4">
+                        <a href="#" class="text-success">
+                                                        <span><img class="me-2" th:src="@{/assets/images/image1.png}"
+                                                                   alt="" height="80"></span>
+                        </a>
+                    </div>
+
+                    <form action="/admin/dashboard/san-pham/add-category" th:object="${category}" method="post"
+                          onsubmit="return  confirm('Bạn có thêm không?')">
+                        <div class="form-group mb-3">
+                            <input class="form-control custom-shadow custom-radius border-0 bg-white"
+                                   type="text" placeholder="Nhập tên loại sản phẩm" th:field="*{name}"
+                                   style="height: 50px">
+                            <span th:if="${#fields.hasErrors('name')}" style="color: red; font-size: 13px"
+                                  th:errors="*{name}"></span>
+                        </div>
+                        <div class="form-group mb-3 text-center">
+                            <button class="btn btn-rounded btn-primary" type="submit">Add</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+    <div id="kich-thuoc" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="text-center mt-2 mb-4">
+                        <a href="#" class="text-success">
+                                                        <span><img class="me-2" th:src="@{/assets/images/image1.png}"
+                                                                   alt="" height="80"></span>
+                        </a>
+                    </div>
+
+                    <form action="/admin/dashboard/san-pham/add-size" th:object="${size}" method="post"
+                          onsubmit="return  confirm('Bạn có thêm không?')">
+                        <div class="form-group mb-3">
+                            <input class="form-control custom-shadow custom-radius border-0 bg-white"
+                                   type="text" placeholder="Nhập tên kích thước" th:field="*{name}"
+                                   style="height: 50px">
+                            <span th:if="${#fields.hasErrors('name')}" style="color: red; font-size: 13px"
+                                  th:errors="*{name}"></span>
+                        </div>
+                        <div class="form-group mb-3 text-center">
+                            <button class="btn btn-rounded btn-primary" type="submit">Add</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+
+</div>
+</body>
+</html>

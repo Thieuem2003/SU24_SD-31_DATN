@@ -1,0 +1,478 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en"-->
+<!--      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"-->
+
+<!--&gt;-->
+<!--<head>-->
+<!--    <meta charset="utf-8">-->
+<!--    <meta http-equiv="X-UA-Compatible" content="IE=edge">-->
+<!--    &lt;!&ndash; Tell the browser to be responsive to screen width &ndash;&gt;-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1">-->
+<!--    <meta name="description" content="">-->
+<!--    <meta name="author" content="">-->
+<!--    &lt;!&ndash; Favicon icon &ndash;&gt;-->
+<!--    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/site-logo.8a953140.png">-->
+<!--    <title>Paris Saint-Germain Boutique | PSG Maillots, PSG Boutique | Official PSG Shop</title>-->
+<!--    <link th:href="@{/assets/css/plugins.bundle5883.css}" rel="stylesheet">-->
+<!--    <link th:href="@{/assets/css/plugins.bundle.css}" rel="stylesheet">-->
+<!--    <link th:href="@{/assets/css/style.bundle.css}" rel="stylesheet">-->
+<!--    <link th:href="@{/assets/css/style.bundle5883.css}" rel="stylesheet">-->
+<!--    <style>-->
+<!--        #diaChiSection,-->
+<!--        #tienShipSection,-->
+<!--        #tienChuyenKhoanSection,-->
+<!--        #tenNguoiNhanSection,-->
+<!--        #sdtNguoiNhanSection,-->
+<!--        #ngayMuonNhanSection,-->
+<!--        #maGiaDichSection {-->
+<!--            display: none;-->
+<!--        }-->
+<!--    </style>-->
+<!--</head>-->
+<!--<body>-->
+<!--<div class="mt-4">-->
+<!--    <div class="inline-block-container">-->
+<!--        <div class="row">-->
+<!--            <div class="col-11">-->
+<!--                <div class="container">-->
+<!--                    <div th:each="hdc:${listHoaDonCho}" class="inline-block-element d-inline-block"-->
+<!--                         style="margin-right: 20px">-->
+<!--                        <a class="btn btn-primary" th:href="@{/admin/psg/hoa-don/detail-hoa-don/{id}(id=${hdc.id})}"-->
+<!--                           role="button" th:text="${hdc.ma}"></a>-->
+<!--                    </div>-->
+<!--                    <form action="/admin/psg/hoa-don/add-hoa-don-cho" method="post" class="d-inline-block">-->
+<!--                        <button class="btn btn-primary" type="submit">+</button>-->
+<!--                    </form>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="col-1">-->
+<!--                <div class=" flex-column flex-root app-root" id="kt_app_root">-->
+<!--                    &lt;!&ndash;begin::Page&ndash;&gt;-->
+<!--                    <div class="app-page flex-column flex-column-fluid" id="kt_app_page">-->
+<!--                        &lt;!&ndash;begin::Header&ndash;&gt;-->
+<!--                        <div-->
+<!--                                id="kt_app_header"-->
+<!--                                class="app-header"-->
+<!--                                data-kt-sticky="true"-->
+<!--                                data-kt-sticky-activate="{default: true, lg: true}"-->
+<!--                                data-kt-sticky-name="app-header-minimize"-->
+<!--                                data-kt-sticky-offset="{default: '200px', lg: '0'}"-->
+<!--                                data-kt-sticky-animation="false"-->
+<!--                        >-->
+<!--                            &lt;!&ndash;begin::Header container&ndash;&gt;-->
+<!--                            <div-->
+<!--                                    class="app-container container-fluid  align-items-stretch justify-content-between"-->
+<!--                                    id="kt_app_header_container"-->
+<!--                            >-->
+<!--                                <div-->
+<!--                                        class=" align-items-stretch justify-content-between flex-lg-grow-1"-->
+<!--                                        id="kt_app_header_wrapper"-->
+<!--                                >-->
+<!--                                    &lt;!&ndash;begin::Menu wrapper&ndash;&gt;-->
+<!--                                    <div-->
+<!--                                            class="app-header-menu app-header-mobile-drawer align-items-stretch"-->
+<!--                                            data-kt-drawer="true"-->
+<!--                                            data-kt-drawer-name="app-header-menu"-->
+<!--                                            data-kt-drawer-activate="{default: true, lg: false}"-->
+<!--                                            data-kt-drawer-overlay="true"-->
+<!--                                            data-kt-drawer-width="250px"-->
+<!--                                            data-kt-drawer-direction="end"-->
+<!--                                            data-kt-drawer-toggle="#kt_app_header_menu_toggle"-->
+<!--                                            data-kt-swapper="true"-->
+<!--                                            data-kt-swapper-mode="{default: 'append', lg: 'prepend'}"-->
+<!--                                            data-kt-swapper-parent="{default: '#kt_app_body', lg: '#kt_app_header_wrapper'}"-->
+<!--                                    >-->
+<!--                                        <div class="app-navbar flex-shrink-0">-->
+<!--                                            <div-->
+<!--                                                    class="app-navbar-item align-items-stretch ms-1 ms-md-4"-->
+<!--                                            ></div>-->
+<!--                                            <div-->
+<!--                                                    class="app-navbar-item ms-1 ms-md-4"-->
+<!--                                                    id="kt_header_user_menu_toggle"-->
+<!--                                            >-->
+<!--                                                <div-->
+<!--                                                        class="cursor-pointer symbol symbol-35px"-->
+<!--                                                        data-kt-menu-trigger="{default: 'click', lg: 'hover'}"-->
+<!--                                                        data-kt-menu-attach="parent"-->
+<!--                                                        data-kt-menu-placement="bottom-end"-->
+<!--                                                >-->
+<!--                                                    <img-->
+<!--                                                            src="../../../assets/media/avatars/300-3.jpg"-->
+<!--                                                            class="rounded-3"-->
+<!--                                                            alt="user"-->
+<!--                                                    />-->
+<!--                                                </div>-->
+
+<!--                                                &lt;!&ndash;begin::User account menu&ndash;&gt;-->
+<!--                                                <div-->
+<!--                                                        class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg menu-state-color fw-semibold py-4 fs-6 w-275px"-->
+<!--                                                        data-kt-menu="true"-->
+<!--                                                >-->
+<!--                                                    &lt;!&ndash;begin::Menu item&ndash;&gt;-->
+<!--                                                    <div class="menu-item px-3">-->
+<!--                                                        <div-->
+<!--                                                                class="menu-content  align-items-center px-3"-->
+<!--                                                        >-->
+<!--                                                            &lt;!&ndash;begin::Avatar&ndash;&gt;-->
+<!--                                                            <div class="symbol symbol-50px me-5">-->
+<!--                                                                <img-->
+<!--                                                                        alt="Logo"-->
+<!--                                                                        src="../../../assets/media/avatars/300-3.jpg"-->
+<!--                                                                />-->
+<!--                                                            </div>-->
+<!--                                                            <div class=" flex-column">-->
+<!--                                                                <div class="fw-bold  align-items-center fs-5">-->
+<!--                                                                    Robert Fox-->
+<!--                                                                    <span-->
+<!--                                                                            class="badge badge-light-success fw-bold fs-8 px-2 py-1 ms-2"-->
+<!--                                                                    >Pro</span-->
+<!--                                                                    >-->
+<!--                                                                </div>-->
+<!--                                                                <a-->
+<!--                                                                        href="#"-->
+<!--                                                                        class="fw-semibold text-muted text-hover-primary fs-7"-->
+<!--                                                                >-->
+<!--                                                                    robert@kt.com-->
+<!--                                                                </a>-->
+<!--                                                            </div>-->
+<!--                                                        </div>-->
+<!--                                                    </div>-->
+<!--                                                    <div class="separator my-2"></div>-->
+<!--                                                    <div class="menu-item px-5">-->
+<!--                                                        <a-->
+<!--                                                                href="#"-->
+<!--                                                                class="menu-link px-5"-->
+<!--                                                        >-->
+<!--                                                            My Profile-->
+<!--                                                        </a>-->
+<!--                                                    </div>-->
+<!--                                                    <div class="menu-item px-5">-->
+<!--                                                        <a-->
+<!--                                                                href="#"-->
+<!--                                                                class="menu-link px-5"-->
+<!--                                                        >-->
+<!--                                                            Sign Out-->
+<!--                                                        </a>-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                            <div-->
+<!--                                                    class="app-navbar-item d-lg-none ms-2 me-n2"-->
+<!--                                                    title="Show header menu"-->
+<!--                                            >-->
+<!--                                                <div-->
+<!--                                                        class="btn btn-flex btn-icon btn-active-color-primary w-30px h-30px"-->
+<!--                                                        id="kt_app_header_menu_toggle"-->
+<!--                                                >-->
+<!--                                                    <i class="ki-duotone ki-element-4 fs-1"-->
+<!--                                                    ><span class="path1"></span><span class="path2"></span-->
+<!--                                                    ></i>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <section layout:fragment="gioHang">-->
+<!--    </section>-->
+<!--    <hr>-->
+<!--    <div class="card card-flush">-->
+<!--        <div class="card-header align-items-center py-5 gap-2 gap-md-5">-->
+<!--            <div class="card-title">-->
+<!--                <div class=" align-items-center position-relative my-1">-->
+<!--                    <i class="ki-duotone ki-magnifier fs-3 position-absolute ms-4"-->
+<!--                    ><span class="path1"></span><span class="path2"></span-->
+<!--                    ></i>-->
+<!--                    <input-->
+<!--                            type="text"-->
+<!--                            data-kt-ecommerce-product-filter="search"-->
+<!--                            class="form-control form-control-solid w-250px ps-12"-->
+<!--                            placeholder="Search Product"-->
+<!--                    />-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="card-body pt-0">-->
+<!--            <table-->
+<!--                    class="table align-middle table-row-dashed fs-6 gy-5"-->
+<!--                    id="kt_ecommerce_products_table"-->
+<!--            >-->
+<!--                <thead>-->
+<!--                <tr-->
+<!--                        class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0"-->
+<!--                >-->
+<!--                    <th class="w-10px pe-2">-->
+<!--                        <div-->
+<!--                                class="form-check form-check-sm form-check-custom form-check-solid me-3"-->
+<!--                        >-->
+<!--                            <input-->
+<!--                                    class="form-check-input"-->
+<!--                                    type="checkbox"-->
+<!--                                    data-kt-check="true"-->
+<!--                                    data-kt-check-target="#kt_ecommerce_products_table .form-check-input"-->
+<!--                                    value="1"-->
+<!--                            />-->
+<!--                        </div>-->
+<!--                    </th>-->
+<!--                    <th class="text-center min-w-150px">Sản Phẩm</th>-->
+<!--                    <th class="text-center min-w-100px">Giá</th>-->
+<!--                    <th class="text-center min-w-70px">Số Lượng</th>-->
+<!--                    <th class="text-center min-w-100px">Cầu Thủ</th>-->
+<!--                    <th class="text-center min-w-100px">Mã Vạch</th>-->
+<!--                    <th class="text-center min-w-100px">Trạng Thái</th>-->
+<!--                    <th class="text-center min-w-70px">Hành Động</th>-->
+<!--                </tr>-->
+<!--                </thead>-->
+<!--                <tbody class="fw-semibold text-gray-600">-->
+<!--                <tr th:each="ctsp:${listCtsp}">-->
+<!--                    <td class="text-center">-->
+<!--                        <div-->
+<!--                                class="form-check form-check-sm form-check-custom form-check-solid"-->
+<!--                        >-->
+<!--                            <input class="form-check-input" type="checkbox" value="1"/>-->
+<!--                        </div>-->
+<!--                    </td>-->
+<!--                    <td class="text-center d-flex flex-column align-items-center font-weight-bolder">-->
+<!--                        <div class="symbol symbol-60 flex-shrink-0 mr-4 bg-light">-->
+<!--                            <a href="#" class="symbol symbol-50px">-->
+<!--                                <img th:src="@{'/admin/psg/chi-tiet-san-pham/display?id=' + ${ctsp.sanPham.id}}"-->
+<!--                                     alt="Image">-->
+<!--                            </a>-->
+<!--                        </div>-->
+<!--                        <a href="#" class="text-gray-800 text-hover-primary fs-5 fw-bold"-->
+<!--                           data-kt-ecommerce-product-filter="product_name">-->
+<!--                            <span th:text="${ctsp.sanPham.ten}"></span>-->
+<!--                        </a>-->
+<!--                        <span th:text="'Size: ' + ${ctsp.kichThuoc.ten}"></span>-->
+<!--                    </td>-->
+<!--                    <td class="text-center pe-0">-->
+<!--                        <span class="fw-bold" th:text="${ctsp.sanPham.gia}"></span>-->
+<!--                    </td>-->
+<!--                    <td class="text-center pe-0" th:text="${ctsp.soLuong}"></td>-->
+<!--                    <td class="text-center pe-0" th:text="${ctsp.sanPham.cauThu.ten}"></td>-->
+<!--                    <td class="text-center pe-0" th:text="${ctsp.sanPham.maVach}"></td>-->
+<!--                    <td class="text-center pe-0">-->
+<!--                        <div class="badge badge-light-success" th:text="${ctsp.sanPham.trangThai.moTa}"></div>-->
+<!--                    </td>-->
+<!--                    <td class="text-center">-->
+<!--                        <form th:action="@{/admin/psg/hoa-don/add-hoa-don-chi-tiet/{idHd}/{idCtsp}(idHd=${hoaDon.id},idCtsp=${ctsp.id})}"-->
+<!--                              method="post">-->
+<!--                            <button class="btn btn-primary" type="submit">Thêm</button>-->
+<!--                        </form>-->
+<!--                    </td>-->
+<!--                </tr>-->
+<!--                </tbody>-->
+<!--            </table>-->
+<!--        </div>-->
+<!--    </div>-->
+
+<!--</div>-->
+
+
+<!--<script th:inline="javascript">-->
+<!--    /*<![CDATA[*/-->
+<!--    function updateHoaDonKhachHang() {-->
+<!--        var selectedCustomerId = document.getElementById("kt_select2_1").value;-->
+<!--        var hoaDonId = [[${hoaDon.id}]];-->
+<!--        $.ajax({-->
+<!--            url: '/admin/psg/hoa-don/update-hoa-don/khach-hang/' + hoaDonId + '?customerId=' + selectedCustomerId,-->
+<!--            type: 'POST',-->
+<!--            success: function (data) {-->
+<!--            },-->
+<!--            error: function (xhr, status, error) {-->
+<!--                // Xử lý lỗi nếu có-->
+<!--            }-->
+<!--        });-->
+<!--    }-->
+
+<!--    /*]]>*/-->
+<!--</script>-->
+
+<!--<script th:inline="javascript">-->
+<!--    const totalAmount = /*[[${totalAmount}]]*/;-->
+
+<!--    function calculateCustomerPayment() {-->
+<!--        const discountInput = document.getElementById("discountInput");-->
+<!--        const discount = parseFloat(discountInput.value);-->
+
+<!--        const tienShipInput = document.getElementById("tienShip");-->
+<!--        const tienShip = parseFloat(tienShipInput.value);-->
+
+<!--        const voucherSelect = document.getElementById("kt_select2_7");-->
+<!--        const voucherSelectValue = parseFloat(voucherSelect.value);-->
+
+<!--        // Hạn chế giá trị phần trăm giảm giá trong khoảng từ 0 đến 100-->
+<!--        if (isNaN(discount) || discount < 0) {-->
+<!--            discountInput.value = "0";-->
+<!--        } else if (discount > 100) {-->
+<!--            discountInput.value = "100";-->
+<!--        } else {-->
+<!--            // discountInput.value = discount.toFixed(2);-->
+<!--        }-->
+
+<!--        if (isNaN(tienShip) || tienShip < 0) {-->
+<!--            tienShipInput.value = "0";-->
+<!--        } else {-->
+<!--            // tienShipInput.value = tienShip.toFixed(2);-->
+<!--        }-->
+
+<!--        // Thực hiện tính toán và cập nhật giá trị trong ô input "Khách cần trả"-->
+<!--        const discountAmount = (discount / 100) * totalAmount;-->
+<!--        const customerPayment = totalAmount - discountAmount - tienShip - voucherSelectValue;-->
+
+<!--        // Đảm bảo số tiền khách trả không âm-->
+<!--        const finalCustomerPayment = Math.max(0, customerPayment);-->
+
+<!--        const customerPaymentInput = document.getElementById("customerPayment");-->
+<!--        customerPaymentInput.value = finalCustomerPayment.toFixed(2);-->
+<!--    }-->
+
+<!--    // Gắn sự kiện lắng nghe vào các phần tử-->
+<!--    const discountInput = document.getElementById("discountInput");-->
+<!--    discountInput.addEventListener("input", calculateCustomerPayment);-->
+
+<!--    const tienShip = document.getElementById("tienShip");-->
+<!--    tienShip.addEventListener("input", calculateCustomerPayment);-->
+
+<!--    const voucherSelect = document.getElementById("kt_select2_7");-->
+<!--    voucherSelect.addEventListener("change", calculateCustomerPayment);-->
+<!--    // Gọi hàm tính toán lần đầu khi trang được tải-->
+<!--    calculateCustomerPayment();-->
+<!--</script>-->
+
+<!--<script th:inline="javascript">-->
+<!--    const taiQuayRadio = document.getElementById("taiQuayRadio");-->
+<!--    const giaoHangRadio = document.getElementById("giaoHangRadio");-->
+<!--    const diaChiSection = document.getElementById("diaChiSection");-->
+<!--    const tienShipSection = document.getElementById("tienShipSection");-->
+<!--    const tenNguoiNhanSection = document.getElementById("tenNguoiNhanSection");-->
+<!--    const sdtNguoiNhanSection = document.getElementById("sdtNguoiNhanSection");-->
+<!--    const ngayMuonNhanSection = document.getElementById("ngayMuonNhanSection");-->
+<!--    const phuongThucThanhToan = document.getElementById("phuongThucThanhToan");-->
+<!--    const tienChuyenKhoanSection = document.getElementById("tienChuyenKhoanSection");-->
+<!--    const maGiaDichSection = document.getElementById("maGiaDichSection");-->
+<!--    const tienMatKhachTra = document.getElementById("tienMatKhachTra");-->
+<!--    const tienThua = document.getElementById("tienThua");-->
+
+<!--    taiQuayRadio.addEventListener("change", function () {-->
+<!--        diaChiSection.style.display = "none";-->
+<!--        tienShipSection.style.display = "none";-->
+<!--        tenNguoiNhanSection.style.display = "none";-->
+<!--        ngayMuonNhanSection.style.display = "none";-->
+<!--        sdtNguoiNhanSection.style.display = "none";-->
+<!--    });-->
+
+<!--    giaoHangRadio.addEventListener("change", function () {-->
+<!--        diaChiSection.style.display = "table-row";-->
+<!--        tienShipSection.style.display = "table-row";-->
+<!--        tenNguoiNhanSection.style.display = "table-row";-->
+<!--        ngayMuonNhanSection.style.display = "table-row";-->
+<!--        sdtNguoiNhanSection.style.display = "table-row";-->
+<!--    });-->
+
+<!--    phuongThucThanhToan.addEventListener("change", function () {-->
+<!--        const selectedValue = phuongThucThanhToan.value;-->
+<!--        const isBanking = selectedValue === "BANKING";-->
+<!--        const isCOD = selectedValue === "COD";-->
+<!--        const isCASH = selectedValue === "CASH";-->
+
+<!--        tienChuyenKhoanSection.style.display = isBanking ? "table-row" : "none";-->
+<!--        maGiaDichSection.style.display = isBanking ? "table-row" : "none";-->
+
+<!--        if (isCOD) {-->
+<!--            // giaoHangRadio.value = "INACTIVE";-->
+<!--            // giaoHangRadio.checked = true;-->
+<!--            // giaoHangRadio.disabled = false;-->
+<!--            diaChiSection.style.display = "table-row";-->
+<!--            tienShipSection.style.display = "table-row";-->
+<!--            tenNguoiNhanSection.style.display = "table-row";-->
+<!--            ngayMuonNhanSection.style.display = "table-row";-->
+<!--            sdtNguoiNhanSection.style.display = "table-row";-->
+<!--            // tienThua.disabled = true;-->
+<!--            // tienMatKhachTra.disabled = true;-->
+<!--            // taiQuayRadio.disabled = true;-->
+<!--        } else if (isCASH) {-->
+<!--            // giaoHangRadio.checked = false;-->
+<!--            // giaoHangRadio.disabled = true;-->
+<!--            diaChiSection.style.display = "none";-->
+<!--            tienShipSection.style.display = "none";-->
+<!--            tenNguoiNhanSection.style.display = "none";-->
+<!--            ngayMuonNhanSection.style.display = "none";-->
+<!--            sdtNguoiNhanSection.style.display = "none";-->
+<!--            // tienThua.disabled = false;-->
+<!--            // tienMatKhachTra.disabled = false;-->
+<!--            // taiQuayRadio.disabled = true;-->
+<!--            // taiQuayRadio.checked = true;-->
+<!--        } else {-->
+<!--            giaoHangRadio.disabled = false;-->
+<!--            taiQuayRadio.disabled = false;-->
+<!--            tienThua.disabled = false;-->
+<!--            tienMatKhachTra.disabled = false;-->
+<!--        }-->
+<!--    });-->
+<!--</script>-->
+<!--<script th:inline="javascript" th:src="@{/assets/libs/jquery/dist/jquery.min.js}"></script>-->
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.1/axios.min.js"-->
+<!--        integrity="sha512-bPh3uwgU5qEMipS/VOmRqynnMXGGSRv+72H/N260MQeXZIK4PG48401Bsby9Nq5P5fz7hy5UGNmC/W1Z51h2GQ=="-->
+<!--        crossorigin="anonymous" referrerpolicy="no-referrer"></script>-->
+<!--<script th:inline="javascript">-->
+
+<!--    const host = "https://provinces.open-api.vn/api/";-->
+<!--    var callAPI = (api) => {-->
+<!--        return axios.get(api)-->
+<!--            .then((response) => {-->
+<!--                renderData(response.data, "province");-->
+<!--            });-->
+<!--    }-->
+<!--    callAPI('https://provinces.open-api.vn/api/?depth=1');-->
+<!--    var callApiDistrict = (api) => {-->
+<!--        return axios.get(api)-->
+<!--            .then((response) => {-->
+<!--                renderData(response.data.districts, "district");-->
+<!--            });-->
+<!--    }-->
+<!--    var callApiWard = (api) => {-->
+<!--        return axios.get(api)-->
+<!--            .then((response) => {-->
+<!--                renderData(response.data.wards, "ward");-->
+<!--            });-->
+<!--    }-->
+<!--    var renderData = (array, select) => {-->
+<!--        let row = '';-->
+<!--        array.forEach(element => {-->
+<!--            row += `<option value="${element.code}">${element.name}</option>`;-->
+<!--        });-->
+<!--        document.querySelector("#" + select).innerHTML = row;-->
+<!--    }-->
+<!--    $("#province").change(() => {-->
+<!--        callApiDistrict(host + "p/" + $("#province").val() + "?depth=2");-->
+<!--        printResult();-->
+<!--    });-->
+<!--    $("#district").change(() => {-->
+<!--        callApiWard(host + "d/" + $("#district").val() + "?depth=2");-->
+<!--        printResult();-->
+<!--    });-->
+<!--    $("#ward").change(() => {-->
+<!--        printResult();-->
+<!--    })-->
+<!--    var printResult = () => {-->
+<!--        var provinceName = $("#province option:selected").text();-->
+<!--        var districtName = $("#district option:selected").text();-->
+<!--        var wardName = $("#ward option:selected").text();-->
+<!--        $("#diaChiInput").val(wardName+', '+districtName+', '+provinceName)-->
+<!--    }-->
+<!--</script>-->
+<!--<script th:src="@{/assets/js/plugins.bundle5883.js}"></script>-->
+<!--<script th:src="@{/assets/js/plugins.bundle.js}"></script>-->
+<!--<script th:src="@{/assets/js/select25883.js}"></script>-->
+<!--<script th:src="@{/assets/js/scripts.bundle.js}"></script>-->
+<!--<script th:src="@{/assets/js/datatables.bundle.js}"></script>-->
+<!--<script th:src="@{/assets/js/products.js}"></script>-->
+<!--</body>-->
+<!--</html>-->
