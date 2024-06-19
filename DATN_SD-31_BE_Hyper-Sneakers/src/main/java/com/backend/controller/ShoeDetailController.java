@@ -264,10 +264,27 @@ public class ShoeDetailController {
         return "redirect:/admin/dashboard/san-pham/view-add";
     }
 
-//    @GetMapping("admin/dashboard/san-pham/search")
-//    public String searchShoeDetail(@RequestParam("name") String name, Model model){
-//        List<ShoeDetail> shoeDetails = iShoeDetailService.searchShoesByName(name);
-//        model.addAttribute("shoeDetails", shoeDetails);
-//        return "redirect:/admin/dashboard/san-pham/view-add";
-//    }
+    @GetMapping("/admin/dashboard/san-pham/tim-kiem")
+    public String searchShoes(@RequestParam(name = "searchNameOrMa", required = false) String searchNameOrMa,
+                              @RequestParam(name = "page", defaultValue = "0") Integer pageNo,
+                              Model model) {
+        Page<ShoeResponse> searchResults;
+
+        if (searchNameOrMa != null && !searchNameOrMa.trim().isEmpty()) {
+            searchResults = iShoeDetailService.searchAndPageShoe(searchNameOrMa.trim(), pageNo, 5);
+        } else {
+            searchResults = iShoeDetailService.pageShoe(pageNo, 5);
+        }
+
+        model.addAttribute("size", searchResults.getSize());
+        model.addAttribute("totalPages", searchResults.getTotalPages());
+        model.addAttribute("currentPage", pageNo);
+        model.addAttribute("listSanPham", searchResults.getContent());
+
+        return "admin/san_pham/trang_chu_san_pham";
+    }
+
+    private boolean isNumeric(String str) {
+        return str.matches("-?\\d+(\\.\\d+)?");  // Kiểm tra chuỗi có phải là số nguyên hoặc số thực
+    }
 }

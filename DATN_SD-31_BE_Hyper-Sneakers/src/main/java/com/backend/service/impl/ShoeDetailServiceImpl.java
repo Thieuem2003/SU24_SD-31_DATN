@@ -248,5 +248,36 @@ public class ShoeDetailServiceImpl implements IShoeDetailService {
                         .build()).collect(Collectors.toList());
     }
 
+    @Override
+    public Page<ShoeResponse> searchAndPageShoe(String searchNameOrMa, int pageNo, int pageSize) {
+        // Tạo đối tượng PageRequest cho việc phân trang
+        PageRequest pageRequest = PageRequest.of(pageNo, pageSize);
+
+        // Gọi repository để thực hiện tìm kiếm và phân trang
+        Page<Shoe> shoesPage = shoeRepository.searchByNameOrCode(searchNameOrMa, pageRequest);
+
+        // Chuyển đổi từ Page<Shoe> sang Page<ShoeResponse> để trả về
+        Page<ShoeResponse> shoeResponsePage = shoesPage.map(shoe -> convertToShoeResponse(shoe));
+
+        return shoeResponsePage;
+    }
+
+    private ShoeResponse convertToShoeResponse(Shoe shoe) {
+        return ShoeResponse.builder()
+                .id(shoe.getId())
+                .category(shoe.getCategory())
+                .material(shoe.getMaterial())
+                .sole(shoe.getSole())
+                .brand(shoe.getBrand())
+                .code(shoe.getCode())
+                .name(shoe.getName())
+                .description(shoe.getDescription())
+                .shoeHeight(shoe.getShoeHeight())
+                .shoeLength(shoe.getShoeLength())
+                .shoeWidth(shoe.getShoeWidth())
+                .status(shoe.getStatus())
+                .imageUrl(shoe.getImages().isEmpty() ? null : shoe.getImages().get(0).getImgUrl())
+                .build();
+    }
 
 }

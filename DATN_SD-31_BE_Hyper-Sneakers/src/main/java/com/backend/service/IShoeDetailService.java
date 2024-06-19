@@ -41,5 +41,5 @@ public interface IShoeDetailService {
 
     void addShoeAndShoeDetail(ShoeRequest shoeRequest, List<Size> sizeList, List<Color> colorList, MultipartFile[] files, Integer price);
 
-
+    Page<ShoeResponse> searchAndPageShoe(String searchNameOrMa, int pageNo, int pageSize);
 }
