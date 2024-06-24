@@ -1,14 +1,16 @@
 package com.backend.service.impl;
 
-import com.backend.ServiceResult;
-import com.backend.config.AppConstant;
 import com.backend.dto.request.size.SizeRequest;
 import com.backend.dto.request.size.SizeRequestUpdate;
 import com.backend.dto.response.shoeDetail.SizeRespose;
 import com.backend.entity.Size;
 import com.backend.repository.SizeRepository;
 import com.backend.service.ISizeService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Calendar;
@@ -23,28 +25,43 @@ public class SizeServiceImpl implements ISizeService {
     @Autowired
     private SizeRepository sizeRepository;
 
+    @Autowired
+    private ModelMapper modelMapper;
+
     @Override
-    public ServiceResult<List<SizeRespose>> getAll() {
+    public List<SizeRespose> getAll() {
         List<Size> sizeList = sizeRepository.findAll();
-        List<SizeRespose> sizeResponse = convertToRes(sizeList);
-        return new ServiceResult<>(AppConstant.SUCCESS, "Get list Size", sizeResponse);
+        return convertToRes(sizeList);
     }
 
     @Override
-    public ServiceResult<SizeRespose> addSize(SizeRequest sizeRequest) {
+    public SizeRespose getOne(Long id) {
+        Size size = sizeRepository.findById(id).get();
+        return modelMapper.map(size, SizeRespose.class);
+    }
+
+    @Override
+    public Page<SizeRespose> pageSize(Integer page, Integer size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Size> pageSize = sizeRepository.findAll(pageable);
+        return pageSize.map(sizex -> modelMapper.map(sizex, SizeRespose.class));
+    }
+
+    @Override
+    public String addSize(SizeRequest sizeRequest) {
         Optional<Size> sizeOptional = sizeRepository.findByNameSize(sizeRequest.getName());
         if (sizeOptional.isPresent()) {
             if (sizeOptional.get().getStatus() == 0) {
                 Size size = sizeOptional.get();
                 size.setStatus(1);
                 Size sizeUpdate = sizeRepository.save(size);
-                return new ServiceResult(AppConstant.SUCCESS, "Size updated succesfully!", sizeUpdate);
+                return "Size updated successfully!";
             } else {
-                return new ServiceResult(AppConstant.FAIL, "Size already exits!", null);
+                return "Size already exits!";
             }
         } else {
             if (sizeRequest.getName() == null) {
-                return new ServiceResult<>(AppConstant.BAD_REQUEST, "The name of size not valid!", null);
+                return "The name of size not valid!";
             } else {
                 Size size = new Size();
                 Calendar calendar = Calendar.getInstance();
@@ -53,17 +70,18 @@ public class SizeServiceImpl implements ISizeService {
                 size.setStatus(1);
                 size.setCreatedAt(date);
                 size.setUpdatedAt(date);
-                return new ServiceResult(AppConstant.SUCCESS, "Category", sizeRepository.save(size));
+                sizeRepository.save(size);
+                return "Category";
             }
         }
     }
 
     @Override
-    public ServiceResult<Size> updateSize(SizeRequestUpdate sizeRequestUpdate) {
+    public String updateSize(SizeRequestUpdate sizeRequestUpdate) {
         Optional<Size> sizeOptional = sizeRepository.findById(sizeRequestUpdate.getId());
         if (sizeOptional.isPresent()) {
             if (sizeRequestUpdate.getName() == null) {
-                return new ServiceResult<>(AppConstant.BAD_REQUEST, "The name of size not valid!", null);
+                return "The name of size not valid!";
             } else {
                 Size sizeExits = sizeOptional.get();
                 sizeExits.setId(sizeExits.getId());
@@ -75,36 +93,36 @@ public class SizeServiceImpl implements ISizeService {
 
                 sizeExits.setStatus(sizeRequestUpdate.getStatus());
                 Size sizeUpdate = sizeRepository.save(sizeExits);
-                return new ServiceResult<>(AppConstant.SUCCESS, "The size update succesfully!", sizeUpdate);
+                return "The size update succesfully!";
             }
         } else {
-            return new ServiceResult<>(AppConstant.BAD_REQUEST, "The size not found!", null);
+            return "The size not found!";
         }
     }
 
     @Override
-    public ServiceResult<Size> deleteSize(SizeRequestUpdate sizeRequestUpdate) {
-        Optional<Size> sizeOptional = sizeRepository.findById(sizeRequestUpdate.getId());
+    public String deleteSize(Long id) {
+        Optional<Size> sizeOptional = sizeRepository.findById(id);
         if (sizeOptional.isPresent()) {
             Size sizeExits = sizeOptional.get();
             sizeExits.setStatus(0);
             sizeRepository.save(sizeExits);
-            return new ServiceResult<>(AppConstant.SUCCESS, "The size delete succesfully!", null);
+            return "The size delete succesfully!";
         } else {
-            return new ServiceResult<>(AppConstant.BAD_REQUEST, "The size not found!", null);
+            return "The size not found!";
         }
     }
 
     @Override
-    public ServiceResult<Size> activeSize(SizeRequestUpdate sizeRequestUpdate) {
+    public String activeSize(SizeRequestUpdate sizeRequestUpdate) {
         Optional<Size> sizeOptional = sizeRepository.findById(sizeRequestUpdate.getId());
         if (sizeOptional.isPresent()) {
             Size sizeExits = sizeOptional.get();
             sizeExits.setStatus(1);
             sizeRepository.save(sizeExits);
-            return new ServiceResult<>(AppConstant.SUCCESS, "The size active succesfully!", null);
+            return "The size active succesfully!";
         } else {
-            return new ServiceResult<>(AppConstant.BAD_REQUEST, "The size not found!", null);
+            return "The size not found!";
         }
     }
 

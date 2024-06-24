@@ -1,24 +1,28 @@
 package com.backend.service;
 
-import com.backend.ServiceResult;
 import com.backend.dto.request.color.ColorRequest;
 import com.backend.dto.request.color.ColorRequestUpdate;
 import com.backend.dto.response.shoeDetail.ColorResponse;
 import com.backend.entity.Color;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
 public interface IColorService {
 
-    ServiceResult<List<ColorResponse>> getAll();
+    List<ColorResponse> getAll();
 
-    ServiceResult<ColorResponse> addColor(ColorRequest colorRequest);
+    ColorResponse getById(Long id);
 
-    ServiceResult<Color> updateColor(ColorRequestUpdate colorRequestUpdate);
+    Page<ColorResponse> pageColor(Integer page, Integer size);
 
-    ServiceResult<Color> deleteColor(ColorRequestUpdate colorRequestUpdate);
+    String addColor(ColorRequest colorRequest);
 
-    ServiceResult<Color> activeColor(ColorRequestUpdate colorRequestUpdate);
+    String updateColor(ColorRequestUpdate colorRequestUpdate);
 
-    ServiceResult<Color> getColorByName(String name);
+    String deleteColor(Long id);
+
+    String activeColor(ColorRequestUpdate colorRequestUpdate);
+
+    Color getColorByName(String name);
 }

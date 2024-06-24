@@ -1,6 +1,7 @@
 package com.backend.entity;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -8,7 +9,13 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PastOrPresent;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -16,6 +23,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @AllArgsConstructor
@@ -66,7 +74,6 @@ public class Shoe {
     @Column(name = "shoe_width")
     private Float shoeWidth;
 
-
     @Column(name = "created_time")
     private Date createdAt;
 
@@ -76,5 +83,6 @@ public class Shoe {
     @Column(name = "status")
     private Integer status;
 
-
+    @OneToMany(mappedBy = "shoe", cascade = CascadeType.ALL)
+    private List<Image> images;
 }

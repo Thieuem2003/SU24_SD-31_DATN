@@ -1,21 +1,24 @@
 package com.backend.service;
 
-import com.backend.ServiceResult;
 import com.backend.dto.request.sole.SoleRequest;
 import com.backend.dto.request.sole.SoleRequestUpdate;
 import com.backend.dto.response.SoleResponse;
-import com.backend.entity.Sole;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
 public interface ISoleService {
-    ServiceResult<List<SoleResponse>> getAll();
+    List<SoleResponse> getAll();
 
-    ServiceResult<Sole> addNewSole(SoleRequest soleRequest);
+    Page<SoleResponse> pageSole(Integer pageNo, Integer size);
 
-    ServiceResult<Sole> updateSole(SoleRequestUpdate soleRequestUpdate);
+    SoleResponse getOne(Long id);
 
-    ServiceResult<Sole> deleteSole(SoleRequestUpdate soleRequestUpdate);
+    String addNewSole(SoleRequest soleRequest);
 
-    ServiceResult<Sole> activeSole(SoleRequestUpdate soleRequestUpdate);
+    String updateSole(SoleRequestUpdate soleRequestUpdate);
+
+    String deleteSole(Long id);
+
+    String activeSole(SoleRequestUpdate soleRequestUpdate);
 }

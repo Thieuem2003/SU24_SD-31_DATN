@@ -1,0 +1,195 @@
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org" lang="en"-->
+<!--      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"-->
+<!--      layout:decorate="~{fragments/fragments_layout_admin}"-->
+<!--&gt;-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Title</title>-->
+<!--    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>-->
+<!--    <style>-->
+<!--        .badge-light-success {-->
+<!--            color: #d9b115;-->
+<!--            background-color: #e8fff3;-->
+<!--        }-->
+<!--    </style>-->
+<!--</head>-->
+<!--<body>-->
+<!--<script>-->
+<!--    function onsubmit() {-->
+<!--        document.getElementById("myForm").submit();-->
+<!--    }-->
+<!--</script>-->
+<!--<div class="container" layout:fragment="content">-->
+<!--    <div class="row">-->
+<!--        <div class="col-4">-->
+<!--            <li class="nav-item d-none d-md-block">-->
+<!--                <a class="nav-link" href="javascript:void(0)">-->
+<!--                    <nav class="navbar bg-body">-->
+<!--                        <div class="container-fluid">-->
+<!--                            <form class="d-flex" role="search" action="/admin/psg/hoa-don/searchHoaDon/0" method="get">-->
+<!--                                <input name="pathSearch"-->
+<!--                                       class="form-control custom-shadow custom-radius border-0 bg-white"-->
+<!--                                       type="search" placeholder="Tìm Theo Tên và Số Điện Thoại"-->
+<!--                                       aria-label="Search">-->
+<!--                                <button class="btn btn-rounded btn-primary" type="submit" style="margin-left: 7px">-->
+<!--                                    Search-->
+<!--                                </button>-->
+<!--                            </form>-->
+<!--                        </div>-->
+<!--                    </nav>-->
+<!--                </a>-->
+<!--            </li>-->
+<!--        </div>-->
+<!--        <div class="col-8">-->
+<!--            <a class="nav-link" href="javascript:void(0)">-->
+<!--                <div class="container-fluid">-->
+<!--                    <form class="d-flex" role="search" id="searchForm" action="/admin/psg/hoa-don/searchDate/0"-->
+<!--                          method="get">-->
+<!--                        <label style="padding-top: 15px">Từ ngày</label>-->
+<!--                        <input name="beginDate" id="beginDateInput"-->
+<!--                               class="form-control custom-shadow custom-radius border-0 bg-white"-->
+<!--                               type="date"-->
+<!--                               style="margin-left: 7px;height: 2rem;margin-top: 8px;width: 11rem;margin-right: 7px;">-->
+
+<!--                        <label style="padding-top: 15px">Đến ngày</label>-->
+<!--                        <input name="endDate" id="endDateInput"-->
+<!--                               class="form-control custom-shadow custom-radius border-0 bg-white"-->
+<!--                               type="date" style="margin-left: 7px;height: 2rem;margin-top: 8px;width: 11rem;">-->
+<!--                        <button class="btn btn-rounded btn-primary" type="submit"-->
+<!--                                style="margin-top: 6px;margin-left: 8px">Lọc-->
+<!--                        </button>-->
+<!--                    </form>-->
+<!--                </div>-->
+<!--            </a>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="row">-->
+<!--        <div class="col-4">-->
+<!--            <div class="d-flex justify-content-center">-->
+<!--                <div class="row" style="margin-top: 5px">-->
+<!--                    <div class="col-4">-->
+<!--                        <label style="margin-top: 7px;">Trạng thái</label>-->
+<!--                    </div>-->
+<!--                    <div class="col-8">-->
+<!--                        <form action="/admin/psg/hoa-don/loadTrangThaiHd/0" method="get">-->
+<!--                            <select class="form-select custom-shadow custom-radius border-0 bg-white"-->
+<!--                                    name="selectedTrangThai" onchange="onsubmit()">-->
+<!--                                <option th:each="enumValue : ${trangThaiHD}"-->
+<!--                                        th:value="${enumValue}"-->
+<!--                                        th:text="${enumValue.getMoTa()}">-->
+<!--                                </option>-->
+<!--                            </select>-->
+<!--                        </form>-->
+
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="col-4">-->
+<!--            <div class="d-flex justify-content-center">-->
+
+<!--                <div class="row" style="margin-top: 5px">-->
+<!--                    <div class="col-5">-->
+<!--                        <label style="margin-top: 7px;">Loại đơn</label>-->
+<!--                    </div>-->
+<!--                    <div class="col-7">-->
+<!--                        <select class="form-select custom-shadow custom-radius border-0 bg-white">-->
+<!--                            <option th:each="enumValue : ${trangThaiBH}"-->
+<!--                                    th:value="${enumValue}"-->
+<!--                                    th:text="${enumValue.getMoTa()}">-->
+<!--                            </option>-->
+<!--                        </select>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="col-4">-->
+<!--            <div class="d-flex justify-content-center">-->
+<!--                <div class="row" style="margin-top: 5px">-->
+<!--                    <div class="col-4">-->
+<!--                        <label style="margin-top: 7px;">Xắp xếp</label>-->
+<!--                    </div>-->
+<!--                    <div class="col-8">-->
+<!--                        <select name="trangThai" class="form-select custom-shadow custom-radius border-0 bg-white">-->
+<!--                            <option value="ALL">Mặc đinh</option>-->
+<!--                            <option value="CONFIRMED">Giá trị giảm dần</option>-->
+<!--                            <option value="CONFIRMED">Giá trị tăng dần</option>-->
+<!--                            <option value="SHIPPING">Mới nhất</option>-->
+<!--                            <option value="SHIPPING">Cũ nhất</option>-->
+<!--                        </select>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+
+<!--    <div class="card">-->
+<!--        <div class="card-body">-->
+<!--            <h4 class="card-title mb-3">Danh Sách Hóa Đơn</h4>-->
+<!--            <div class="tab-content">-->
+<!--                <div class="tab-pane show active" id="home-b1">-->
+<!--                    <table class="table table-striped">-->
+<!--                        <thead>-->
+<!--                        <tr>-->
+<!--                            <th scope="col">STT</th>-->
+<!--                            <th scope="col" class="th-sm">Mã Đơn Hàng</th>-->
+<!--                            <th scope="col">Loại Đơn</th>-->
+<!--                            <th scope="col">Khách Hàng</th>-->
+<!--                            <th scope="col">Số Điện Thoại</th>-->
+<!--                            <th scope="col">Ngày Tạo</th>-->
+<!--                            <th scope="col">Tổng Tiền</th>-->
+<!--                            <th scope="col">Trạng Thái</th>-->
+<!--                                                        <th scope="col">Hành Động</th>-->
+
+<!--                        </tr>-->
+<!--                        </thead>-->
+<!--                        <tbody>-->
+<!--                        <tr th:each="hd,index:${listHoaDon}">-->
+<!--                            <td th:text="${index.count}"></td>-->
+<!--                            <td th:text="${hd.ma}"></td>-->
+<!--                            <td th:text="${hd.getHinhThucBanHang().getMoTa()}"></td>-->
+
+<!--                            <td th:text="${hd.getKhachHang().getTen()}"></td>-->
+<!--                            <td th:text="${hd.getSdtNguoiNhan()}"></td>-->
+<!--                            <td th:text="${#temporals.format(hd.getNgayTao, 'dd/MM/yyyy')}"></td>-->
+<!--                            <td th:text="${hd.formattedThanhTien}"></td>-->
+<!--                            <td>-->
+<!--                                <div class="badge badge-light-success fw-bold">-->
+<!--                                    <span th:text="${hd.getTrangThai().getMoTa()}"></span>-->
+<!--                                </div>-->
+<!--                            </td>-->
+<!--                            <td>-->
+<!--                                <span>-->
+<!--                                      <a th:href="@{/admin/psg/hoa-don/lich-su-hoa-don/{idHd}(idHd=${hd.id})}"-->
+<!--                                         class="btn waves-effect waves-light btn-rounded btn-warning"-->
+<!--                                      >Detail</a>-->
+<!--                      </span>-->
+<!--                            </td>-->
+<!--                        </tr>-->
+<!--                        </tbody>-->
+<!--                    </table>-->
+<!--                    <nav aria-label="Page navigation example">-->
+<!--                        <ul class="pagination">-->
+<!--                            <li class="page-item" th:if="${currentPage !=0}">-->
+<!--                                <a class="page-link" th:href="@{'/admin/psg/hoa-don/pageActive/'+${ currentPage - 1}}">Previous</a>-->
+<!--                            </li>-->
+<!--                            <li class="page-item" th:each="i: ${#numbers.sequence(1,totalPages)}"-->
+<!--                                th:classappend="${currentPage == i - 1 ? 'active' : ''}">-->
+<!--                                <a class="page-link" th:href="@{'/admin/psg/hoa-don/pageActive/'+${i - 1}}">-->
+<!--                                    <span th:text="${i}"></span>-->
+<!--                                </a>-->
+<!--                            </li>-->
+<!--                            <li class="page-item" th:if="${currentPage + 1 != totalPages}">-->
+<!--                                <a class="page-link" th:href="@{'/admin/psg/hoa-don/pageActive/'+${currentPage + 1}}">Next</a>-->
+<!--                            </li>-->
+<!--                        </ul>-->
+<!--                    </nav>-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--        </div> &lt;!&ndash; end card-body&ndash;&gt;-->
+<!--    </div>-->
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->

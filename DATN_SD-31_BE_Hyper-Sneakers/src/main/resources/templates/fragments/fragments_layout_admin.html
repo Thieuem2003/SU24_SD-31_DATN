@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/site-logo.8a953140.png">
+    <title>Hyper Sneaker - SD31 - SU24</title>
+    <!-- Custom CSS -->
+    <link th:href="@{/assets/extra-libs/c3/c3.min.css}" rel="stylesheet">
+    <link th:href="@{/dist/css/style.min.css}" rel="stylesheet">
+    <link th:href="@{/assets/css/custom.css}" rel="stylesheet">
+    <script th:src="@{/assets/js/config.js}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</head>
+<body>
+<div class="preloader">
+    <div class="lds-ripple">
+        <div class="lds-pos"></div>
+        <div class="lds-pos"></div>
+    </div>
+</div>
+<div id="main-wrapper" data-theme="light" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+     data-sidebar-position="fixed" data-header-position="fixed" data-boxed-layout="full">
+    <header class="topbar" data-navbarbg="skin6">
+        <nav class="navbar top-navbar navbar-expand-lg">
+            <div class="navbar-header" data-logobg="skin6">
+                <!-- This is for the sidebar toggle which is visible on mobile only -->
+                <a class="nav-toggler waves-effect waves-light d-block d-lg-none" href="javascript:void(0)"><i
+                        class="ti-menu ti-close"></i></a>
+                <div class="navbar-brand">
+                    <!-- Logo icon -->
+                    <a href="#">
+                        <img th:src="@{/assets/images/image1.png}" alt="" class="img-fluid" width="250px">
+                    </a>
+                </div>
+                <a class="topbartoggler d-block d-lg-none waves-effect waves-light" href="javascript:void(0)"
+                   data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                   aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i
+                        class="ti-more"></i></a>
+            </div>
+            <div class="navbar-collapse collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav float-left me-auto ms-3 ps-1">
+                    <!-- Notification -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle pl-md-3 position-relative" href="javascript:void(0)"
+                           id="bell" role="button" data-bs-toggle="dropdown" aria-haspopup="true"
+                           aria-expanded="false">
+                            <span><i data-feather="bell" class="svg-icon"></i></span>
+                            <span class="badge text-bg-primary notify-no rounded-circle">5</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-left mailbox animated bounceInDown">
+                            <ul class="list-style-none">
+                                <li>
+                                    <div class="message-center notifications position-relative">
+                                        <!-- Message -->
+                                        <a href="javascript:void(0)"
+                                           class="message-item d-flex align-items-center border-bottom px-3 py-2">
+                                            <div class="btn btn-danger rounded-circle btn-circle"><i
+                                                    data-feather="airplay" class="text-white"></i></div>
+                                            <div class="w-75 d-inline-block v-middle ps-2">
+                                                <h6 class="message-title mb-0 mt-1">Luanch Admin</h6>
+                                                <span class="font-12 text-nowrap d-block text-muted">Just see
+                                                        the my new
+                                                        admin!</span>
+                                                <span class="font-12 text-nowrap d-block text-muted">9:30 AM</span>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a class="nav-link pt-3 text-center text-dark" href="javascript:void(0);">
+                                        <strong>Check all notifications</strong>
+                                        <i class="fa fa-angle-right"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+                <ul class="navbar-nav float-end">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="javascript:void(0)" data-bs-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">
+                            <img th:src="@{/assets/images/users/profile-pic.jpg}" alt="user" class="rounded-circle"
+                                 width="40">
+                            <span class="ms-2 d-none d-lg-inline-block"><span>Hello,</span> <span
+                                    class="text-dark">Jason Doe</span> <i data-feather="chevron-down"
+                                                                          class="svg-icon"></i></span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end dropdown-menu-right user-dd animated flipInY">
+                            <a class="dropdown-item" href="javascript:void(0)"><i data-feather="user"
+                                                                                  class="svg-icon me-2 ms-1"></i>
+                                My Profile</a>
+                            <a class="dropdown-item" href="javascript:void(0)"><i data-feather="credit-card"
+                                                                                  class="svg-icon me-2 ms-1"></i>
+                                My Balance</a>
+                            <a class="dropdown-item" href="javascript:void(0)"><i data-feather="mail"
+                                                                                  class="svg-icon me-2 ms-1"></i>
+                                Inbox</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="javascript:void(0)"><i data-feather="settings"
+                                                                                  class="svg-icon me-2 ms-1"></i>
+                                Account Setting</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="javascript:void(0)"><i data-feather="power"
+                                                                                  class="svg-icon me-2 ms-1"></i>
+                                Logout</a>
+                            <div class="dropdown-divider"></div>
+                            <div class="pl-4 p-3"><a href="javascript:void(0)" class="btn btn-sm btn-info">View
+                                Profile</a></div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <aside class="left-sidebar" data-sidebarbg="skin6">
+        <!-- Sidebar scroll-->
+        <div class="scroll-sidebar" data-sidebarbg="skin6">
+            <!-- Sidebar navigation-->
+            <nav class="sidebar-nav">
+                <ul id="sidebarnav">
+                    <li class="sidebar-item"><a class="sidebar-link" href="/admin/dashboard/hoa-don/detail-hoa-don/3"
+                                                aria-expanded="false"><i data-feather="shopping-bag"
+                                                                         class="feather-icon"></i><span
+                            class="hide-menu">Bán Hàng Tai Quay
+                                        </span></a>
+                    </li>
+                    <li class="list-divider"></li>
+                    <li class="nav-small-cap"><span class="hide-menu">Hệ Thống Quản Lý</span></li>
+                    <li class="sidebar-item"><a class="sidebar-link sidebar-link" href="/admin/dashboard/hoa-don/hien-thi"
+                                                aria-expanded="false"><i data-feather="file-text"
+                                                                         class="feather-icon"></i><span
+                            class="hide-menu">Hóa Đơn</span></a></li>
+                    <li class="sidebar-item"><a class="sidebar-link sidebar-link" href="/admin/dashboard/voucher-thu-hang/hien-thi"
+                                                aria-expanded="false"><i data-feather="percent"
+                                                                         class="feather-icon"></i><span
+                            class="hide-menu">Voucher</span></a></li>
+                    <li class="sidebar-item"><a class="sidebar-link has-arrow" href="javascript:void(0)"
+                                                aria-expanded="false"><i data-feather="users"
+                                                                         class="feather-icon"></i><span
+                            class="hide-menu">Tài Khoản </span></a>
+                        <ul aria-expanded="false" class="collapse  first-level base-level-line">
+                            <li class="sidebar-item"><a href="/admin/dashboard/nhan-vien/hien-thi" class="sidebar-link"><span
+                                    class="hide-menu"> Nhân Viên
+                                        </span></a>
+                            </li>
+                            <li class="sidebar-item"><a href="/admin/dashboard/khach-hang/hien-thi" class="sidebar-link"><span
+                                    class="hide-menu"> Khách Hàng
+                                        </span></a>
+                            </li>
+                            <li class="sidebar-item"><a href="/admin/dashboard/vai-tro/hien-thi" class="sidebar-link"><span
+                                    class="hide-menu"> Vai trò
+                                        </span></a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="sidebar-item"><a class="sidebar-link has-arrow" href="javascript:void(0)"
+                                                aria-expanded="false"><i data-feather="grid"
+                                                                         class="feather-icon"></i><span
+                            class="hide-menu">Sản Phẩm</span></a>
+                        <ul aria-expanded="false" class="collapse  first-level base-level-line">
+                            <li class="sidebar-item"><a href="/admin/dashboard/san-pham/hien-thi" class="sidebar-link"><span
+                                    class="hide-menu"> Sản Phẩm
+                                        </span></a>
+                            </li>
+                            <li class="sidebar-item"><a href="/admin/dashboard/kich-thuoc/hien-thi" class="sidebar-link"><span
+                                    class="hide-menu"> Kích Thước
+                                        </span></a>
+                            </li>
+                            <li class="sidebar-item"><a href="/admin/dashboard/mau-sac/hien-thi" class="sidebar-link"><span
+                                    class="hide-menu">
+                                            Màu Sắc
+                                        </span></a>
+                            </li>
+                            <li class="sidebar-item"><a href="/admin/dashboard/thuong-hieu/hien-thi" class="sidebar-link"><span
+                                    class="hide-menu">
+                                            Thương Hiệu
+                                        </span></a>
+                            </li>
+                            <li class="sidebar-item"><a href="/admin/dashboard/category/hien-thi" class="sidebar-link"><span
+                                    class="hide-menu">
+                                         Loại Sản Phẩm
+                                        </span></a>
+                            </li>
+                            <li class="sidebar-item"><a href="/admin/dashboard/chat-lieu/hien-thi" class="sidebar-link"><span
+                                    class="hide-menu">
+                                         Chất Liệu
+                                        </span></a>
+                            </li>
+                            <li class="sidebar-item"><a href="/admin/dashboard/de-giay/hien-thi" class="sidebar-link"><span
+                                    class="hide-menu">
+                                        De Giay
+                                        </span></a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="list-divider"></li>
+                    <li class="nav-small-cap"><span class="hide-menu">Thống Kê</span></li>
+                    <li class="sidebar-item"><a class="sidebar-link sidebar-link" href="#"
+                                                aria-expanded="false"><i data-feather="trending-up"
+                                                                         class="feather-icon"></i><span
+                            class="hide-menu">Thống Kê
+                                </span></a>
+                    </li>
+                </ul>
+            </nav>
+            <!-- End Sidebar navigation -->
+        </div>
+        <!-- End Sidebar scroll-->
+    </aside>
+    <div class="page-wrapper">
+        <div class="container-fluid">
+            <section layout:fragment="content">
+                <p>This is filled by the content template.</p>
+            </section>
+        </div>
+        <footer class="footer text-center text-muted">
+            All Rights Reserved by Freedash. Designed and Developed by <a
+                href="#">Adminmart</a>.
+        </footer>
+    </div>
+</div>
+<script th:if="${successMessage}" th:inline="javascript">
+    /*<![CDATA[*/
+    window.addEventListener('DOMContentLoaded', function() {
+        var successMessage = /*[[${successMessage}]]*/ '';
+        if (successMessage) {
+            // alert(successMessage);
+            swal({
+                title: "Good job!",
+                text: successMessage,
+                icon: "success",
+            });
+        }
+    });
+    /*]]>*/
+</script>
+
+<script th:inline="javascript" th:src="@{/assets/libs/jquery/dist/jquery.min.js}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.1/axios.min.js"
+        integrity="sha512-bPh3uwgU5qEMipS/VOmRqynnMXGGSRv+72H/N260MQeXZIK4PG48401Bsby9Nq5P5fz7hy5UGNmC/W1Z51h2GQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script th:inline="javascript">
+
+    const host = "https://provinces.open-api.vn/api/";
+    var callAPI = (api) => {
+        return axios.get(api)
+            .then((response) => {
+                renderData(response.data, "province");
+            });
+    }
+    callAPI('https://provinces.open-api.vn/api/?depth=1');
+    var callApiDistrict = (api) => {
+        return axios.get(api)
+            .then((response) => {
+                renderData(response.data.districts, "district");
+            });
+    }
+    var callApiWard = (api) => {
+        return axios.get(api)
+            .then((response) => {
+                renderData(response.data.wards, "ward");
+            });
+    }
+    var renderData = (array, select) => {
+        let row = '';
+        array.forEach(element => {
+            row += `<option value="${element.code}">${element.name}</option>`;
+        });
+        document.querySelector("#" + select).innerHTML = row;
+    }
+    $("#province").change(() => {
+        callApiDistrict(host + "p/" + $("#province").val() + "?depth=2");
+        printResult();
+    });
+    $("#district").change(() => {
+        callApiWard(host + "d/" + $("#district").val() + "?depth=2");
+        printResult();
+    });
+    $("#ward").change(() => {
+        printResult();
+    })
+    var printResult = () => {
+        var provinceCode = $("#province").val();
+        var districtCode = $("#district").val();
+        var wardCode = $("#ward").val();
+        var provinceName = $("#province option:selected").text();
+        var districtName = $("#district option:selected").text();
+        var wardName = $("#ward option:selected").text();
+        callApiDistrict(host + "p/" + provinceCode + "?depth=2")
+            .then(() => {
+                $("#district").val(districtCode);
+            });
+        callApiWard(host + "d/" + districtCode + "?depth=2")
+            .then(() => {
+                $("#ward").val(wardCode);
+            });
+        $("#provinceInput").val(provinceName);
+        $("#districtInput").val(districtName);
+        $("#wardInput").val(wardName);
+        // $("#provinceCodeInput").val(provinceCode);
+        // $("#districtCodeInput").val(districtCode);
+        // $("#wardCodeInput").val(wardCode);
+    }
+
+    $("#printRes").click(() => {
+        var provinceCode = $("#province").val();
+        var districtCode = $("#district").val();
+        var wardCode = $("#ward").val();
+        var provinceName = $("#province option:selected").text();
+        var districtName = $("#district option:selected").text();
+        var wardName = $("#ward option:selected").text();
+        $("#provinceInput2").val(provinceName);
+        $("#districtInput2").val(districtName);
+        $("#wardInput2").val(wardName);
+        $("#provinceCodeInput2").val(provinceCode);
+        $("#districtCodeInput2").val(districtCode);
+        $("#wardCodeInput2").val(wardCode);
+
+        var fullAddress = provinceName + ', ' + districtName + ', ' + wardName;
+
+        // Cập nhật giá trị vào ô input mới
+        $('#wardInput2').val(fullAddress);
+    })
+
+    document.getElementById("selecttTT").addEventListener("change", function() {
+        var selectedValue = this.value;
+        if (selectedValue === "2") {
+            var url = new URL("/admin/psg/voucher-thu-hang/hien-thi", window.location.origin);
+            window.location.href = url.href;
+        }
+    });
+    document.getElementById("selecttTT").addEventListener("change", function() {
+        var selectedValue = this.value;
+        if (selectedValue === "3") {
+            var url = new URL("/admin/psg/voucher-thu-hang/pageInActive/0", window.location.origin);
+            window.location.href = url.href;
+        }
+    });
+    document.getElementById("selecttTT").addEventListener("change", function() {
+        var selectedValue = this.value;
+        if (selectedValue === "4") {
+            var url = new URL("admin/psg/voucher-thu-hang/pagePending/0", window.location.origin);
+            window.location.href = url.href;
+        }
+    });
+
+    $(document).ready(function () {
+        // Lắng nghe sự kiện thay đổi trên các ô input thành phố, quận và huyện
+        $('#provinceInput2, #districtInput2, #wardInput2').on('change', function () {
+            // Lấy giá trị từ ba ô input và gộp lại thành địa chỉ đầy đủ
+            var province = $('#provinceInput2').val();
+            var district = $('#districtInput2').val();
+            var ward = $('#wardInput2').val();
+            var fullAddress = province + ', ' + district + ', ' + ward;
+
+            // Cập nhật giá trị vào ô input mới
+            $('#fullAddress').val(fullAddress);
+        });
+    });
+
+
+
+</script>
+<script th:inline="javascript">
+    const maxImages = 5;
+
+    document.getElementById('filesAnhSanPham').addEventListener('change', function () {
+        const previewImagesContainer = document.getElementById('previewImages');
+        previewImagesContainer.innerHTML = '';
+
+        if (this.files.length > maxImages) {
+            alert('You can only upload ' + maxImages + ' images at a time.');
+            this.value = '';
+            return;
+        }
+
+        for (let i = 0; i < this.files.length; i++) {
+            const reader = new FileReader();
+            reader.onloadend = function () {
+                const img = document.createElement('img');
+                img.src = reader.result;
+                img.style.marginTop = '20px';
+                img.style.marginRight = '20px';
+                img.style.border = '1px';
+                img.style.borderRadius = '20px';
+                img.style.width = '150px';
+                img.style.height = '150px';
+                previewImagesContainer.appendChild(img);
+            }
+            reader.readAsDataURL(this.files[i]);
+        }
+    });
+</script>
+<script th:inline="javascript">
+    function validateBeforeSubmit() {
+        var sizeCheckboxes = document.querySelectorAll('#kichThuocContainer input[type="checkbox"]');
+        var colorCheckboxes = document.querySelectorAll('#mauSacContainer input[type="checkbox"]');
+        var sizeChecked = false;
+        var colorChecked = false;
+
+        // Kiểm tra nếu có ít nhất một size được chọn
+        for (var i = 0; i < sizeCheckboxes.length; i++) {
+            if (sizeCheckboxes[i].checked) {
+                sizeChecked = true;
+                break;
+            }
+        }
+
+        // Kiểm tra nếu có ít nhất một color được chọn
+        for (var i = 0; i < colorCheckboxes.length; i++) {
+            if (colorCheckboxes[i].checked) {
+                colorChecked = true;
+                break;
+            }
+        }
+
+        if (!sizeChecked || !colorChecked) {
+            alert("Vui lòng chọn ít nhất một kích thước và một màu sắc trước khi thêm sản phẩm.");
+            return false; // Ngăn form submit
+        }
+    }
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+<script th:src="@{/assets/libs/jquery/dist/jquery.min.js}"></script>
+<script th:src="@{/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/dist/js/feather.min.js}"></script>
+<script th:src="@{/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js}"></script>
+<script th:src="@{/dist/js/sidebarmenu.js}"></script>
+<script th:src="@{/dist/js/custom.min.js}"></script>
+<script th:src="@{/assets/extra-libs/c3/d3.min.js}"></script>
+<script th:src="@{/vendors/lodash/lodash.min.js}"></script>
+<script th:src="@{/vendors/dropzone/dropzone.min.js}"></script>
+<script th:src="@{/assets/js/phoenix.js}"></script>
+<script th:src="@{/assets/js/scripts.bundle.js}"></script>
+
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en"-->
+<!--      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"-->
+<!--      layout:decorate="~{fragments/fragments_layout_admin}"-->
+<!--&gt;-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Title</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<div class="container" layout:fragment="content">-->
+
+<!--    <a class="btn btn-primary" href="#" data-bs-toggle="modal"-->
+<!--       data-bs-target="#san-pham" role="button">Thêm Sản Phẩm</a>-->
+<!--    <div class="card card-custom mt-4">-->
+<!--        <div class="card-header flex-wrap border-0 pt-6 pb-0">-->
+<!--            <div class="text-center">-->
+<!--                <img th:src="@{/assets/images/cartNull.png}">-->
+<!--                <p class="mt-3"> Vui lòng thêm sản phẩm vào trong giỏ hàng</p>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+
+
+<!--    <div id="san-pham" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">-->
+<!--        <div class="modal-dialog">-->
+<!--            <div class="modal-content" >-->
+<!--                <div class="modal-body">-->
+<!--                    <div class="text-center mt-2 mb-4">-->
+<!--                        <a href="#" class="text-success">-->
+<!--                                                        <span><img class="me-2" th:src="@{/assets/images/image1.png}"-->
+<!--                                                                   alt="" height="80"></span>-->
+<!--                        </a>-->
+<!--                    </div>-->
+
+<!--                    <table class="table align-middle table-row-dashed fs-6 gy-5">-->
+<!--                        <thead>-->
+<!--                        <tr class="text-start text-muted fw-bold fs-7 text-uppercase gs-0">-->
+<!--                            <th scope="col">STT</th>-->
+<!--                            <th scope="col">Sản Phẩm</th>-->
+<!--                            <th scope="col">Màu Sắc</th>-->
+<!--                            <th scope="col">Công Nghệ</th>-->
+<!--                            <th scope="col">Nhà Sản Xuất</th>-->
+<!--                            <th scope="col">Hành Động</th>-->
+<!--                        </tr>-->
+<!--                        </thead>-->
+<!--                        <tbody class="text-gray-600 fw-semibold">-->
+<!--                        <tr th:each="sp,index:${listSanPham}">-->
+<!--                            <td th:text="${index.count}"></td>-->
+<!--                            <td class="d-flex align-items-center">-->
+<!--                                <div class="symbol symbol-circle symbol-50px overflow-hidden me-3" >-->
+<!--                                    <a href="#" class="d-block border rounded-2">-->
+<!--                                        <div class="symbol-label">-->
+<!--                                            <img th:src="@{${'/admin/psg/chi-tiet-san-pham/display?id=' + sp.id}}"-->
+<!--                                                 alt="Emma Smith"-->
+<!--                                                 style="width: 70px; height: 70px;border-radius: 10%;object-fit: cover"-->
+<!--                                            />-->
+<!--                                        </div>-->
+<!--                                    </a>-->
+<!--                                </div>-->
+<!--                                <div class="d-flex flex-column">-->
+<!--                                    <a href="#" class="text-gray-800 text-hover-primary mb-1" th:text="${sp.ten}"></a>-->
+<!--                                    <span th:text="${sp.thuongHieu.ten}"></span>-->
+<!--                                </div>-->
+<!--                            </td>-->
+<!--                            <td th:text="${sp.mauSac.ten}"></td>-->
+<!--                            <td th:text="${sp.congNghe.ten}">-->
+<!--                            </td>-->
+<!--                            <td th:text="${sp.nhaSanXuat.ten}"></td>-->
+<!--                            <td>-->
+<!--                                <a th:href="@{/admin/psg/chi-tiet-san-pham/view-update/{id}(id=${sp.id})}"-->
+<!--                                   class="btn waves-effect waves-light btn-rounded btn-warning"-->
+<!--                                >Update</a>-->
+<!--                            </td>-->
+<!--                        </tr>-->
+<!--                        </tbody>-->
+<!--                    </table>-->
+
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->

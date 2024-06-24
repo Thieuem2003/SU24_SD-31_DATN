@@ -12,5 +12,5 @@ import java.util.Optional;
 public interface SizeRepository extends JpaRepository<Size, Long> {
 
     @Query("SELECT s FROM Size s WHERE s.name = :nameSize")
-    Optional<Size> findByNameSize(@Param("nameSize") Float nameSize);
+    Optional<Size> findByNameSize(@Param("nameSize") Integer nameSize);
 }

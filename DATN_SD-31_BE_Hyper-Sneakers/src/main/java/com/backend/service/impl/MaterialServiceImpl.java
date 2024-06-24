@@ -1,15 +1,16 @@
 package com.backend.service.impl;
 
-import com.backend.ServiceResult;
-import com.backend.config.AppConstant;
 import com.backend.dto.request.material.MaterialRequest;
 import com.backend.dto.request.material.MaterialRequestUpdate;
 import com.backend.dto.response.MaterialResponse;
-import com.backend.entity.Color;
 import com.backend.entity.Material;
 import com.backend.repository.MaterialRepository;
 import com.backend.service.IMaterialService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Calendar;
@@ -22,49 +23,64 @@ import java.util.stream.Collectors;
 public class MaterialServiceImpl implements IMaterialService {
     @Autowired
     private MaterialRepository materialRepository;
+    @Autowired
+    private ModelMapper modelMapper;
 
     @Override
-    public ServiceResult<List<MaterialResponse>> getAll() {
+    public List<MaterialResponse> getAll() {
         List<Material> materialList = materialRepository.findAll();
-        List<MaterialResponse> materialResponses = convertToRes(materialList);
-        return new ServiceResult<>(AppConstant.SUCCESS, "Material", materialResponses);
+        return convertToRes(materialList);
     }
 
     @Override
-    public ServiceResult<Material> addNewMaterial(MaterialRequest materialRequest) {
+    public MaterialResponse getOne(Long id) {
+        Material material = materialRepository.findById(id).orElse(null);
+        return modelMapper.map(material, MaterialResponse.class);
+    }
+
+    @Override
+    public Page<MaterialResponse> pageMaterial(Integer page, Integer size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Material> materialPage = materialRepository.findAll(pageable);
+        return materialPage.map(material -> modelMapper.map(material, MaterialResponse.class));
+    }
+
+    @Override
+    public String addNewMaterial(MaterialRequest materialRequest) {
         Optional<Material> materialOptional = materialRepository.findByNameMaterial(materialRequest.getName());
         if (materialOptional.isPresent()) {
             if (materialOptional.get().getStatus() == 0) {
                 Material material = materialOptional.get();
                 material.setStatus(1);
-                Material materialUpdate = materialRepository.save(material);
-                return new ServiceResult<>(AppConstant.SUCCESS, "Material updated succesfully!", materialUpdate);
+                materialRepository.save(material);
+                return "Material updated succesfully!";
             } else {
-                return new ServiceResult<>(AppConstant.FAIL, "Material already exits!", null);
+                return "Material already exits!";
             }
         } else {
             if (materialRequest.getName() == null || materialRequest.getName().trim().isEmpty()) {
-                return new ServiceResult<>(AppConstant.BAD_REQUEST, "The name of material not valid!", null);
+                return "The name of material not valid!";
             } else {
                 Material material = new Material();
                 Calendar calendar = Calendar.getInstance();
                 Date date = calendar.getTime();
-                material.setName(material.getName());
+                material.setName(materialRequest.getName());
                 material.setStatus(1);
                 material.setCreatedAt(date);
                 material.setUpdatedAt(date);
-                return new ServiceResult<>(AppConstant.SUCCESS, "Material", materialRepository.save(material));
+                materialRepository.save(material);
+                return "Material added succesfully!";
             }
 
         }
     }
 
     @Override
-    public ServiceResult<Material> updateMaterial(MaterialRequestUpdate materialRequestUpdate) {
+    public String updateMaterial(MaterialRequestUpdate materialRequestUpdate) {
         Optional<Material> materialOptional = materialRepository.findById(materialRequestUpdate.getId());
         if (materialOptional.isPresent()) {
             if (materialRequestUpdate.getName() == null || materialRequestUpdate.getName().trim().isEmpty()) {
-                return new ServiceResult<>(AppConstant.BAD_REQUEST, "The name of material not valid!", null);
+                return "The name of material not valid!";
             } else {
                 Material material = materialOptional.get();
                 material.setId(materialRequestUpdate.getId());
@@ -75,38 +91,38 @@ public class MaterialServiceImpl implements IMaterialService {
                 material.setUpdatedAt(calendar.getTime());
 
                 material.setStatus(materialRequestUpdate.getStatus());
-                Material materialUpdate = materialRepository.save(material);
-                return new ServiceResult<>(AppConstant.SUCCESS, "The material update succesfully!", materialUpdate);
+                materialRepository.save(material);
+                return "The material update succesfully!";
             }
 
         } else {
-            return new ServiceResult<>(AppConstant.BAD_REQUEST, "The material not found!", null);
+            return "The material not found!";
         }
     }
 
     @Override
-    public ServiceResult<Material> deleteMaterial(MaterialRequestUpdate materialRequestUpdate) {
-        Optional<Material> materialOptional = materialRepository.findById(materialRequestUpdate.getId());
+    public String deleteMaterial(Long id) {
+        Optional<Material> materialOptional = materialRepository.findById(id);
         if (materialOptional.isPresent()) {
             Material material = materialOptional.get();
             material.setStatus(0);
             materialRepository.save(material);
-            return new ServiceResult<>(AppConstant.SUCCESS, "The material delete succesfully!", null);
+            return "The material delete succesfully!";
         } else {
-            return new ServiceResult<>(AppConstant.BAD_REQUEST, "The material not found!", null);
+            return "The material not found!";
         }
     }
 
     @Override
-    public ServiceResult<Material> activeMaterial(MaterialRequestUpdate materialRequestUpdate) {
+    public String activeMaterial(MaterialRequestUpdate materialRequestUpdate) {
         Optional<Material> materialOptional = materialRepository.findById(materialRequestUpdate.getId());
         if (materialOptional.isPresent()) {
             Material material = materialOptional.get();
             material.setStatus(1);
             materialRepository.save(material);
-            return new ServiceResult<>(AppConstant.SUCCESS, "The material active succesfully!", null);
+            return "The material active succesfully!";
         } else {
-            return new ServiceResult<>(AppConstant.BAD_REQUEST, "The material not found!", null);
+            return "The material not found!";
         }
     }
 

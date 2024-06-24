@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/fragments_layout_admin}"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="container" layout:fragment="content">
+    <div class="row">
+        <div class="col-3"> </div>
+        <div class="col-6">
+            <form action="/admin/dashboard/de-giay/update" th:object="${deGiay}" method="post" onsubmit="return  confirm('Bạn có cập nhật không?')">
+                <input type="hidden" th:field="*{id}">
+                <div class="form-group mb-3">
+                    <label>Ten de giay</label>
+                    <input  class="form-control custom-shadow custom-radius border-0 bg-white"
+                            type="text" placeholder="Nhập tên de giay" th:field="*{name}" style="height: 50px">
+                    <span th:if="${#fields.hasErrors('name')}" style="color: red; font-size: 13px" th:errors="*{name}"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <div>
+                        <label>Trang thai</label>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" th:field="*{status}" th:value="1" id="active">
+                            <label class="form-check-label" for="active">Active</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" th:field="*{status}" th:value="0" id="disable">
+                            <label class="form-check-label" for="disable">Disable</label>
+                        </div>
+                    </div>
+                    <span th:if="${#fields.hasErrors('status')}" style="color: red; font-size: 13px"
+                          th:errors="*{status}"></span>
+                </div>
+                <div class="form-group mb-3 text-center">
+                    <a href="/admin/dashboard/de-giay/hien-thi" class="btn waves-effect waves-light btn-rounded btn-primary">Back</a>
+                    <button class="btn btn-rounded btn-primary" type="submit">Update</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-3"> </div>
+</div>
+</div>
+
+</body>
+</html>

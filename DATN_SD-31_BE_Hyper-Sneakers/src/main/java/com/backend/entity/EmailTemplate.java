@@ -33,4 +33,5 @@ public class EmailTemplate {
 
     @Column(name = "mail_content")
     private String mailContent;
+
 }

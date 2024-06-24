@@ -1,14 +1,16 @@
 package com.backend.service.impl;
 
-import com.backend.ServiceResult;
-import com.backend.config.AppConstant;
 import com.backend.dto.request.category.CategoryRequest;
 import com.backend.dto.request.category.CategoryRequestUpdate;
 import com.backend.dto.response.shoeDetail.CategoryResponse;
 import com.backend.entity.Category;
 import com.backend.repository.CategoryRepository;
 import com.backend.service.ICategoryService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Calendar;
@@ -23,30 +25,45 @@ public class CategoryServiceImpl implements ICategoryService {
     @Autowired
     private CategoryRepository categoryRepository;
 
+    @Autowired
+    private ModelMapper modelMapper;
+
 
     @Override
-    public ServiceResult<List<CategoryResponse>> getAll() {
+    public List<CategoryResponse> getAll() {
         List<Category> categoryList = categoryRepository.findAll();
-        List<CategoryResponse> categoryResponses = convertToRes(categoryList);
-        return new ServiceResult<>(AppConstant.SUCCESS, "Category",categoryResponses);
+        return convertToRes(categoryList);
     }
 
     @Override
-    public ServiceResult<CategoryResponse> addCategory(CategoryRequest categoryRequest) {
+    public CategoryResponse getById(Long id) {
+        Category category = categoryRepository.findById(id).orElse(null);
+        return modelMapper.map(category, CategoryResponse.class);
+    }
+
+    @Override
+    public Page<CategoryResponse> getByPage(Integer page, Integer size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Category> categoryPage = categoryRepository.findAll(pageable);
+        return categoryPage.map(category -> modelMapper.map(category, CategoryResponse.class));
+    }
+
+    @Override
+    public String addCategory(CategoryRequest categoryRequest) {
         Optional<Category> categoryOptional = categoryRepository.findByNameCategory(categoryRequest.getName());
-        if (categoryOptional.isPresent()){
-            if (categoryOptional.get().getStatus() == 0){
+        if (categoryOptional.isPresent()) {
+            if (categoryOptional.get().getStatus() == 0) {
                 Category category = categoryOptional.get();
                 category.setStatus(1);
-                Category categoryUpdate = categoryRepository.save(category);
-                return new ServiceResult(AppConstant.SUCCESS,"Category updated succesfully", categoryUpdate);
-            }else {
-                return new ServiceResult(AppConstant.FAIL,"Category already exits!", null);
+                categoryRepository.save(category);
+                return "Category updated succesfully";
+            } else {
+                return "Category already exits!";
             }
-        }else {
-            if (categoryRequest.getName() == null || (categoryRequest.getName() != null && categoryRequest.getName().trim().isEmpty())){
-                return new ServiceResult<>(AppConstant.BAD_REQUEST,"The name of category not valid!", null);
-            }else {
+        } else {
+            if (categoryRequest.getName() == null || categoryRequest.getName().trim().isEmpty()) {
+                return "The name of category not valid!";
+            } else {
                 Category category = new Category();
                 Calendar calendar = Calendar.getInstance();
                 Date date = calendar.getTime();
@@ -54,18 +71,19 @@ public class CategoryServiceImpl implements ICategoryService {
                 category.setStatus(1);
                 category.setCreatedAt(date);
                 category.setUpdatedAt(date);
-                return new ServiceResult(AppConstant.SUCCESS,"Category", categoryRepository.save(category));
+                categoryRepository.save(category);
+                return "Category";
             }
         }
     }
 
     @Override
-    public ServiceResult<Category> updateCategory(CategoryRequestUpdate categoryRequestUpdate) {
+    public String updateCategory(CategoryRequestUpdate categoryRequestUpdate) {
         Optional<Category> categoryOptional = categoryRepository.findById(categoryRequestUpdate.getId());
-        if (categoryOptional.isPresent()){
-            if (categoryRequestUpdate.getName() == null || (categoryRequestUpdate.getName() != null && categoryRequestUpdate.getName().trim().isEmpty())){
-                return new ServiceResult<>(AppConstant.BAD_REQUEST,"The name of category not valid!", null);
-            }else {
+        if (categoryOptional.isPresent()) {
+            if (categoryRequestUpdate.getName() == null || categoryRequestUpdate.getName().trim().isEmpty()) {
+                return "The name of category not valid!";
+            } else {
                 Category categoryExits = categoryOptional.get();
                 categoryExits.setId(categoryExits.getId());
                 categoryExits.setName(categoryExits.getName());
@@ -76,45 +94,46 @@ public class CategoryServiceImpl implements ICategoryService {
 
                 categoryExits.setStatus(categoryRequestUpdate.getStatus());
                 Category categoryUpdate = categoryRepository.save(categoryExits);
-                return new ServiceResult<>(AppConstant.SUCCESS,"The category update succesfully!",categoryUpdate);
+                return "The category update successfully!";
             }
-        }else {
-            return new ServiceResult<>(AppConstant.BAD_REQUEST,"The category not found!", null);
+        } else {
+            return "The category not found!";
         }
     }
 
+
     @Override
-    public ServiceResult<Category> deleteCategory(CategoryRequestUpdate categoryRequestUpdate) {
-        Optional<Category> categoryOptional = categoryRepository.findById(categoryRequestUpdate.getId());
-        if (categoryOptional.isPresent()){
+    public String deleteCategory(Long id) {
+        Optional<Category> categoryOptional = categoryRepository.findById(id);
+        if (categoryOptional.isPresent()) {
             Category categoryExits = categoryOptional.get();
             categoryExits.setStatus(0);
             categoryRepository.save(categoryExits);
-            return new ServiceResult<>(AppConstant.SUCCESS, "The category update succesfully!", null);
-        }else {
-            return new ServiceResult<>(AppConstant.BAD_REQUEST,"The category not found!", null);
+            return "The category update successfully!";
+        } else {
+            return "The category not found!";
         }
     }
 
     @Override
-    public ServiceResult<Category> activeCategory(CategoryRequestUpdate categoryRequestUpdate) {
+    public String activeCategory(CategoryRequestUpdate categoryRequestUpdate) {
         Optional<Category> categoryOptional = categoryRepository.findById(categoryRequestUpdate.getId());
-        if (categoryOptional.isPresent()){
+        if (categoryOptional.isPresent()) {
             Category categoryExits = categoryOptional.get();
             categoryExits.setStatus(1);
             categoryRepository.save(categoryExits);
-            return new ServiceResult<>(AppConstant.SUCCESS, "The category update succesfully!", null);
-        }else {
-            return new ServiceResult<>(AppConstant.BAD_REQUEST,"The category not found!", null);
+            return "The category update successfully!";
+        } else {
+            return "The category not found!";
         }
     }
 
-    private List<CategoryResponse> convertToRes(List<Category> categoryList){
+    private List<CategoryResponse> convertToRes(List<Category> categoryList) {
         return categoryList.stream().map(category ->
                 CategoryResponse.builder()
-                .id(category.getId())
-                .name(category.getName())
-                .status(category.getStatus())
-                .build()).collect(Collectors.toList());
+                        .id(category.getId())
+                        .name(category.getName())
+                        .status(category.getStatus())
+                        .build()).collect(Collectors.toList());
     }
 }

@@ -15,7 +15,7 @@ public class SizeRespose {
 
     private Long id;
 
-    private Float name;
+    private Integer name;
 
     private Integer status;
 }

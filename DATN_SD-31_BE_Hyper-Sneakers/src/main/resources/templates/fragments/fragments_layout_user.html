@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en-GB"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/site-logo.8a953140.png">
+    <!-- <link rel="apple-touch-icon" /> -->
+    <title>Paris Saint-Germain Online Store | PSG Kits, PSG Clothing &amp; Merchandise | Official PSG Shop</title>
+    <meta charSet="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta content="Browse the official Paris Saint-Germain online store for the latest PSG kits, PSG apparel and clothing. The Paris Saint-Germain shop has the best PSG merchandise available."
+          name="description"/>
+    <meta content="PSG Shop" name="keywords"/>
+
+    <link th:href="@{/dist/css/style.min.css}" rel="stylesheet">
+    <link th:href="@{/assets/css/base-theme.css}" rel="stylesheet">
+    <link th:href="@{/assets/css/sec-3-10.css}" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+        }
+        .button.primary {
+            background-color: #000;
+            color: #fff
+        }
+
+        .button.primary:hover {
+            background-color: #262626;
+            color: #fff
+        }
+
+        .button.primary.blocked {
+            background-color: #000;
+            color: #fff
+        }
+
+        .cart-icon .cart-count {
+            background-color: #000;
+            color: #fff
+        }
+
+        .top-bar-cart .cart-icon {
+            background-color: #000;
+            color: #fff
+        }
+
+        .top-bar-cart .cart-icon:hover {
+            background-color: #262626
+        }
+
+        @media screen and (max-width: 39.99875em) {
+            .cart-icon .cart-count {
+                background-color: #000;
+                color: #fff
+            }
+        }
+
+        .global-footer-container .global-footer-main .sign-up-and-save .sign-up-and-save-link {
+            background-color: #000;
+            color: #fff
+        }
+
+        .global-footer-container .global-footer-main .sign-up-and-save .sign-up-and-save-link:hover {
+            background: #262626
+        }
+
+        .product-grid-container .product-grid-top-area + .selections > a:after,
+        .product-grid-container .product-grid-top-area > .selections > a:after {
+            color: #000
+        }
+
+        .side-nav-component .side-nav-facet .side-nav-facet-items a:hover {
+            background-color: #262626
+        }
+
+        .side-nav-component .side-nav-facet .side-nav-facet-items.extendedSizes > ul > li > a:hover,
+        .side-nav-component .side-nav-facet .side-nav-facet-items.sizes > ul > li > a:hover {
+            background-color: #000;
+            color: #fff
+        }
+
+        .pill {
+            background-color: #f5f6f8;
+            color: #1b1b1b
+        }
+
+        @media screen and (min-width: 64em) {
+            .side-nav-component .side-nav-selections li .selection-value:before {
+                background-color: #000;
+                color: #fff
+            }
+        }
+
+        .size-selector-button.selected {
+            background-color: #000;
+            color: #fff
+        }
+
+        .size-selector-button.available.selected,
+        .size-selector-button.available:hover {
+            background-color: #262626;
+            border-color: #262626;
+            color: #fff
+        }
+
+        .top-nav-light-container .top-nav-component {
+            background-color: #000
+        }
+
+        @media screen and (max-width: 39.99875em) {
+            .top-nav-light-container .top-nav-component,
+            .top-nav-light-container .top-nav-component.swipe .top-nav-item-link.fixed {
+                background-color: #000
+            }
+        }
+
+        .top-nav-light-container .top-nav-item .top-nav-item-link,
+        .top-nav-light-container .top-nav-item span.shop-by-team .top-nav-item-link {
+            color: #fff
+        }
+
+        @media screen and (max-width: 39.99875em) {
+            .top-nav-light-container .top-nav-item .top-nav-item-link,
+            .top-nav-light-container .top-nav-item span.shop-by-team .top-nav-item-link {
+                color: #fff
+            }
+        }
+
+        .hover.top-nav-light-container .top-nav-item:hover .top-nav-item-link {
+            color: #fff
+        }
+
+        .hover.top-nav-light-container .top-nav-item:hover {
+            background-color: #262626
+        }
+
+        .touch.top-nav-light-container .top-nav-item.open .top-nav-item-link {
+            color: #fff
+        }
+
+        .touch.top-nav-light-container .top-nav-item.open {
+            background-color: #262626;
+            color: #fff
+        }
+
+        .hamburger-menu-mode .main-section,
+        .main-bar {
+            background-color: #fff
+        }
+
+        .hamburger-menu-nav.hamburger-menu-container .hamburger-menu-wrapper .menu .menu-header {
+            background-color: #fff
+        }
+
+        .hamburger-menu-mode .main-section .right-container > a i,
+        .main-bar .mobile-toolbar a i {
+            color: #000
+        }
+
+        .hamburger-menu-mode .main-section .left-container .hamburger-menu-button .svg-icon-hamburger {
+            fill: #242424;
+            stroke: #242424
+        }
+
+        @media print, screen and (min-width: 40em) {
+            .main-bar .checkout-right-container span {
+                color: #1b1b1b
+            }
+
+            .main-bar .checkout-right-container a {
+                color: #1b1b1b
+            }
+        }
+
+        .main-bar .mobile-toolbar a svg.track-order-icon .svg-foreground,
+        .main-bar .mobile-toolbar a svg.track-order-icon .svg-mask {
+            fill: #000
+        }
+
+        .main-bar .mobile-toolbar .mobile-bar-fancash .currency,
+        .main-bar .mobile-toolbar .mobile-bar-fancash .plain-text {
+            color: #000
+        }
+
+        .top-bar {
+            background-color: #000
+        }
+
+        .top-bar.hide-for-mobile > .top-nav-hamburger-menu-wrapper .hamburger-menu-container .hamburger-menu-button .svg-icon-hamburger {
+            fill: #fff;
+            stroke: #fff
+        }
+
+        .top-bar .geo-recognition-widget .map-marker-icon,
+        .top-bar .geo-recognition-widget > span > a,
+        .top-bar .geo-recognition-widget > span > span,
+        .top-bar .top-bar-item > a,
+        .top-bar .top-bar-item > div {
+            color: #fff
+        }
+
+        .simple-dd .simple-dd-caret-down {
+            border-top: .5em solid #fff
+        }
+
+        .top-bar .top-bar-fancash > span > .plain-text {
+            color: #fff
+        }
+
+        .top-bar .top-bar-fancash > span.currency > a.fancash-learn-more {
+            color: #fff
+        }
+
+        .top-bar .top-bar-item > a.highlighted {
+            background-color: #000;
+            color: #fff
+        }
+
+        .typeahead-item.focus {
+            background-color: #000;
+            color: #fff
+        }
+
+        .sign-up-and-save .sign-up-and-save-link.desktop-theme,
+        .top-bar .sign-up-and-save .sign-up-and-save-link {
+            background-color: #000;
+            color: #fff
+        }
+
+        .sign-up-and-save .sign-up-and-save-link.desktop-theme,
+        .top-bar .sign-up-and-save .sign-up-and-save-link:hover {
+            background-color: #262626
+        }
+
+        @media screen and (max-width: 39.9375em) {
+            .sign-up-and-save .sign-up-and-save-link {
+                background-color: #000;
+                color: #fff
+            }
+
+            .sign-up-and-save .sign-up-and-save-link:hover {
+                background-color: #262626
+            }
+        }
+
+        .help-search .help-search-container {
+            background-color: #000
+        }
+
+        .help-search .help-search-container .title {
+            color: #fff
+        }
+
+        .button_bar .button-bar-aggregate-items a.site-primary {
+            background-color: #000;
+            color: #fff
+        }
+
+        .button_bar .button-bar-aggregate-items a.site-primary:hover {
+            background-color: #262626;
+            color: #fff
+        }
+
+        .shipping-account-box .shipping-account-box-container .content-on-page .site-swatch-1 {
+            background-color: #000;
+            color: #fff
+        }
+
+        .shipping-account-box .shipping-account-box-container .content-on-page .site-swatch-1 a,
+        .shipping-account-box .shipping-account-box-container .content-on-page .site-swatch-1 h1,
+        .shipping-account-box .shipping-account-box-container .content-on-page .site-swatch-1 h2 {
+            color: #fff
+        }
+
+        .shipping-account-box .shipping-account-box-container .content-on-page .site-swatch-2 {
+            background-color: #000;
+            color: #fff
+        }
+
+        .shipping-account-box .shipping-account-box-container .content-on-page .site-swatch-2 a,
+        .shipping-account-box .shipping-account-box-container .content-on-page .site-swatch-2 h1,
+        .shipping-account-box .shipping-account-box-container .content-on-page .site-swatch-2 h2 {
+            color: #fff
+        }
+
+
+        .shipping-account-box .shipping-account-box-container .content-on-page .site-swatch-3 a,
+        .shipping-account-box .shipping-account-box-container .content-on-page .site-swatch-3 h1,
+        .shipping-account-box .shipping-account-box-container .content-on-page .site-swatch-3 h2 {
+            color: #fff
+        }
+    </style>
+
+</head>
+
+<body>
+<div class="layout-row" data-trk-id="r1">
+    <div class="layout-row universal-header" data-trk-id="universal-header">
+        <header>
+            <a href="#" data-trk-id="skip-to-Main Content" class="skip-link">Skip to Main
+                Content</a><a href="#" data-trk-id="skip-to-Footer" class="skip-link">Skip to Footer</a>
+            <div class="top-bar show-for-large">
+                <div class="sign-up-and-save">
+                    <button class="button large sign-up-and-save-link none false" data-trk-id="sas-header"><span
+                            class="balance l"></span><span>SIGN UP &amp; SAVE 10%</span><span
+                            class="balance r"></span></button>
+                    <div class="sign-up-container">
+                        <div class="sign-up-modal"></div>
+                    </div>
+                </div>
+                <ul class="top-bar-list flex-grow-list" role="navigation">
+
+                    <li class="top-bar-item"><a href="#" data-trk-id="top-bar-link-my-orders"
+                                                class="">My Orders</a></li>
+                    <li class="top-bar-item">
+                        <div class="simple-dd" id="simple-dd" data-talos="linkMyAccount" tabindex="0" role="button"
+                             aria-haspopup="true" aria-expanded="false">Hi Tung Anh<span
+                                class="simple-dd-caret-down"></span>
+                            <ul class="dd-content" role="menu">
+                                <li class="dd-item" role="none"><a href="#" data-trk-id="account-home"
+                                                                   data-talos="linkAccountHome" class="/account"
+                                                                   role="menuitem" tabindex="-1">Account Home</a>
+                                </li>
+                                <li class="dd-item" role="none"><a href="#" data-trk-id="profile"
+                                                                   data-talos="linkProfile" class="/account/update"
+                                                                   role="menuitem" tabindex="-1">Profile</a></li>
+                                <li class="dd-item" role="none"><a href="#" data-trk-id="order-history"
+                                                                   data-talos="linkOrderHistory"
+                                                                   class="/account/orders" role="menuitem"
+                                                                   tabindex="-1">Order History</a></li>
+                                <li class="dd-item" role="none"><a href="#" data-trk-id="address-book"
+                                                                   data-talos="linkAddressBook"
+                                                                   class="/account/address-book" role="menuitem"
+                                                                   tabindex="-1">Address Book</a></li>
+                                <li class="dd-item" role="none"><a href="#" data-trk-id="payment-methods"
+                                                                   data-talos="linkPaymentMethods"
+                                                                   class="/account/payment-methods" role="menuitem"
+                                                                   tabindex="-1">Payment Methods</a></li>
+                                <li class="dd-item" role="none"><a href="#" data-trk-id="sign-out"
+                                                                   data-talos="linkSignOut"
+                                                                   class="/api/account/logout" role="menuitem"
+                                                                   tabindex="-1">Sign out</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+                <div class="top-bar-cart" role="complementary"><a href="#" data-trk-id="cart-icon"
+                                                                  data-talos="linkCartIcon" class="cart-icon"
+                                                                  aria-label="You have 0 items in cart. The total is US$0.00"><i
+                        class="icon icon-cart" role="presentation"></i></a></div>
+            </div>
+            <div class="main-bar show-for-large" role="banner">
+                <div class="logo no-fancash-logo" role="presentation"><a href="#" aria-label="PSG Online Store"><img
+                        loading="lazy" th:src="@{/assets/images/__0-136652413036.96703.svg}" alt="PSG Online Store"
+                        role="presentation"/></a></div>
+                <div class="search-container">
+                    <div class="typeahead-container">
+                        <div class="typeahead-input-container">
+                            <form action="" class="typeahead-input-form" role="search"><input type="text"
+                                                                                              id="typeahead-input-desktop"
+                                                                                              class="typeahead-input"
+                                                                                              autoComplete="off"
+                                                                                              value=""
+                                                                                              placeholder="Search"
+                                                                                              data-talos="navSearchInput"
+                                                                                              aria-label="Search"/><input
+                                    type="hidden" aria-hidden="true" class="typeahead-input-hint"
+                                    disabled="" value=""/></form>
+                        </div>
+                        <button aria-label="Search Product" class="typeahead-go" data-talos="navSearchIcon"
+                                data-trk-id="search-typeahead"><i class="icon icon-search" role="presentation"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="mobile-toolbar"><a href="#" data-trk-id="account"><i title="Account"
+                                                                                 data-talos="linkMyAccount"
+                                                                                 class="icon icon-user"
+                                                                                 role="presentation"></i></a><a
+                        href="/cart" data-trk-id="cart-icon" data-talos="linkCartIcon" class="cart-icon"
+                        aria-label="You have 0 items in cart. The total is US$0.00"><i class="icon icon-cart"
+                                                                                       role="presentation"></i></a>
+                </div>
+            </div>
+            <div class="hamburger-menu-mode" role="banner">
+                <div class="main-section">
+                    <div class="left-container">
+                        <div class="hamburger-menu-container hamburger-menu-nav">
+                            <div class="hamburger-menu-button" data-talos="hamburgerMenuToggle">
+                                <svg width="25" height="21" class="svg-icon-hamburger" version="1.1"
+                                     viewBox="0 0 25 21" xmlns="http://www.w3.org/2000/svg">
+                                    <g fill-rule="evenodd">
+                                        <rect x=".75" y=".5" width="23" height="1.5" rx=".75"></rect>
+                                        <rect x=".75" y="9.5" width="23" height="1.5" rx=".75"></rect>
+                                        <rect x=".75" y="18.5" width="23" height="1.5" rx=".75"></rect>
+                                    </g>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="right-container"><a href="#" data-trk-id="search"><i title="search"
+                                                                                     data-talos="navSearchIcon"
+                                                                                     class="icon icon-search top-nav-search"
+                                                                                     role="presentation"></i></a><a
+                            href="#" data-trk-id="account"><i title="Account" data-talos="linkMyAccount"
+                                                              class="icon icon-user" role="presentation"></i></a>
+                        <a
+                                href="#" data-trk-id="cart-icon" data-talos="linkCartIcon" class="cart-icon"
+                                aria-label="You have 0 items in cart. The total is US$0.00"><i
+                                class="icon icon-cart" role="presentation"></i></a>
+                    </div>
+                </div>
+                <div class="typeahead hide">
+                    <div class="mobile-typeahead version-V3">
+                        <div class="typeahead-container">
+                            <div class="typeahead-input-container">
+                                <form action="" class="typeahead-input-form" role="search"><input type="text"
+                                                                                                  id="typeahead-input-mobile"
+                                                                                                  class="typeahead-input"
+                                                                                                  autoComplete="off"
+                                                                                                  value=""
+                                                                                                  placeholder="Search"
+                                                                                                  data-talos="navSearchInput"
+                                                                                                  aria-label="Search"/><input
+                                        type="hidden" aria-hidden="true" class="typeahead-input-hint"
+                                        disabled="" value=""/></form>
+                            </div>
+                            <div class="dropdown-touch-header touch">
+                                <button class="button large close-btn unstyled false"
+                                        data-trk-id="close-search-box"><span
+                                        class="balance l"></span><span>close</span><span class="balance r"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div>
+                    <nav class="top-nav-light-container show-for-large hover"
+                         aria-label="Navigation across the content site: teams, leagues, departments, genders and so forth">
+                        <ul class="top-nav-component add-space-right" role="menu">
+                            <li class="top-nav-item small-up" data-trk-id="topnav-group-br-219"><a href="#"
+                                                                                                   data-trk-id="topnav-group-br-219"
+                                                                                                   class="top-nav-item-link"
+                                                                                                   aria-label="jordan"
+                                                                                                   aria-haspopup="true"
+                                                                                                   aria-expanded="false"
+                                                                                                   role="menuitem">jordan</a>
+                            </li>
+                            <li class="top-nav-item small-up" data-trk-id="topnav-group-br-219"><a href="#"
+                                                                                                   data-trk-id="topnav-group-br-219"
+                                                                                                   class="top-nav-item-link"
+                                                                                                   aria-label="jordan"
+                                                                                                   aria-haspopup="true"
+                                                                                                   aria-expanded="false"
+                                                                                                   role="menuitem">jordan</a>
+                            </li>
+                            <li class="top-nav-item small-up" data-trk-id="topnav-group-br-219"><a href="#"
+                                                                                                   data-trk-id="topnav-group-br-219"
+                                                                                                   class="top-nav-item-link"
+                                                                                                   aria-label="jordan"
+                                                                                                   aria-haspopup="true"
+                                                                                                   aria-expanded="false"
+                                                                                                   role="menuitem">jordan</a>
+                            </li>
+                            <li class="top-nav-item small-up" data-trk-id="topnav-group-br-219"><a href="#"
+                                                                                                   data-trk-id="topnav-group-br-219"
+                                                                                                   class="top-nav-item-link"
+                                                                                                   aria-label="jordan"
+                                                                                                   aria-haspopup="true"
+                                                                                                   aria-expanded="false"
+                                                                                                   role="menuitem">jordan</a>
+                            </li>
+                            <li class="top-nav-item small-up" data-trk-id="topnav-group-br-219"><a href="#"
+                                                                                                   data-trk-id="topnav-group-br-219"
+                                                                                                   class="top-nav-item-link"
+                                                                                                   aria-label="jordan"
+                                                                                                   aria-haspopup="true"
+                                                                                                   aria-expanded="false"
+                                                                                                   role="menuitem">jordan</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div class="sign-up-and-save hide-for-large">
+                <div class="sign-up-and-save-link">SIGN UP &amp; SAVE 10%</div>
+                <div class="sign-up-container">
+                    <div class="sign-up-modal"></div>
+                </div>
+            </div>
+            <div id="main-content"></div>
+        </header>
+    </div>
+    <div class="container-fluid">
+        <section layout:fragment="content_user">
+            <p>This is filled by the content template.</p>
+        </section>
+    </div>
+    <div class="layout-row global-footer" data-trk-id="global-footer">
+        <div class="global-footer-container hide-ticketmaster" id="global-footer" role="presentation">
+            <div class="global-footer-main">
+                <div class="row">
+                    <div class="col-9">
+                        <div class="global-footer-main-links m-b-xl">
+                            <div class="global-footer-section footer-sections-small-1 footer-sections-medium-3 footer-sections-large-3">
+                                <div class="global-footer-section-column  footer-section-for-medium footer-section-for-large">
+                                    <div class="global-footer-session-title">Customer Service</div>
+                                    <ul class="global-footer-links">
+                                        <li><a href="#" data-trk-id="help" class="" title="Help"
+                                               aria-label="Help">Help</a></li>
+                                        <li><a href="#" data-trk-id="track-order"
+                                               class="" title="Track Order" aria-label="Track Order">Track Order</a>
+                                        </li>
+                                        <li><a href="#" data-trk-id="size-chart" class=""
+                                               title="Size Chart" aria-label="Size Chart">Size Chart</a></li>
+                                    </ul>
+                                </div>
+                                <div class="global-footer-section-column  footer-section-for-medium footer-section-for-large">
+                                    <div class="global-footer-session-title">Worry Free Shopping</div>
+                                    <ul class="global-footer-links">
+                                        <li><a href="#" data-trk-id="safe-shopping"
+                                               class="" title="Safe Shopping" aria-label="Safe Shopping">Safe
+                                            Shopping</a></li>
+                                        <li><a href="#" data-trk-id="delivery-shipping"
+                                               class="" title="Delivery &amp; Shipping"
+                                               aria-label="Delivery &amp; Shipping">Delivery &amp; Shipping</a></li>
+                                        <li><a href="#" data-trk-id="90-day-returns"
+                                               class="" title="90-Day Returns" aria-label="90-Day Returns">90-Day
+                                            Returns</a></li>
+                                    </ul>
+                                </div>
+                                <div class="global-footer-section-column  footer-section-for-medium footer-section-for-large">
+                                    <div class="global-footer-session-title">Information</div>
+                                    <ul class="global-footer-links">
+                                        <li><a href="#" data-trk-id="my-account" class=""
+                                               title="My Account" aria-label="My Account">My Account</a></li>
+                                        <li><a href="#" data-trk-id="contact-us" class=""
+                                               title="Contact Us" aria-label="Contact Us">Contact Us</a></li>
+                                        <li><a href="#" data-trk-id="affiliate-program" class=""
+                                               title="Affiliate Program" aria-label="Affiliate Program">Affiliate
+                                            Program</a></li>
+                                    </ul>
+                                </div>
+                                <div class="global-footer-section-column footer-section-for-small  ">
+                                    <ul class="global-footer-links">
+                                        <li><a href="#" data-trk-id="help" class="" title="Help"
+                                               aria-label="Help">Help</a></li>
+                                        <li><a href="#" data-trk-id="90-day-returns"
+                                               class="" title="90-Day Returns" aria-label="90-Day Returns">90-Day
+                                            Returns</a></li>
+                                        <li><a href="#" data-trk-id="track-my-order"
+                                               class="" title="Track My Order" aria-label="Track My Order">Track My
+                                            Order</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="global-footer-right-content">
+                            <div class="global-footer-mobile-app columns small-12 medium-6 large-12"></div>
+                            <div class="global-footer-right-content-first">
+                                <div class="sign-up-and-save columns medium-6 large-12 hide-for-small-only">
+                                    <div class="sign-up-cta m-b-md footnote">Stay updated on sales, new items and
+                                        more
+                                    </div>
+                                    <button class="button large sign-up-and-save-link none false"
+                                            data-trk-id="sas-footer"><span class="balance l"></span><span>SIGN UP &amp; SAVE 10%</span><span
+                                            class="balance r"></span></button>
+                                    <div
+                                            class="sign-up-container">
+                                        <div class="sign-up-modal"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="global-footer-right-content-second">
+                                <div class="global-footer-social-links columns small-12 medium-6 large-12">
+                                    <div class="global-footer-section footer-sections-small-1 footer-sections-medium-1 footer-sections-large-1">
+                                        <div class="global-footer-section-column footer-section-for-small footer-section-for-medium footer-section-for-large">
+                                            <div class="global-footer-session-title">Follow Us</div>
+                                            <ul class="global-footer-links">
+                                                <li><a href="//www.facebook.com/psg" data-trk-id="facebook"
+                                                       target="_blank" class="icon-fa-facebook" title="Facebook"
+                                                       aria-label="Facebook"></a></li>
+                                                <li><a href="//twitter.com/PSG_inside" data-trk-id="twitter"
+                                                       target="_blank" class="icon-fa-twitter" title="Twitter"
+                                                       aria-label="Twitter"></a></li>
+                                                <li><a href="//www.instagram.com/psg" data-trk-id="instagram"
+                                                       target="_blank" class="icon-fa-instagram" title="Instagram"
+                                                       aria-label="Instagram"></a></li>
+                                                <li><a href="//www.youtube.com/user/PSGofficiel"
+                                                       data-trk-id="you-tube" target="_blank"
+                                                       class="icon-fa-youtube-play" title="YouTube"
+                                                       aria-label="YouTube"></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row m-t-lg m-b-sm mt-5">
+                <div class="columns">
+                    <div class="global-footer-rights-links">
+                        <div class="global-footer-section footer-sections-small-1 footer-sections-medium-1 footer-sections-large-1">
+                            <div class="global-footer-section-column footer-section-for-small footer-section-for-medium footer-section-for-large">
+                                <ul class="global-footer-links">
+                                    <li><a href="#" data-trk-id="privacy-policy" class=""
+                                           title="Privacy Policy" aria-label="Privacy Policy">Privacy Policy</a>
+                                    </li>
+                                    <li><a href="#" data-trk-id="terms-of-use"
+                                           class="" title="Terms of Use" aria-label="Terms of Use">Terms of Use</a>
+                                    </li>
+                                    <li><a href="#"
+                                           data-trk-id="ca-supply-chains-act-uk-modern-slavery-act" target="_blank"
+                                           class="" title="CA Supply Chains Act/UK Modern Slavery Act"
+                                           aria-label="CA Supply Chains Act/UK Modern Slavery Act">CA Supply Chains
+                                        Act/UK Modern Slavery Act</a></li>
+                                    <li><a href="#" data-trk-id="site-map" class=""
+                                           title="Site Map" aria-label="Site Map">Site Map</a></li>
+                                    <li><a href="#" data-trk-id="cookie-policy-management"
+                                           class="" title="Cookie Policy &amp; Management"
+                                           aria-label="Cookie Policy &amp; Management">Cookie Policy &amp;
+                                        Management</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row m-b-xl">
+                <div class="columns">
+                    <div class="global-footer-rights-message">
+                        <div class="global-footer-section footer-sections-small-1 footer-sections-medium-1 footer-sections-large-1">
+                            <div class="global-footer-section-column footer-section-for-small footer-section-for-medium footer-section-for-large">
+                                © 2023, Fanatics, Inc. and/or its affiliated entities. All Rights Reserved. No
+                                portion of this site may be reproduced or duplicated without the express permission
+                                of Fanatics.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row m-b-lg">
+                <div class="columns small-12 medium-6 large-4">
+                    <div class="global-footer-secure-shopping"></div>
+                </div>
+                <div class="columns hide-for-mobile-only">
+                    <div class="global-footer-payment">
+                        <div class="global-footer-section  footer-sections-medium-1 footer-sections-large-1">
+                            <div class="global-footer-section-column  footer-section-for-medium footer-section-for-large">
+                                <ul class="global-footer-links">
+                                    <li>
+                                        <svg class="svg-visa" aria-label="Visa" role="img"><title id=Visa>
+                                            Visa</title>
+                                            <use xlink:href='#'></use>
+                                        </svg>
+                                    </li>
+                                    <li>
+                                        <svg class="svg-mastercard" aria-label="Master Card" role="img"><title
+                                                id=Master Card>Master Card</title>
+                                            <use xlink:href='#'></use>
+                                        </svg>
+                                    </li>
+                                    <li>
+                                        <svg class="svg-amex" aria-label="Amex" role="img"><title id=Amex>
+                                            Amex</title>
+                                            <use xlink:href='#'></use>
+                                        </svg>
+                                    </li>
+                                    <li>
+                                        <svg class="svg-paypal" aria-label="PayPal" role="img"><title id=PayPal>
+                                            PayPal</title>
+                                            <use xlink:href='#'></use>
+                                        </svg>
+                                    </li>
+                                    <li>
+                                        <svg class="svg-jcb" aria-label="JCB" role="img"><title id=JCB>JCB</title>
+                                            <use xlink:href='#'></use>
+                                        </svg>
+                                    </li>
+                                    <li>
+                                        <svg class="svg-maestro" aria-label="Maestro" role="img"><title id=Maestro>
+                                            Maestro</title>
+                                            <use xlink:href='#'></use>
+                                        </svg>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="debug-info hide">
+                <div>rc: 0c6b4eeb676adf98</div>
+                <div>vid: c40d7b70-037c-11ee-8936-196a94f78be3</div>
+                <div>version: 1.1.0-rc-20230809.71617</div>
+                <div>+</div>
+                <div style="display:none">
+                    <div>Qualified Experiments #:</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script th:src="@{/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

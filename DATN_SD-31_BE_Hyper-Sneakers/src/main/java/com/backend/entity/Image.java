@@ -35,14 +35,11 @@ public class Image {
     @Column(name = "img_url")
     private String imgUrl;
 
-    @Column(name = "img_name")
-    private String imgName;
+    @ManyToOne
+    @JoinColumn(name = "shoe_id", referencedColumnName = "id")
+    private Shoe shoe;
 
     @CreationTimestamp
     @Column(name = "created_time")
     private Date createdAt;
-
-    @ManyToOne
-    @JoinColumn(name = "shoe_detail_id")
-    private ShoeDetail shoeDetail;
 }
