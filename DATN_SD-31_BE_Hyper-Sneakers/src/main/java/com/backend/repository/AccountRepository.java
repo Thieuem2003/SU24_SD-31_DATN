@@ -25,9 +25,9 @@ public interface AccountRepository extends JpaRepository<Account, Long> {
     Page<Account> findByNameContaining(String name, Pageable pageable);
 
 
-//    @Query(value = "select top 1 * from account where email = ? and status = 1", nativeQuery = true)
-//    Optional<Account> FindByEmail(String email);
-//
+    @Query(value = "select top 1 * from account where email = ? and status = 1", nativeQuery = true)
+    Optional<Account> FindByEmail(String email);
+
 //    @Modifying
 //    @Query(value = "update Account u set u.status = false where u.id = ?1")
 //    void SetStatus(int id);

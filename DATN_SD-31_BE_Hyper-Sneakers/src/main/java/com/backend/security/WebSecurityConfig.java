@@ -62,16 +62,29 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests(auth -> auth
 //                        .requestMatchers("/signin").permitAll() // cho phép tất cả truy cập
 //                        .requestMatchers("/signup").permitAll()
-                        .requestMatchers( "/login", "/oauth2/**", "/logout", "/register", "/home/**", "/cart/**",
+                        .requestMatchers( "/login","/changePassword","/confirmOtp", "/oauth2/**", "/logout","/forgotPassword", "/register", "/home/**", "/cart/**",
                                 "/addCart/**", "/assets/**", "/css/**", "/js/**").permitAll() // Add /login here
                         .requestMatchers("/home").permitAll()
                         .anyRequest().authenticated() // tất cả các request khác đề phải xác thực mới vào đc
                 );
+        http.formLogin(form -> form
+                .loginPage("/login") // Custom login page
+                .permitAll() // Allow all to access the login page
+                .loginProcessingUrl("/j_spring_security_check") // Login form POST URL
+                .defaultSuccessUrl("/home", true) // Redirect on successful login
+                .failureUrl("/login?error=true") // Redirect on login failure
+        );
+
+        http.logout(logout -> logout
+                .logoutUrl("/logout") // URL to trigger logout
+                .logoutSuccessUrl("/login?logout=true") // Redirect after successful logout
+        );
 
         http.authenticationProvider(authenticationProvider());
 
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
+
     }
 }

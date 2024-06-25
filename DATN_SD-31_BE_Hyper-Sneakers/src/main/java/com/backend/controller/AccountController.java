@@ -1,6 +1,7 @@
 package com.backend.controller;
 
 import com.backend.dto.request.SignupRequest;
+import com.backend.dto.request.account.ChangePassword;
 import com.backend.entity.Account;
 import com.backend.entity.EmailTemplate;
 import com.backend.entity.Role;
@@ -92,6 +93,7 @@ public class AccountController {
         return "redirect:/home";
     }
 
+    // đăng kí tài khoản
     @GetMapping("/register")
     public ModelAndView registerForm(ModelMap model) {
         model.addAttribute("customer", new SignupRequest());
@@ -133,6 +135,7 @@ public class AccountController {
         return Integer.parseInt(codeStr); // Chuyển đổi chuỗi thành số nguyên
     }
 
+    // xác nhận email đk
     @PostMapping("/confirmOtpRegister")
     public ModelAndView confirmRegister(ModelMap model, @ModelAttribute("customer") SignupRequest dto, @RequestParam("password") String password,
                                         @RequestParam("otp") Integer otp) {
@@ -203,4 +206,100 @@ public class AccountController {
         }
         return true;
     }
+
+//    quên mk
+@GetMapping("/forgotPassword")
+public ModelAndView forgotFrom() {
+
+        return new ModelAndView("/user/forgotPassword");
+}
+
+    @PostMapping("/forgotPassword")
+    public ModelAndView forgotPassowrd(ModelMap model, @RequestParam("email") String email) {
+        List<Account> listC = accountRepository.findAll();
+        for (Account c : listC) {
+            if (email.trim().equals(c.getEmail())) {
+                session.removeAttribute("otp");
+                // Gửi mã xác nhận đến email của tài khoản vừa đăng ký
+                Integer mailType = createVerificationCode();
+                iEmailTemplateService.sendMaXacNhanToEmail(mailType);
+
+                EmailTemplate xacNhanEmail = new EmailTemplate();
+                xacNhanEmail.setMailType(mailType);
+                xacNhanEmail.setMailContent("ok");
+                xacNhanEmail.setSubject("Subject");
+                xacNhanEmailRepository.save(xacNhanEmail);
+
+                model.addAttribute("email", email);
+                model.addAttribute("message", "Mã OTP đã được gửi tới Email, hãy kiểm tra Email của bạn!");
+                return new ModelAndView("/user/confirmOtp", model);
+            }
+        }
+        model.addAttribute("error", "Email này không tồn tại trong hệ thống!");
+        return new ModelAndView("/user/forgotPassword", model);
+    }
+
+    @PostMapping("/confirmOtp")
+    public ModelAndView confirm(ModelMap model, @RequestParam("otp") Integer otp, @RequestParam("email") String email) {
+        Optional<EmailTemplate> optionalXacNhanEmail = xacNhanEmailRepository.findByMailType(otp);
+        if (otp.equals(optionalXacNhanEmail.get().getMailType())) {
+            model.addAttribute("email", email);
+            model.addAttribute("newPassword", "");
+            model.addAttribute("confirmPassword", "");
+            model.addAttribute("changePassword", new ChangePassword());
+            return new ModelAndView("/user/changePassword", model);
+        }
+        model.addAttribute("error", "Mã OTP không trùng, vui lòng kiểm tra lại!");
+        return new ModelAndView("/user/confirmOtp", model);
+    }
+
+    @PostMapping("/changePassword")
+    public ModelAndView changeForm(ModelMap model,
+                                   @Valid @ModelAttribute("changePassword") ChangePassword changePassword, BindingResult result,
+                                   @RequestParam("email") String email, @RequestParam("newPassword") String newPassword, @RequestParam("confirmPassword") String confirmPassword) {
+        if (result.hasErrors()) {
+
+            model.addAttribute("newPassword", newPassword);
+            model.addAttribute("newPassword", confirmPassword);
+//			model.addAttribute("changePassword", changePassword);
+            model.addAttribute("email", email);
+            return new ModelAndView("/site/changePassword", model);
+        }
+
+        if (!changePassword.getNewPassword().equals(changePassword.getConfirmPassword())) {
+
+            model.addAttribute("newPassword", newPassword);
+            model.addAttribute("newPassword", confirmPassword);
+//			model.addAttribute("changePassword", changePassword);
+            model.addAttribute("error", "error");
+            model.addAttribute("email", email);
+            return new ModelAndView("/site/changePassword", model);
+        }
+        // Handle potential absence of account using Optional
+        Optional<Account> optionalAccount = accountRepository.FindByEmail(email);
+        if (!optionalAccount.isPresent()) {
+            // Handle case where account with email is not found
+            model.addAttribute("error", "Không tìm thấy tài khoản với email đã nhập (Account with entered email not found)");
+            model.addAttribute("email", email);
+            return new ModelAndView("/user/changePassword", model);
+        }
+
+        Account account = optionalAccount.get(); // Safe access after checking isPresent()
+
+        // Update account details
+        account.setStatus(1);
+        account.setPassword(encoder.encode(newPassword));
+        accountRepository.save(account);
+        //
+        model.addAttribute("message", "Đổi mật khẩu thành công!");
+        model.addAttribute("email", "");
+        session.removeAttribute("otp");
+        return new ModelAndView("/user/changePassword", model);
+    }
+    @RequestMapping("/403")
+    public String error() {
+
+        return "/user/error";
+    }
+
 }
