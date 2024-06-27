@@ -4,8 +4,6 @@ import com.backend.dto.request.category.CategoryRequest;
 import com.backend.dto.request.category.CategoryRequestUpdate;
 import com.backend.dto.response.shoeDetail.CategoryResponse;
 import com.backend.service.ICategoryService;
-import jakarta.servlet.http.HttpSession;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -16,6 +14,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/admin/dashboard/category")

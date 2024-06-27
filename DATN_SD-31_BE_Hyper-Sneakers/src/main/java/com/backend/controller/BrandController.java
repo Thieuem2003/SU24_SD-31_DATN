@@ -4,8 +4,6 @@ import com.backend.dto.request.brand.BrandRequest;
 import com.backend.dto.request.brand.BrandRequestUpdate;
 import com.backend.dto.response.BrandResponse;
 import com.backend.service.IBrandService;
-import jakarta.servlet.http.HttpSession;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -16,6 +14,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/admin/dashboard/thuong-hieu")

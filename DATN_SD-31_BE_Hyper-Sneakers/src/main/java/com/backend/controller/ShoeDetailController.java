@@ -10,7 +10,6 @@ import com.backend.dto.request.size.SizeRequest;
 import com.backend.dto.request.sole.SoleRequest;
 import com.backend.dto.response.ShoeResponse;
 import com.backend.entity.Color;
-import com.backend.entity.ShoeDetail;
 import com.backend.entity.Size;
 import com.backend.service.IBrandService;
 import com.backend.service.ICategoryService;
@@ -19,8 +18,6 @@ import com.backend.service.IMaterialService;
 import com.backend.service.IShoeDetailService;
 import com.backend.service.ISizeService;
 import com.backend.service.ISoleService;
-import jakarta.servlet.http.HttpSession;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -33,6 +30,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -253,13 +252,15 @@ public class ShoeDetailController {
         iShoeDetailService.deleteShoe(id);
         return "redirect:/admin/dashboard/san-pham/hien-thi";
     }
+
     @GetMapping("admin/dashboard/san-pham/active/{id}")
     public String activeShoe(@PathVariable("id") Long id) {
         iShoeDetailService.activeShoe(id);
         return "redirect:/admin/dashboard/san-pham/hien-thi";
     }
+
     @GetMapping("admin/dashboard/chi-tiet-san-pham/delete/{id}")
-    public String deleteShoeDetail(@PathVariable("id") Long id){
+    public String deleteShoeDetail(@PathVariable("id") Long id) {
         iShoeDetailService.deleteShoeDetail(id);
         return "redirect:/admin/dashboard/san-pham/view-add";
     }

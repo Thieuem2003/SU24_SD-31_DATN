@@ -4,12 +4,13 @@ import com.backend.entity.Brand;
 import com.backend.entity.Category;
 import com.backend.entity.Material;
 import com.backend.entity.Sole;
-import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import javax.validation.constraints.NotBlank;
 
 @Getter
 @Setter

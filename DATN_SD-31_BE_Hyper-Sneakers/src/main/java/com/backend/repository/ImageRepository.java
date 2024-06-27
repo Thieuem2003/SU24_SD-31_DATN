@@ -2,9 +2,9 @@ package com.backend.repository;
 
 import com.backend.entity.Image;
 import com.backend.entity.Shoe;
-import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
