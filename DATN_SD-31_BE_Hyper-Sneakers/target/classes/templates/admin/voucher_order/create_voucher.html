@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/fragments_layout_admin}"
+>
+<head>
+<body>
+<div class="container mt-5" layout:fragment="content">
+    <h2>Create Voucher</h2>
+    <form th:action="@{/admin/dashboard/voucher_order/}" th:object="${voucherOrderRequest}" method="post">
+        <div class="form-group">
+            <label for="code">Code</label>
+            <input type="text" class="form-control" id="code" th:field="*{code}">
+        </div>
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" th:field="*{name}">
+        </div>
+        <div class="form-group">
+            <label for="quantity">Quantity</label>
+            <input type="number" class="form-control" id="quantity" th:field="*{quantity}">
+        </div>
+        <div class="form-group">
+            <label for="discountAmount">Discount Amount</label>
+            <input type="text" class="form-control" id="discountAmount" th:field="*{discountAmount}">
+        </div>
+        <div class="form-group">
+            <label for="minBillValue">Min Bill Value</label>
+            <input type="text" class="form-control" id="minBillValue" th:field="*{minBillValue}">
+        </div>
+        <div class="form-group">
+            <label for="startDate">Start Date</label>
+            <input type="datetime-local" class="form-control" id="startDate" th:field="*{startDate}">
+        </div>
+        <div class="form-group">
+            <label for="endDate">End Date</label>
+            <input type="datetime-local" class="form-control" id="endDate" th:field="*{endDate}">
+        </div>
+        <div class="form-group">
+            <label for="reduceForm">Reduce Form</label>
+            <select class="form-control" id="reduceForm" th:field="*{reduceForm}">
+                <option value="0">Discount Amount</option>
+                <option value="1">Discount %</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="status">Status</label>
+            <select class="form-control" id="status" th:field="*{status}">
+                <option value="0">Waiting Activation</option>
+                <option value="1">Activated</option>
+                <option value="2">Expired</option>
+                <option value="3">Hidden</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+</div>
+</body>
+</html>
